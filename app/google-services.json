@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "912902417765",
+    "firebase_url": "https://triggerwordsv1.firebaseio.com",
+    "project_id": "triggerwordsv1",
+    "storage_bucket": "triggerwordsv1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912902417765:android:dd7aefd3d5842eae",
+        "android_client_info": {
+          "package_name": "com.example.tarik.triggerwordsv1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912902417765-8etmi2sif4e1irrlv4msglsa8u5p79ui.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tarik.triggerwordsv1",
+            "certificate_hash": "72430cb6301e939e679498e0b7ccfc4689b32b7a"
+          }
+        },
+        {
+          "client_id": "912902417765-e1th4sabso2kj69ifn2k0rvouksd6acn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5_TdONlcxwB7wjC-IACSZvCrknl6iJo8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912902417765-e1th4sabso2kj69ifn2k0rvouksd6acn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

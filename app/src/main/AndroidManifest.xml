@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tarik.triggerwordsv1">
+
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"></uses-permission>
+    <receiver  android:process=":remote" android:name=".AlertReceiver"></receiver>
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+
+        <uses-feature android:name="android.hardware.camera" />
+        <uses-feature android:name="android.hardware.camera.autofocus" />
+        <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+
+
+
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.example.tarik.triggerwordsv1.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/filepaths" />
+        </provider>
+        <activity
+            android:name=".MenuActivity"
+            android:label="Dyslexican"
+            android:theme="@style/AppTheme.NoActionBar">
+
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+
+
+        </activity>
+        <activity android:name=".SendCalendar">
+
+
+
+            </activity>
+        <activity android:name=".Repeating_activity"/>
+        <activity android:name=".Notification">
+
+
+
+
+        </activity>
+
+        <activity android:name=".interactiveSession" >
+
+
+        </activity>
+        <activity android:name=".interactMenu" />
+        <activity android:name=".EyeTracker"></activity>
+        <activity android:name=".WordActivity">
+
+        </activity>
+        <activity android:name=".RecyclerMain"></activity>
+        <activity android:name=".ActivityDiaryEdit">
+        </activity>
+            <activity android:name=".ActivityMain"
+
+
+                android:label="ListWords"
+                >
+
+
+
+            </activity>
+        <activity android:name=".DemoActivity">
+
+
+
+            ></activity>
+        <activity android:name=".DateTime2.Sampler">
+
+
+
+        </activity>
+
+
+
+
+
+
+
+
+    </application>
+
+</manifest>
