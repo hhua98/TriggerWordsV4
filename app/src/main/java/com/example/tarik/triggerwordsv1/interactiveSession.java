@@ -9,15 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
-import android.widget.Toast;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.widget.ImageView;
-import android.widget.Toast;
-
+import com.example.tarik.triggerwordsv1.triggerWords.Word;
+import com.example.tarik.triggerwordsv1.triggerWords.WordAdapter;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import java.util.ArrayList;

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:id="@+id/barChartView"
+            android:background="#ffffff"
+            android:layout_weight="5">
+        </com.github.mikephil.charting.charts.BarChart>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:text="none"
+            android:id="@+id/descriptionTextView"
+            android:background="#ffffff"
+            android:padding="4dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1.5"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/legendBox"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:layout_marginTop="10dp"
+            android:padding="6dp"
+            android:layout_weight="2.5">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/disorientation"
+                android:text="Disorientation"
+                android:textSize="16sp"
+                android:textColor="@color/dis"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/readSpell"
+                android:text="Reading and Spelling"
+                android:textSize="16sp"
+                android:textColor="@color/rs"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/attentionFocus"
+                android:text="Attention Focus"
+                android:textSize="16sp"
+                android:textColor="@color/af"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/math"
+                android:text="Math and Time Management"
+                android:textSize="16sp"
+                android:textColor="@color/mat"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/handwriting"
+                android:text="Co-ordination and handwriting"
+                android:textSize="16sp"
+                android:textColor="@color/hw"
+                android:layout_marginTop="2dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/personality"
+                android:text="Personality and Self-esteem"
+                android:textSize="16sp"
+                android:textColor="@color/ps"
+                android:layout_marginTop="2dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/quitToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:text="QUIT"
+            android:textColor="#ffffff"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorPrimary"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

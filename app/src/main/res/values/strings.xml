@@ -41,6 +41,8 @@
     <string name="thursday">Thursday</string>
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
+    <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;/i&gt;&lt;br/&gt;Address: %2$s&lt;br/&gt;Phone: %3$s&lt;br/&gt;Website: %4$s</string>
+
 
     <string-array name="days_array">
         <item>@string/sunday</item>
@@ -64,5 +66,6 @@
         <item>Friday</item>
         <item>Saturday</item>
     </string-array>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

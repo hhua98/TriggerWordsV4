@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.tarik.triggerwordsv1.triggerWords.FirebaseHelper;
+import com.example.tarik.triggerwordsv1.triggerWords.WordActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 

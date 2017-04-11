@@ -15,4 +15,10 @@
 
     <color name="floating_action_button_bg">@color/c_accent</color>
     <color name="floating_action_button_pressed_bg">#212121</color>
+    <color name="dis">#ffb4c8</color>
+    <color name="rs">#fff4a2</color>
+    <color name="af">#aa9fff</color>
+    <color name="mat">#92b932</color>
+    <color name="hw">#c3eed7</color>
+    <color name="ps">#ff6a00</color>
 </resources>

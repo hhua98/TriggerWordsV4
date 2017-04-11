@@ -10,6 +10,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.DemoActivity;
+import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.EyeTracker;
+
 public class interactMenu extends AppCompatActivity {
     ImageButton imageButton5;
     ImageButton imageButton6;

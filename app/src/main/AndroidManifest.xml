@@ -2,9 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tarik.triggerwordsv1">
 
-    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"></uses-permission>
-    <receiver  android:process=":remote" android:name=".AlertReceiver"></receiver>
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
+
+    <receiver
+        android:name=".AlertReceiver"
+        android:process=":remote" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -13,6 +17,23 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="com.androidtutorialpoint.mymapsappsdirection.permission.MAPS_REVICE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality. 
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,14 +41,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
         <uses-feature android:name="android.hardware.camera" />
         <uses-feature android:name="android.hardware.camera.autofocus" />
-        <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
+        <uses-permission android:name="android.permission.INTERNET" />
 
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
@@ -38,72 +62,45 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/filepaths" />
         </provider>
+
         <activity
             android:name=".MenuActivity"
             android:label="Dyslexican"
             android:theme="@style/AppTheme.NoActionBar">
-
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-
-
         </activity>
-        <activity android:name=".SendCalendar">
-
-
-
-            </activity>
-        <activity android:name=".Repeating_activity"/>
-        <activity android:name=".Notification">
-
-
-
-
-        </activity>
-
-        <activity android:name=".interactiveSession" >
-
-
-        </activity>
+        <activity android:name=".diary.SendCalendar" />
+        <activity android:name=".interactiveSession" />
         <activity android:name=".interactMenu" />
-        <activity android:name=".EyeTracker"></activity>
-        <activity android:name=".WordActivity">
-
+        <activity android:name=".Eyetracking_ReadingStories.EyeTracker" />
+        <activity android:name=".triggerWords.WordActivity" />
+        <activity android:name=".RecyclerMain" />
+        <activity android:name=".diary.ActivityDiaryEdit" />
+        <activity
+            android:name=".diary.ActivityMain"
+            android:label="ListWords" />
+        <activity android:name=".Eyetracking_ReadingStories.DemoActivity">
+            >
         </activity>
-        <activity android:name=".RecyclerMain"></activity>
-        <activity android:name=".ActivityDiaryEdit">
-        </activity>
-            <activity android:name=".ActivityMain"
+        <activity
+            android:name=".map.MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".Information.information"
+            android:label="@string/title_activity_information"
+            android:theme="@style/AppTheme"></activity>
 
-
-                android:label="ListWords"
-                >
-
-
-
-            </activity>
-        <activity android:name=".DemoActivity">
-
-
-
-            ></activity>
-        <activity android:name=".DateTime2.Sampler">
-
-
-
-        </activity>
-
-
-
-
-
-
-
+        <activity android:name=".Information.AQDisorientation"></activity>
+        <activity android:name=".Information.AQReadSpell"></activity>
+        <activity android:name=".Information.AQAttentionFocus"></activity>
+        <activity android:name=".Information.AQMath"></activity>
+        <activity android:name=".Information.AQHandwriting"></activity>
+        <activity android:name=".Information.AQPersonality"></activity>
+        <activity android:name=".Information.AQResult"></activity>
 
     </application>
 

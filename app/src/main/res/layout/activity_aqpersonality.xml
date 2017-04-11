@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:background="#dddddd">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/titleTextView"
+            android:text="title"
+            android:textSize="22sp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="15dp"
+            android:background="@color/colorPrimary"
+            android:padding="7dp"
+            android:paddingBottom="5dp"
+            android:layout_weight="0.1"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="7dp"
+            android:background="#dddddd">
+
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:layout_weight="8.9">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="#ffffff"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#dddddd"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/group1"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginTop="7dp"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/questionTextView1"
+                        android:text="replace"
+                        android:textSize="18sp"
+                        android:textColor="#7773f2"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="15dp"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup1"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Absolutely"
+                            android:id="@+id/radioButton1A"
+                            android:checked="true"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Somewhat"
+                            android:id="@+id/radioButton1S"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rarely or never"
+                            android:id="@+id/radioButton1N"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/group2"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginTop="7dp"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/questionTextView2"
+                        android:text="replace"
+                        android:textSize="18sp"
+                        android:textColor="#7773f2"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="15dp"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup2"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Absolutely"
+                            android:id="@+id/radioButton2A"
+                            android:checked="true"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Somewhat"
+                            android:id="@+id/radioButton2S"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rarely or never"
+                            android:id="@+id/radioButton2N"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/group3"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginTop="7dp"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/questionTextView3"
+                        android:text="replace"
+                        android:textSize="18sp"
+                        android:textColor="#7773f2"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="15dp"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup3"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Absolutely"
+                            android:id="@+id/radioButton3A"
+                            android:checked="true"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Somewhat"
+                            android:id="@+id/radioButton3S"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rarely or never"
+                            android:id="@+id/radioButton3N"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/group4"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginTop="7dp"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/questionTextView4"
+                        android:text="replace"
+                        android:textSize="18sp"
+                        android:textColor="#7773f2"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="15dp"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup4"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Absolutely"
+                            android:id="@+id/radioButton4A"
+                            android:checked="true"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Somewhat"
+                            android:id="@+id/radioButton4S"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rarely or never"
+                            android:id="@+id/radioButton4N"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/group5"
+                    android:orientation="vertical"
+                    android:background="#ffffff"
+                    android:layout_marginTop="7dp"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/questionTextView5"
+                        android:text="replace"
+                        android:textSize="18sp"
+                        android:textColor="#7773f2"
+                        android:layout_marginBottom="7dp"
+                        android:layout_marginTop="15dp"/>
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup5"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp">
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Absolutely"
+                            android:id="@+id/radioButton5A"
+                            android:checked="true"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Somewhat"
+                            android:id="@+id/radioButton5S"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rarely or never"
+                            android:id="@+id/radioButton5N"
+                            android:checked="false"
+                            android:layout_weight="1"
+                            android:buttonTint="@color/colorPrimary"/>
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_weight="0.5">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/quitButton"
+                android:text="QUIT"
+                android:textColor="#ffffff"
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorPrimary"/>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nextButton"
+                android:text="RESULT"
+                android:textColor="#ffffff"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
