@@ -41,7 +41,6 @@ public class CalendarHelper {
         values.put(Events.DESCRIPTION, description);
         values.put(Events.CALENDAR_ID, calendarId);
         values.put(Events.STATUS, Events.STATUS_CONFIRMED);
-        requestPermissions(new String[]{Manifest.permission.WRITE_CALENDAR}, 1678);
 
 
         if (allDay)
