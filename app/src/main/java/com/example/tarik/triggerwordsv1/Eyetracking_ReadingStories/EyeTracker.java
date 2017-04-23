@@ -15,6 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,7 @@ import android.widget.TextView;
 import com.example.tarik.triggerwordsv1.R;
 
 
-public class EyeTracker extends Activity {
+public class EyeTracker extends AppCompatActivity {
 
     LinearLayout linearLayout;
     ImageButton button;
@@ -60,7 +61,18 @@ public class EyeTracker extends Activity {
         //customer method for onclick listener
         button.setOnClickListener(myOnClickListener);
         buttonStop.setOnClickListener(myOnClickListenerStop);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     /**

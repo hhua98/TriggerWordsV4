@@ -31,6 +31,7 @@ dependencies {
     })
     compile project(':library')
     compile project(':sublimepickerlibrary')
+    compile project(':floataction')
 
 
     compile 'com.android.support:design:25.3.0'

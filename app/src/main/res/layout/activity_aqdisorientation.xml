@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:background="#303f95"
+
     android:layout_height="match_parent">
 
     <LinearLayout
@@ -9,26 +9,40 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp"
-        android:background="#303f95"
+        android:background="#ffffff"
         android:layout_centerHorizontal="true">
 
-        <TextView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/titleTextView"
-            android:text="title"
-            android:textSize="22sp"
-            android:textColor="#ffffff"
-            android:layout_marginTop="15dp"
             android:background="@color/colorPrimary"
-            android:padding="7dp"
-            android:paddingBottom="5dp"
-            android:layout_weight="0.1"/>
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="The person’s threshold for confusion is a key factor in how often he or she disorients."/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Section 1 of 6"
+                    android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="7dp"
-            android:background="#303f95">
+            android:background="#dddddd"
+            >
 
         </LinearLayout>
 
@@ -43,7 +57,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginTop="10dp"
-                android:background="#303f95"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp">
 
@@ -57,14 +70,14 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/questionTextView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/questionTextView1"
-                        android:text="replace"
-                        android:textSize="18sp"
-                        android:textColor="#7773f2"
                         android:layout_marginBottom="7dp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="15dp"
+                        android:text="replace"
+                        android:textColor="#7773f2"
+                        android:textSize="18sp" />
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -115,14 +128,14 @@
                     android:padding="12dp">
 
                     <TextView
+                        android:id="@+id/questionTextView2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/questionTextView2"
-                        android:text="replace"
-                        android:textSize="18sp"
-                        android:textColor="#7773f2"
                         android:layout_marginBottom="7dp"
-                        android:layout_marginTop="15dp"/>
+                        android:layout_marginTop="15dp"
+                        android:text="replace"
+                        android:textColor="#7773f2"
+                        android:textSize="18sp" />
 
                     <RadioGroup
                         android:layout_width="match_parent"
@@ -348,24 +361,24 @@
             android:layout_weight="0.5">
 
             <Button
+                android:id="@+id/quitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/quitButton"
-                android:text="QUIT"
-                android:textColor="@color/colorPrimary"
                 android:layout_marginRight="7dp"
                 android:layout_marginTop="5dp"
-                android:background="#ffffff"/>
+                android:background="@color/colorPrimary"
+                android:text="QUIT"
+                android:textColor="#ffffff" />
 
             <Button
+                android:id="@+id/nextButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/nextButton"
-                android:text="NEXT"
-                android:textColor="@color/colorPrimary"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:background="#ffffff"/>
+                android:background="@color/colorPrimary"
+                android:text="NEXT"
+                android:textColor="#ffffff" />
 
         </LinearLayout>
 

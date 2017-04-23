@@ -7,6 +7,7 @@ package com.example.tarik.triggerwordsv1;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -22,7 +23,7 @@ public class interactMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interact_menu);
+        setContentView(R.layout.app_bar_2menu);
         imageButton6 = (ImageButton) findViewById(R.id.imageButton6);
         imageButton6.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,5 +49,17 @@ public class interactMenu extends AppCompatActivity {
                 startActivity(intentLoadNewActivity);
             }
         });
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

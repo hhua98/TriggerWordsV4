@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#303f95"
+    android:background="#ffffff"
     tools:context="com.example.tarik.triggerwordsv1.Information.questionnare">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,11 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/disclaimerTextView"
-            android:text="Disclaimer!!"
-            android:textColor="#ffffff"
-            android:textSize="30sp"
+            android:textColor="#303f95"
+            android:textSize="22sp"
             android:paddingLeft="5dp"
-            android:layout_margin="15dp"/>
+            android:layout_margin="15dp"
+            android:text="@string/txtCredits"
+            android:autoLink="all"
+            android:linksClickable="true"/>
 
         <View style="@style/Divider"/>
 
@@ -31,16 +35,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/quitToMain"
-                android:text="GO BACK"
-                android:textColor="#ffffff"
-                android:background="@color/colorPrimary"
-                android:layout_marginLeft="15dp"
-                android:layout_marginRight="15dp"
-                android:padding="16dp"/>
+
 
             <Button
                 android:layout_width="wrap_content"
@@ -56,5 +51,6 @@
         </LinearLayout>
 
     </LinearLayout>
+</ScrollView>
 
 </RelativeLayout>

@@ -67,5 +67,6 @@
         <item>Saturday</item>
     </string-array>
     <string name="title_activity_maps">Map</string>
+    <string name="txtCredits"><a href="http://www.google.com">Google</a></string>
 
 </resources>

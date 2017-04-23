@@ -6,5 +6,11 @@
     tools:context="com.example.tarik.triggerwordsv1.Information.information">
 
 
-
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="147dp"
+        android:layout_height="186dp"
+        android:text="Under Constraction"
+        tools:layout_editor_absoluteY="140dp"
+        tools:layout_editor_absoluteX="143dp" />
 </android.support.constraint.ConstraintLayout>

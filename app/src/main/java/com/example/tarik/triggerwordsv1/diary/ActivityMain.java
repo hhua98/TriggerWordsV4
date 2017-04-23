@@ -1,8 +1,19 @@
 package com.example.tarik.triggerwordsv1.diary;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.TextView;
+import android.widget.Toast;
+//import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,11 +29,13 @@ import android.database.Cursor;
 
 import com.example.tarik.triggerwordsv1.R;
 
+import static com.example.tarik.triggerwordsv1.R.id.toolbar;
+
 /**
  * Created by huanghe on 1/04/2017.
  */
 
-public class ActivityMain extends ListActivity {
+public class ActivityMain extends ListActivity{
     private static final int ACTIVITY_CREATE = 0;
     private static final int ACTIVITY_EDIT = 1;
 
@@ -48,10 +61,99 @@ public class ActivityMain extends ListActivity {
         registerForContextMenu(getListView());
 
         this.getListView().setLongClickable(true);
+        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
+        actionA.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentLoadNewActivity = new Intent(ActivityMain.this, ActivityDiaryEdit.class);
+                startActivity(intentLoadNewActivity);
+            }
+        });
+        final FloatingActionButton actionB = (FloatingActionButton) findViewById(R.id.action_b);
+        actionB.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentLoadNewActivity = new Intent(ActivityMain.this, SendCalendar.class);
+                startActivity(intentLoadNewActivity);
+            }
+        });
 
 
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
+        drawable.getPaint().setColor(getResources().getColor(R.color.white));
 
-        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+       /* findViewById(R.id.pink_icon).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ActivityMain.this, "Clicked pink Floating Action Button", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionButton button = (FloatingActionButton) findViewById(R.id.setter);
+        button.setSize(FloatingActionButton.SIZE_MINI);
+        button.setColorNormalResId(R.color.pink);
+        button.setColorPressedResId(R.color.pink_pressed);
+        button.setIcon(R.drawable.ic_fab_star);
+        button.setStrokeVisible(false);
+
+        final View actionB = findViewById(R.id.action_b);
+
+        FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
+        actionC.setTitle("Hide/Show Action above");
+        actionC.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+            }
+        });
+
+        final FloatingActionsMenu menuMultipleActions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        menuMultipleActions.addButton(actionC);
+
+        final FloatingActionButton removeAction = (FloatingActionButton) findViewById(R.id.button_remove);
+        removeAction.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((FloatingActionsMenu) findViewById(R.id.multiple_actions_down)).removeButton(removeAction);
+            }
+        });
+
+        ShapeDrawable drawable = new ShapeDrawable(new OvalShape());
+        drawable.getPaint().setColor(getResources().getColor(R.color.white));
+        ((FloatingActionButton) findViewById(R.id.setter_drawable)).setIconDrawable(drawable);
+
+        final FloatingActionButton actionA = (FloatingActionButton) findViewById(R.id.action_a);
+        actionA.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionA.setTitle("Action A clicked");
+            }
+        });
+
+        // Test that FAMs containing FABs with visibility GONE do not cause crashes
+        findViewById(R.id.button_gone).setVisibility(View.GONE);
+
+        final FloatingActionButton actionEnable = (FloatingActionButton) findViewById(R.id.action_enable);
+        actionEnable.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                menuMultipleActions.setEnabled(!menuMultipleActions.isEnabled());
+            }
+        });
+
+        FloatingActionsMenu rightLabels = (FloatingActionsMenu) findViewById(R.id.right_labels);
+        FloatingActionButton addedOnce = new FloatingActionButton(this);
+        addedOnce.setTitle("Added once");
+        rightLabels.addButton(addedOnce);
+
+        FloatingActionButton addedTwice = new FloatingActionButton(this);
+        addedTwice.setTitle("Added twice");
+        rightLabels.addButton(addedTwice);
+        rightLabels.removeButton(addedTwice);
+        rightLabels.addButton(addedTwice);*/
+
+        /*final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         final FloatingActionButton fab_1 = (FloatingActionButton) findViewById(R.id.fab_1);
         final FloatingActionButton fab_2 = (FloatingActionButton) findViewById(R.id.fab_2);
         FabOpen = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fab_open);
@@ -63,6 +165,7 @@ public class ActivityMain extends ListActivity {
             @Override
             public void onClick(View view) {
                 if(isOpen){
+
                     fab_1.startAnimation(FabClose);
                     fab_2.startAnimation(FabClose);
                     fab.startAnimation(FabRanticlockwise);
@@ -82,6 +185,15 @@ public class ActivityMain extends ListActivity {
                         }
                     });
                     fab_2.startAnimation(FabOpen);
+                    fab_2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intentLoadNewActivity = new Intent(ActivityMain.this, ActivityDiaryEdit.class);
+                            startActivity(intentLoadNewActivity);
+
+                        }
+                    });
+
                     fab.startAnimation(FabRclockwise);
                     fab_1.setClickable(true);
                     fab_2.setClickable(true);
@@ -90,18 +202,22 @@ public class ActivityMain extends ListActivity {
 
                 }
 
+
             }
-        });
-        button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
+        });*/
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar4);
+        toolbar.setNavigationIcon(R.drawable.ic_backarrow);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLoadNewActivity = new Intent(ActivityMain.this, ActivityDiaryEdit.class);
-                startActivity(intentLoadNewActivity);
-
+                finish();
             }
         });
         }
+
+
 
 
 

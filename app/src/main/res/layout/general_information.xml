@@ -6,97 +6,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.tarik.triggerwordsv1.Information.generalInformation">
 
-    <com.melnykov.fab.ObservableScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/mainScrollView"
-        android:scrollbars="vertical">
 
-        <LinearLayout
+
+
+        <com.melnykov.fab.ObservableScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="5dp"
-            android:background="#ffffff">
+            android:id="@+id/mainScrollView"
+            android:scrollbars="vertical">
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/titleBoxView1"
-                    android:clickable="true"
-                    android:background="@color/colorPrimary"
-                    android:orientation="vertical"
-                    android:layout_marginTop="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/downArrowImageView1"
-                                android:src="@drawable/ic_details"/>
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/upArrowImageView1"
-                                android:src="@drawable/ic_change_history"/>
-
-                        </RelativeLayout>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/titleTextView1"
-                            android:text="title1"
-                            android:layout_marginTop="9dp"
-                            android:textSize="30sp"
-                            android:textColor="#ffffff"/>
-
-                    </LinearLayout>
-
-                    <View style="@style/Divider"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:id="@+id/contentBoxView1"
-                    android:background="#ffffff"
-                    android:padding="5dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/contentTextView1"
-                        android:text="txt_content"
-                        android:layout_gravity="right"
-                        android:gravity="left"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
-                        android:textSize="20sp"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:background="#ffffff">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -106,11 +30,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/titleBoxView2"
+                        android:id="@+id/titleBoxView1"
                         android:clickable="true"
                         android:background="@color/colorPrimary"
                         android:orientation="vertical"
-                        android:layout_marginTop="5dp">
+                        android:layout_marginTop="10dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -123,13 +47,13 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/downArrowImageView2"
+                                    android:id="@+id/downArrowImageView1"
                                     android:src="@drawable/ic_details"/>
 
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/upArrowImageView2"
+                                    android:id="@+id/upArrowImageView1"
                                     android:src="@drawable/ic_change_history"/>
 
                             </RelativeLayout>
@@ -137,10 +61,10 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/titleTextView2"
-                                android:text="title2"
-                                android:textSize="30sp"
+                                android:id="@+id/titleTextView1"
+                                android:text="title1"
                                 android:layout_marginTop="9dp"
+                                android:textSize="30sp"
                                 android:textColor="#ffffff"/>
 
                         </LinearLayout>
@@ -153,14 +77,20 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:id="@+id/contentBoxView2"
+                        android:id="@+id/contentBoxView1"
                         android:background="#ffffff"
                         android:padding="5dp">
+
+                        <ImageView
+                            android:layout_width="388dp"
+                            android:layout_height="243dp"
+                            android:src="@drawable/generalinformation"
+                            />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/contentTextView2"
+                            android:id="@+id/contentTextView1"
                             android:text="txt_content"
                             android:layout_gravity="right"
                             android:gravity="left"
@@ -171,15 +101,6 @@
                     </LinearLayout>
 
                 </LinearLayout>
-
-            </LinearLayout>
-
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -189,78 +110,80 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/titleBoxView3"
-                        android:clickable="true"
-                        android:background="@color/colorPrimary"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5dp">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:id="@+id/titleBoxView2"
+                            android:clickable="true"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical"
+                            android:layout_marginTop="5dp">
 
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <ImageView
+                                <RelativeLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/downArrowImageView3"
-                                    android:src="@drawable/ic_details"/>
+                                    android:layout_height="wrap_content">
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/upArrowImageView3"
-                                    android:src="@drawable/ic_change_history"/>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/downArrowImageView2"
+                                        android:src="@drawable/ic_details"/>
 
-                            </RelativeLayout>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/upArrowImageView2"
+                                        android:src="@drawable/ic_change_history"/>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/titleTextView2"
+                                    android:text="title2"
+                                    android:textSize="30sp"
+                                    android:layout_marginTop="9dp"
+                                    android:textColor="#ffffff"/>
+
+                            </LinearLayout>
+
+                            <View style="@style/Divider"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/contentBoxView2"
+                            android:background="#ffffff"
+                            android:padding="5dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/titleTextView3"
-                                android:text="title2"
-                                android:textSize="30sp"
-                                android:layout_marginTop="9dp"
-                                android:textColor="#ffffff"/>
+                                android:id="@+id/contentTextView2"
+                                android:text="txt_content"
+                                android:layout_gravity="right"
+                                android:gravity="left"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:textSize="20sp"/>
 
                         </LinearLayout>
-
-                        <View style="@style/Divider"/>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/contentBoxView3"
-                        android:background="#ffffff"
-                        android:padding="5dp">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/contentTextView3"
-                            android:text="txt_content"
-                            android:layout_gravity="right"
-                            android:gravity="left"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:textSize="20sp"/>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -270,67 +193,158 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/titleBoxView4"
-                        android:clickable="true"
-                        android:background="@color/colorPrimary"
-                        android:orientation="vertical"
-                        android:layout_marginTop="5dp">
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:id="@+id/titleBoxView3"
+                            android:clickable="true"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical"
+                            android:layout_marginTop="5dp">
 
-                            <RelativeLayout
-                                android:layout_width="wrap_content"
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content">
 
-                                <ImageView
+                                <RelativeLayout
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/downArrowImageView4"
-                                    android:src="@drawable/ic_details"/>
+                                    android:layout_height="wrap_content">
 
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/upArrowImageView4"
-                                    android:src="@drawable/ic_change_history"/>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/downArrowImageView3"
+                                        android:src="@drawable/ic_details"/>
 
-                            </RelativeLayout>
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/upArrowImageView3"
+                                        android:src="@drawable/ic_change_history"/>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/titleTextView3"
+                                    android:text="title2"
+                                    android:textSize="30sp"
+                                    android:layout_marginTop="9dp"
+                                    android:textColor="#ffffff"/>
+
+                            </LinearLayout>
+
+                            <View style="@style/Divider"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/contentBoxView3"
+                            android:background="#ffffff"
+                            android:padding="5dp">
 
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/titleTextView4"
-                                android:text="title2"
-                                android:textSize="30sp"
-                                android:layout_marginTop="9dp"
-                                android:textColor="#ffffff"/>
+                                android:id="@+id/contentTextView3"
+                                android:text="txt_content"
+                                android:layout_gravity="right"
+                                android:gravity="left"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:textSize="20sp"/>
 
                         </LinearLayout>
 
-                        <View style="@style/Divider"/>
-
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:id="@+id/contentBoxView4"
-                        android:background="#ffffff"
-                        android:padding="5dp">
+                        android:orientation="vertical">
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/contentTextView4"
-                            android:text="txt_content"
-                            android:layout_gravity="right"
-                            android:gravity="left"
-                            android:layout_marginTop="20dp"
-                            android:layout_marginBottom="20dp"
-                            android:textSize="20sp"/>
+                            android:id="@+id/titleBoxView4"
+                            android:clickable="true"
+                            android:background="@color/colorPrimary"
+                            android:orientation="vertical"
+                            android:layout_marginTop="5dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/downArrowImageView4"
+                                        android:src="@drawable/ic_details"/>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:id="@+id/upArrowImageView4"
+                                        android:src="@drawable/ic_change_history"/>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:id="@+id/titleTextView4"
+                                    android:text="title2"
+                                    android:textSize="30sp"
+                                    android:layout_marginTop="9dp"
+                                    android:textColor="#ffffff"/>
+
+                            </LinearLayout>
+
+                            <View style="@style/Divider"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/contentBoxView4"
+                            android:background="#ffffff"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/contentTextView4"
+                                android:autoLink="all"
+                                android:linksClickable="true"
+                                android:layout_gravity="right"
+                                android:gravity="left"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="20dp"
+                                android:textSize="20sp"
+                                android:text="@string/txtCredits"/>
+
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
@@ -338,11 +352,8 @@
 
             </LinearLayout>
 
-        </LinearLayout>
 
-
-
-    </com.melnykov.fab.ObservableScrollView>
+        </com.melnykov.fab.ObservableScrollView>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -351,7 +362,11 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_publish"
-        />
+        android:background="@color/colorPrimary"
+        android:backgroundTint="@color/colorPrimary"
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_uptop" />
+
+
 
 </RelativeLayout>

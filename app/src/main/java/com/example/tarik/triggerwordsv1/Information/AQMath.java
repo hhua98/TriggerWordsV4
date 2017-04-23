@@ -7,6 +7,7 @@ package com.example.tarik.triggerwordsv1.Information;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,19 +15,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import com.example.tarik.triggerwordsv1.R;
-import java.util.ArrayList;
-
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
-
 import java.util.ArrayList;
 
 /**
@@ -37,7 +25,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
 
     private ArrayList<Float> score;
 
-    private TextView mTitle;
+    //private TextView mTitle;
     private Button mQuit;
     private Button mNext;
 
@@ -79,13 +67,13 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.aqmath);
+        setContentView(R.layout.activity_aqmath);
 
         score = (ArrayList<Float>) getIntent().getSerializableExtra("score");
         Log.d("scoreTopM", "scoreTopM: " + score.toString());
 
 
-        mTitle = (TextView) findViewById(R.id.titleTextView);
+        //mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
         mNext = (Button) findViewById(R.id.nextButton);
@@ -125,7 +113,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
         mRadioB5S  = (RadioButton) findViewById(R.id.radioButton5S);
         mRadioB5N  = (RadioButton) findViewById(R.id.radioButton5N);
 
-        mTitle.setText("Math and time management");
+        //mTitle.setText("Math and time management");
         mQuit.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
@@ -134,8 +122,17 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
         mQuestion3.setText("Can count, but has difficulty counting objects and dealing with money.");
         mQuestion4.setText("Can do arithmetic, but not word problems. Has problems showing math steps on paper.");
         mQuestion5.setText("Poor sequencing of numbers (12 for 21).");
-    }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar11);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     @Override
     public void onClick(View v) {
 
@@ -151,7 +148,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, questionnare.class);
+                Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 break;

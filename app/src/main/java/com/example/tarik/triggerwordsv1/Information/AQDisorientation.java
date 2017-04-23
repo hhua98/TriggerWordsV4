@@ -7,6 +7,7 @@ package com.example.tarik.triggerwordsv1.Information;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
 
     private ArrayList<Float> score;
 
-    private TextView mTitle;
+    //private TextView mTitle;
     private Button mQuit;
     private Button mNext;
 
@@ -72,7 +73,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
 
         score = new ArrayList<Float>();
 
-        mTitle = (TextView) findViewById(R.id.titleTextView);
+        //mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
         mNext = (Button) findViewById(R.id.nextButton);
@@ -112,7 +113,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
         mRadioB5S  = (RadioButton) findViewById(R.id.radioButton5S);
         mRadioB5N  = (RadioButton) findViewById(R.id.radioButton5N);
 
-        mTitle.setText("Disorientation");
+        //mTitle.setText("Disorientation");
         mQuit.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
@@ -121,6 +122,16 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
         mQuestion3.setText("Seems to “Zone out” or daydream often; gets lost easily or loses track of time.");
         mQuestion4.setText("Difficulty sustaining attention; seems “hyper” or “daydreamer.”");
         mQuestion5.setText("Prone to ear infections; sensitive to foods, additives, and chemical products.");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar7);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
@@ -138,7 +149,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, questionnare.class);
+                Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 break;

@@ -9,11 +9,13 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -60,7 +62,7 @@ public class SendCalendar extends AppCompatActivity {
     CheckBox checkBox4;
     EditText editText;
     ArrayList<String> list ;
-    Button mbutton4;
+    ImageButton mbutton7;
 
 
     String description ="";
@@ -98,11 +100,13 @@ public class SendCalendar extends AppCompatActivity {
     };
 
 
-    Button button4;
+    //Button button4;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
+
+
         ivLaunchPicker = (ImageView) findViewById(R.id.ivLaunchPicker);
         llDateHolder = (LinearLayout) findViewById(R.id.llDateHolder);
         llDateRangeHolder = (LinearLayout) findViewById(R.id.llDateRangeHolder);
@@ -139,13 +143,13 @@ public class SendCalendar extends AppCompatActivity {
         });
         dealWithSavedInstanceState(savedInstanceState);
 
-        mbutton4 = (Button) findViewById(R.id.button4);
 
 
 
 
+        mbutton7 = (ImageButton)findViewById(R.id.imageButton7);
         calendarIdSpinner = (Spinner) findViewById(R.id.calendarid_spinner);
-        button4 = (Button) findViewById(R.id.button4);
+
 
         addListenerButton();
         editText = (EditText) findViewById(R.id.editText);
@@ -167,8 +171,18 @@ public class SendCalendar extends AppCompatActivity {
             updateCalendarIdSpinner();
 
         }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar13);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     void dealWithSavedInstanceState(Bundle savedInstanceState) {
@@ -294,7 +308,7 @@ public class SendCalendar extends AppCompatActivity {
 
 
 
-        button4.setOnClickListener(new View.OnClickListener() {
+        mbutton7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

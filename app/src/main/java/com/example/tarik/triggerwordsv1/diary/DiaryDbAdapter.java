@@ -73,7 +73,7 @@ public class DiaryDbAdapter {
         initialValues.put(KEY_BODY, body);
         Calendar calendar = Calendar.getInstance();
         String created = "Date:"+ calendar.get(Calendar.YEAR) + "/"
-                + calendar.get(Calendar.DAY_OF_MONTH)+ "/" +calendar.get(Calendar.MONTH)
+                + calendar.get(Calendar.DAY_OF_MONTH) + "/" +(calendar.get(Calendar.MONTH)+1)
                 ;
         initialValues.put(KEY_CREATED, created);
         return mDb.insert(DATABASE_TABLE, null, initialValues);
@@ -110,7 +110,7 @@ public class DiaryDbAdapter {
         args.put(KEY_BODY, body);
         Calendar calendar = Calendar.getInstance();
         String created = "Date:"+ calendar.get(Calendar.YEAR) + "/"
-                + + calendar.get(Calendar.DAY_OF_MONTH)+ "/" +calendar.get(Calendar.MONTH);
+                + + calendar.get(Calendar.DAY_OF_MONTH) + "/" +(calendar.get(Calendar.MONTH)+1);
         args.put(KEY_CREATED, created);
 
         return mDb.update(DATABASE_TABLE, args, KEY_ROWID + "=" + rowId, null) > 0;

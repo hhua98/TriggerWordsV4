@@ -3,6 +3,8 @@ package com.example.tarik.triggerwordsv1.diary;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +16,7 @@ import com.example.tarik.triggerwordsv1.R;
  * Created by huanghe on 1/04/2017.
  */
 
-public class ActivityDiaryEdit extends Activity {
+public class ActivityDiaryEdit extends AppCompatActivity {
 
     private EditText mTitleText;
     private EditText mBodyText;
@@ -62,6 +64,18 @@ public class ActivityDiaryEdit extends Activity {
             }
 
         });
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar5);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 

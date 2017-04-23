@@ -8,20 +8,32 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="5dp"
-        android:background="#dddddd">
+        android:background="#ffffff">
 
-        <TextView
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/titleTextView"
-            android:text="title"
-            android:textSize="22sp"
-            android:textColor="#ffffff"
-            android:layout_marginTop="15dp"
-            android:background="@color/colorPrimary"
-            android:padding="7dp"
-            android:paddingBottom="5dp"
-            android:layout_weight="0.1"/>
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confusion and diffculty in solving math problems."/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Section 4 of 6"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -38,6 +38,9 @@ public class information extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
@@ -52,9 +55,14 @@ public class information extends AppCompatActivity {
 
 
     }
-
-
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_information, menu);
@@ -76,7 +84,7 @@ public class information extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+*/
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -115,13 +123,13 @@ public class information extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "General Information";
+                    return "General Infor";
                 case 1:
                     return "Success Stories";
                 case 2:
-                    return "Statistical Analysis";
+                    return "Stats";
                 case 3:
-                    return "Questionnare Tech";
+                    return "Assessment question";
             }
             return null;
         }

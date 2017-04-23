@@ -86,6 +86,8 @@ public class DemoActivity extends ActionBarActivity implements TextToSpeech.OnIn
 
 
         setSupportActionBar((Toolbar) findViewById(R.id.main_toolbar));
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
 
@@ -125,6 +127,11 @@ public class DemoActivity extends ActionBarActivity implements TextToSpeech.OnIn
 
         voice.setOnClickListener(voiceListener);
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
 //    @Override

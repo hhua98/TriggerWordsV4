@@ -7,6 +7,7 @@ package com.example.tarik.triggerwordsv1.Information;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -117,8 +118,17 @@ public class AQResult extends AppCompatActivity {
                 startActivity(intent2);
             }
         });
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar12);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

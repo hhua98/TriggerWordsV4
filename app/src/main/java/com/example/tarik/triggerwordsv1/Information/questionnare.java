@@ -31,7 +31,9 @@ public class questionnare extends Fragment {
         mDisclaimer.setText("This test is not surety of dyslexia. " +
                 "It is a simple assessment of an indication of dyslexia amongst " +
                 "children aged 7 to 9. The test was originally devised by " +
-                "Ronald D. Davis who...");
+                "Ronald D. Davis where the user rates each description according" +
+                "to how accurately it describes the person you're concerned" + "about (or yourself). For adults, estimate any past " +
+                "school problems as closely as possible." + "\n https://www.davisdyslexia.com/isit.html");
 
         myView.findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,12 +42,12 @@ public class questionnare extends Fragment {
                 startActivity(new Intent(getActivity(), AQDisorientation.class));
             }
         });
-        myView.findViewById(R.id.quitToMain).setOnClickListener(new View.OnClickListener() {
+        /*myView.findViewById(R.id.quitToMain).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getActivity(),information.class));
             }
-        });
+        });*/
 
         return myView;
 

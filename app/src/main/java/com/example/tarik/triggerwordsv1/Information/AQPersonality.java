@@ -7,6 +7,7 @@ package com.example.tarik.triggerwordsv1.Information;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,7 +37,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
 
     private ArrayList<Float> score;
 
-    private TextView mTitle;
+    //private TextView mTitle;
     private Button mQuit;
     private Button mNext;
 
@@ -83,7 +84,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         score = (ArrayList<Float>) getIntent().getSerializableExtra("score");
         Log.d("scoreTopP", "scoreTopP: " + score.toString());
 
-        mTitle = (TextView) findViewById(R.id.titleTextView);
+        //mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
         mNext = (Button) findViewById(R.id.nextButton);
@@ -123,7 +124,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         mRadioB5S  = (RadioButton) findViewById(R.id.radioButton5S);
         mRadioB5N  = (RadioButton) findViewById(R.id.radioButton5N);
 
-        mTitle.setText("Personality and self-esteem");
+        //mTitle.setText("Personality and self-esteem");
         mQuit.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
@@ -132,6 +133,17 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         mQuestion3.setText("Extremely disorderly or compulsively orderly. Can be a class clown, a trouble-maker, or too quiet.");
         mQuestion4.setText("Unusually high or low tolerance for pain. Can be an extra deep or light sleeper.");
         mQuestion5.setText("Mistakes and symptoms increase dramatically with confusion, time pressure, emotional stress, or poor health.");
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar9);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     @Override
@@ -147,7 +159,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, questionnare.class);
+                Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 break;

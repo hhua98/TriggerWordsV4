@@ -3,6 +3,7 @@ package com.example.tarik.triggerwordsv1.Information;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +19,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
 
     private ArrayList<Float> score;
 
-    private TextView mTitle;
+    //private TextView mTitle;
     private Button mQuit;
     private Button mNext;
 
@@ -65,7 +66,12 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
         score = (ArrayList<Float>) getIntent().getSerializableExtra("score");
         Log.d("scoreTopAF", "scoreTopAF: " + score.toString());
 
-        mTitle = (TextView) findViewById(R.id.titleTextView);
+        //mTitle = (TextView) findViewById(R.id.titleTextView);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar6);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mQuit = (Button) findViewById(R.id.quitButton);
         mNext = (Button) findViewById(R.id.nextButton);
@@ -105,7 +111,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
         mRadioB5S  = (RadioButton) findViewById(R.id.radioButton5S);
         mRadioB5N  = (RadioButton) findViewById(R.id.radioButton5N);
 
-        mTitle.setText("Hearing, speech and motor skills");
+        //mTitle.setText("Hearing, speech and motor skills");
         mQuit.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
@@ -115,7 +121,11 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
         mQuestion4.setText("Learns best through hands-on experience, demonstrations, experimentation, observation, and visual aids.");
         mQuestion5.setText("Clumsy, uncoordinated, poor at ball or team sports; difficulties with fine and/or gross motor skills and tasks.");
     }
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     @Override
     public void onClick(View v) {
 
@@ -130,7 +140,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, questionnare.class);
+                Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 break;

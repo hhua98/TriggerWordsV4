@@ -4,19 +4,28 @@
     android:layout_height="match_parent">
 
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar12"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:background="@color/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="15dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar12">
 
         <com.github.mikephil.charting.charts.BarChart
             android:layout_width="match_parent"
             android:layout_height="240dp"
             android:id="@+id/barChartView"
-            android:background="#ffffff"
+            android:background="#dddddd"
             android:layout_weight="5">
         </com.github.mikephil.charting.charts.BarChart>
 
@@ -51,13 +60,13 @@
                 android:layout_marginTop="2dp"/>
 
             <TextView
+                android:id="@+id/readSpell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/readSpell"
+                android:layout_marginTop="2dp"
                 android:text="Reading and Spelling"
-                android:textSize="16sp"
-                android:textColor="@color/rs"
-                android:layout_marginTop="2dp"/>
+                android:textColor="@android:color/holo_red_dark"
+                android:textSize="16sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -102,12 +111,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
-            android:text="QUIT"
-            android:textColor="#ffffff"
             android:layout_marginRight="4dp"
             android:layout_marginTop="15dp"
+            android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:layout_weight="1"/>
+            android:text="QUIT"
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 

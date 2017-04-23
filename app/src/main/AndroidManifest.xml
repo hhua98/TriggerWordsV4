@@ -36,11 +36,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/launcher"
+        android:label="Interactive Activity"
+        android:roundIcon="@mipmap/launcher2"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        >
         <uses-feature android:name="android.hardware.camera" />
         <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -73,18 +74,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".diary.SendCalendar" />
+        <activity android:name=".diary.SendCalendar"
+            android:label="Add Reminder"/>
         <activity android:name=".interactiveSession" />
         <activity android:name=".interactMenu" />
-        <activity android:name=".Eyetracking_ReadingStories.EyeTracker" />
+        <activity android:name=".Eyetracking_ReadingStories.EyeTracker"
+            android:label="Eye Tracking Training"/>
         <activity android:name=".triggerWords.WordActivity" />
         <activity android:name=".RecyclerMain" />
-        <activity android:name=".diary.ActivityDiaryEdit" />
+        <activity android:name=".diary.ActivityDiaryEdit"
+            android:label="Add Diary"/>
         <activity
             android:name=".diary.ActivityMain"
             android:label="ListWords" />
-        <activity android:name=".Eyetracking_ReadingStories.DemoActivity">
-            >
+        <activity android:name=".Eyetracking_ReadingStories.DemoActivity"
+            android:label="Reading Stories">
+
         </activity>
         <activity
             android:name=".map.MapsActivity"
@@ -92,14 +97,23 @@
         <activity
             android:name=".Information.information"
             android:label="@string/title_activity_information"
+
             android:theme="@style/AppTheme"></activity>
 
-        <activity android:name=".Information.AQDisorientation"></activity>
-        <activity android:name=".Information.AQReadSpell"></activity>
-        <activity android:name=".Information.AQAttentionFocus"></activity>
-        <activity android:name=".Information.AQMath"></activity>
-        <activity android:name=".Information.AQHandwriting"></activity>
-        <activity android:name=".Information.AQPersonality"></activity>
+        <activity android:name=".Information.AQDisorientation"
+            android:label="Disorientation"></activity>
+        <activity android:name=".Information.AQReadSpell"
+            android:label="Vision, Reading and Spelling"></activity>
+        <activity android:name=".Information.AQAttentionFocus"
+            android:label="Hearing, speech and motor skills">
+
+        </activity>
+        <activity android:name=".Information.AQMath"
+            android:label="Math and time management"></activity>
+        <activity android:name=".Information.AQHandwriting"
+            android:label="Co-ordination and handwriting"></activity>
+        <activity android:name=".Information.AQPersonality"
+            android:label="Personality and self-esteem"></activity>
         <activity android:name=".Information.AQResult"></activity>
 
     </application>

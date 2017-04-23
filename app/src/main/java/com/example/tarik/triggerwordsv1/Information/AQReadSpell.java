@@ -7,6 +7,7 @@ package com.example.tarik.triggerwordsv1.Information;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -37,7 +38,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
 
     private ArrayList<Float> score;
 
-    private TextView mTitle;
+    //private TextView mTitle;
     private Button mQuit;
     private Button mNext;
 
@@ -84,7 +85,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
         score = (ArrayList<Float>) getIntent().getSerializableExtra("score");
         Log.d("scoreTopRS", "scoreTopRS: " + score.toString());
 
-        mTitle = (TextView) findViewById(R.id.titleTextView);
+       // mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
         mNext = (Button) findViewById(R.id.nextButton);
@@ -124,7 +125,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
         mRadioB5S  = (RadioButton) findViewById(R.id.radioButton5S);
         mRadioB5N  = (RadioButton) findViewById(R.id.radioButton5N);
 
-        mTitle.setText("Vision, Reading and Spelling");
+        //mTitle.setText("Vision, Reading and Spelling");
         mQuit.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
@@ -133,8 +134,17 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
         mQuestion3.setText("Reading or writing shows repetitions, additions, transpositions, omissions, substitutions, and reversals in letters, numbers and/or words.");
         mQuestion4.setText("Complains of feeling or seeing non-existent movement while reading, writing, or copying.");
         mQuestion5.setText("Reads and rereads with little comprehension. Spells phonetically and/or inconsistently.");
-    }
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar10);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     @Override
     public void onClick(View v) {
 
@@ -150,7 +160,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, questionnare.class);
+                Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
                 break;
