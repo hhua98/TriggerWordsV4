@@ -1,16 +1,6 @@
 package com.example.tarik.triggerwordsv1.Newtriggerwords;
-
-/**
- * Created by huanghe on 30/04/2017.
- */
-
 import android.os.Parcel;
 import android.os.Parcelable;
-import com.example.tarik.triggerwordsv1.R;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
 /**
  * Created by Tarik on 22-Apr-17.
  */

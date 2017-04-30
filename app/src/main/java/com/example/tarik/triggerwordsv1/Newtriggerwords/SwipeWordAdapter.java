@@ -1,9 +1,4 @@
 package com.example.tarik.triggerwordsv1.Newtriggerwords;
-
-/**
- * Created by huanghe on 30/04/2017.
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -20,22 +15,6 @@ import java.util.List;
 import java.util.Random;
 import com.example.tarik.triggerwordsv1.R;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.io.File;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by Tarik on 30-Apr-17.

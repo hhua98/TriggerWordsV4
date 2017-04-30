@@ -1,9 +1,5 @@
 package com.example.tarik.triggerwordsv1.Newtriggerwords;
 
-/**
- * Created by huanghe on 30/04/2017.
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
