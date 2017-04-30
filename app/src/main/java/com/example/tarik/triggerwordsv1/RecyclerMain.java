@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.tarik.triggerwordsv1.Newtriggerwords.AddWordUi;
+import com.example.tarik.triggerwordsv1.Newtriggerwords.InteractiveSession;
 import com.example.tarik.triggerwordsv1.triggerWords.FirebaseHelper;
 import com.example.tarik.triggerwordsv1.triggerWords.WordActivity;
 import com.google.firebase.database.DatabaseReference;
@@ -112,14 +114,14 @@ public class RecyclerMain extends AppCompatActivity implements View.OnClickListe
     }
 
     public void startTriggerWordGame() {
-        Intent newIntent = new Intent(this, interactiveSession.class);
+        Intent newIntent = new Intent(this, InteractiveSession.class);
         startActivity(newIntent);
        // Intent newIntent = new Intent(this, DisplayAnswerActivity.class);
         //startActivity(newIntent);
     }
 
     public void startAddWord() {
-        Intent newIntent = new Intent(this, WordActivity.class);
+        Intent newIntent = new Intent(this, AddWordUi.class);
         startActivity(newIntent);
     }
 }

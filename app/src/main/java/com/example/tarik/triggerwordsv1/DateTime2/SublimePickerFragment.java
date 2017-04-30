@@ -3,11 +3,6 @@ package com.example.tarik.triggerwordsv1.DateTime2;
 /**
  * Created by huanghe on 5/04/2017.
  */
-
-
-
-
-
         import android.os.Bundle;
         import android.support.annotation.Nullable;
         import android.support.v4.app.DialogFragment;

@@ -12,20 +12,36 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="580dp"
+        android:layout_height="579dp"
         tools:context="com.example.huanghe.maptest.MapsActivity"></fragment>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/bottom_sheet"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="#FFFFFF"
+        android:layout_height="520dp"
+        android:background="#00FFFFFF"
         android:orientation="vertical"
         android:weightSum="1"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="80dp"
+        app:behavior_peekHeight="100dp"
         app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@android:color/transparent">
+
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="@null"
+                android:layout_marginLeft="200dp"
+                android:visibility="invisible" />
+
+
+        </LinearLayout>
 
         <!--<TextView-->
         <!--android:id="@+id/textView"-->
@@ -34,33 +50,34 @@
         <!--android:background="@android:color/darker_gray"-->
         <!--android:gravity="center"-->
         <!--android:textColor="@android:color/white" />-->
+
         <LinearLayout
             android:id="@+id/buttonPanel"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:background="@color/colorPrimary">
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal">
 
 
             <Button
                 android:id="@+id/btnOrganisation"
                 android:layout_width="110sp"
                 android:layout_height="30dp"
-                android:text="Organisation"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20sp"
                 android:background="#FFFFFF"
-                android:layout_gravity="center"
-                android:shadowColor="#ECEFF1"/>
+                android:shadowColor="#ECEFF1"
+                android:text="Organisation" />
 
             <Button
                 android:id="@+id/btnHospital"
                 android:layout_width="110sp"
                 android:layout_height="30dp"
-                android:text="Dyslexia"
+                android:layout_gravity="center"
                 android:layout_marginLeft="20sp"
                 android:background="#FFFFFF"
-                android:layout_gravity="center"
-                android:shadowColor="#ECEFF1"/>
+                android:shadowColor="#ECEFF1"
+                android:text="Dyslexia" />
 
             <Button
                 android:id="@+id/btnSchool"
@@ -81,34 +98,50 @@
         <!--android:textColor="#CCECF0F1" />-->
 
 
-        <TextView
-            android:id="@+id/place_details"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autoLink="all"
-            android:text="Show details..."
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:paddingTop="5sp"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"/>
+            android:background="#FFFFFF">
+            <TextView
+                android:id="@+id/place_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autoLink="all"
+                android:text="Show details..."
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingTop="5sp"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:background="#FFFFFF"/>
 
-        <ImageView
-            android:id="@+id/mImageView"
-            android:layout_width="372dp"
-            android:layout_height="242dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="20sp"
-            android:layout_marginRight="20sp"
-            android:paddingTop="30sp"
-            />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            >
+
+            <ImageView
+                android:id="@+id/mImageView"
+                android:layout_width="372dp"
+                android:layout_height="242dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:paddingTop="30sp"
+                />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/mText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:textAlignment="center"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:background="#FFFFFF"/>
 
     </LinearLayout>
 

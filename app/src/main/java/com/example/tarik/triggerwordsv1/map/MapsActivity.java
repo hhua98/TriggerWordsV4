@@ -9,6 +9,8 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetBehavior;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +39,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -103,8 +107,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.w3c.dom.Text;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener, GoogleMap.OnMapClickListener, GoogleMap.OnMarkerClickListener {
+        GoogleApiClient.OnConnectionFailedListener,
+        com.google.android.gms.location.LocationListener,
+        GoogleMap.OnMapClickListener,
+        GoogleMap.OnCameraIdleListener,
+        GoogleMap.OnCameraMoveStartedListener,
+        GoogleMap.OnMarkerClickListener {
 
 
     private GoogleMap mMap;
@@ -139,6 +151,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private View bottomPanel;
 
     private BottomSheetBehavior behavior;
+
+    // set the progress bar time
+
+    public ProgressBar progressbar;
+//
+//    private int progressStatus = 0;
+//
+//    private Handler mHandler = new Handler();
+//
+//    private static final int PROGRESS = 0x1;
 
 
 
@@ -240,10 +262,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mText = (TextView) findViewById(R.id.mText);
 
+        progressbar = (ProgressBar) findViewById(R.id.progressbar);
+
+
 
 
 
     }
+
+
 
 
 
@@ -382,8 +409,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.getUiSettings().setRotateGesturesEnabled(true);
         mMap.getUiSettings().setScrollGesturesEnabled(true);
         mMap.getUiSettings().setTiltGesturesEnabled(true);
+
         //mMap.getUiSettings().setMapToolbarEnabled(true);
         mMap.setBuildingsEnabled(true);
+
+        mMap.setOnCameraIdleListener(this);
+        mMap.setOnCameraMoveStartedListener(this);
+
         //LatLng latLng = new LatLng(-34, 165);
         //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -409,6 +441,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String keyDOrganisation = "kids+organisation";
             @Override
             public void onClick(View v) {
+                //progressbar.setVisibility(View.VISIBLE);
+
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
                 String url = getUrl(latitude, longitude, keyDOrganisation);
@@ -418,7 +452,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby Organisation", Toast.LENGTH_LONG).show();
+                // Toast.makeText(MapsActivity.this,"Nearby Organisation", Toast.LENGTH_LONG).show();
+
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
+
+
+
             }
         });
 
@@ -426,8 +465,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         btnHospital.setOnClickListener(new View.OnClickListener() {
             // String type2 = "hospital";
             String keyDHospital = "dyslexia";
+
             @Override
             public void onClick(View v) {
+                //progressbar.setVisibility(View.VISIBLE);
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
                 String url = getUrl(latitude, longitude, keyDHospital);
@@ -437,7 +478,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby Hospitals", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MapsActivity.this,"Nearby Hospitals", Toast.LENGTH_LONG).show();
+
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
+
             }
         });
 
@@ -447,6 +491,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             String keyDSchool = "learning+disability";
             @Override
             public void onClick(View v) {
+                // progressbar.setVisibility(View.VISIBLE);
+
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
                 if (mCurrLocationMarker != null) {
@@ -459,7 +505,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.d("onClick", url);
                 GetNearbyPlacesData getNearbyPlacesData = new GetNearbyPlacesData();
                 getNearbyPlacesData.execute(DataTransfer);
-                Toast.makeText(MapsActivity.this,"Nearby Schools", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MapsActivity.this,"Nearby Schools", Toast.LENGTH_LONG).show();
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
+
+
             }
         });
 
@@ -475,6 +524,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //..marker listener
 
         mMap.setOnMarkerClickListener((GoogleMap.OnMarkerClickListener) this);
+
 
     }
 
@@ -515,7 +565,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.getUiSettings().setMapToolbarEnabled(true);
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(marker.getPosition()), 2000, null);
 
         behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
@@ -595,6 +645,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googlePlacesUrl.append("&sensor=true");
         googlePlacesUrl.append("&key=" + "AIzaSyCN13FCxPHweUuIpi-EBtG9O2StnKXSaXk");
         Log.d("getUrl", googlePlacesUrl.toString());
+
+
         return (googlePlacesUrl.toString());
     }
 
@@ -686,8 +738,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // mCurrLocationMarker = mMap.addMarker(markerOptions);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng), 2000, null);
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
         Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
@@ -698,6 +750,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             Log.d("onLocationChanged", "Removing Location Updates");
         }
         Log.d("onLocationChanged", "Exit");
+
 
 
     }
@@ -767,6 +820,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             // You can add here other case statements according to your requirement.
         }
     }
+
 
     //handle the photo
     private void placePhotosTask(String placeId) {
@@ -842,6 +896,42 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         photoMetadataBuffer.release();
                     }
                 });
+
+
+
+
+        //try to use zoom control to control progress bar
+
+
+    }
+
+//     mMap.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener(){
+//        @Override
+//        public void onCameraMoveStarted(int i) {
+//            progressbar.setVisibility(View.GONE);
+//        }
+//    });
+
+    @Override
+    public void onCameraIdle() {
+//        Toast.makeText(this, "The camera has stopped moving.",
+//                Toast.LENGTH_SHORT).show();
+
+        progressbar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onCameraMoveStarted(int reason) {
+
+        if (reason == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE) {
+            progressbar.setVisibility(View.VISIBLE);
+        } else if (reason == GoogleMap.OnCameraMoveStartedListener
+                .REASON_API_ANIMATION) {
+            progressbar.setVisibility(View.VISIBLE);
+        } else if (reason == GoogleMap.OnCameraMoveStartedListener
+                .REASON_DEVELOPER_ANIMATION) {
+            progressbar.setVisibility(View.VISIBLE);
+        }
     }
 }
 

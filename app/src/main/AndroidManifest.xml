@@ -76,7 +76,7 @@
         </activity>
         <activity android:name=".diary.SendCalendar"
             android:label="Add Reminder"/>
-        <activity android:name=".interactiveSession" />
+        <activity android:name=".Newtriggerwords.InteractiveSession" />
         <activity android:name=".interactMenu" />
         <activity android:name=".Eyetracking_ReadingStories.EyeTracker"
             android:label="Eye Tracking Training"/>
@@ -115,6 +115,11 @@
         <activity android:name=".Information.AQPersonality"
             android:label="Personality and self-esteem"></activity>
         <activity android:name=".Information.AQResult"></activity>
+
+        <activity android:name=".Newtriggerwords.AddWordUi"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
 
     </application>
 
