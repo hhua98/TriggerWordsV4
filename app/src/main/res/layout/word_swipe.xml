@@ -6,11 +6,11 @@
 
     <TextView
         android:id="@+id/item_text"
-        android:layout_width="260dp"
+        android:layout_width="320dp"
         android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
         android:background="@drawable/ic_blackboard"
         android:fontFamily="casual"
-        android:gravity="center"
         android:text="aaaaaaa"
 
         android:textColor="#FFFFFF"
