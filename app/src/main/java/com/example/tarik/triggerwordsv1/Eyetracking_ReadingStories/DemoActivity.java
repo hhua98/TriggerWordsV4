@@ -91,6 +91,7 @@ public class DemoActivity extends ActionBarActivity implements TextToSpeech.OnIn
 
 
 
+
         mLayout = (SlidingUpPanelLayout) findViewById(R.id.sliding_layout);
         mLayout.addPanelSlideListener(new PanelSlideListener() {
             @Override

@@ -146,12 +146,14 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 Log.d("scoreBotDIS", "scoreBotDIS: " + score.toString());
                 intent1.putExtra("score", score);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
                 break;
 
             case R.id.quitButton:
                 Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
                 break;
 
         }
@@ -192,7 +194,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton1S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton1N:
@@ -211,7 +213,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton2S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton2N:
@@ -230,7 +232,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton3S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton3N:
@@ -249,7 +251,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton4S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton4N:
@@ -268,7 +270,7 @@ public class AQDisorientation extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton5S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton5N:

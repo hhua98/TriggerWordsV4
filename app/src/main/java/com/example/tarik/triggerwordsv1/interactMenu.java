@@ -14,13 +14,17 @@ import android.widget.ImageButton;
 import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.DemoActivity;
 import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.EyeTracker;
 import com.example.tarik.triggerwordsv1.Newtriggerwords.AddWordUi;
+import com.example.tarik.triggerwordsv1.triggerletters.CoverFlowActivity;
+import com.example.tarik.triggerwordsv1.wordgame.gameActivity;
+import com.example.tarik.triggerwordsv1.wordgame.startScreen;
+import com.example.tarik.triggerwordsv1.wordgame.gamebuild;
 
 public class interactMenu extends AppCompatActivity {
-    ImageButton imageButton5;
     ImageButton imageButton6;
     ImageButton imageButton7;
     ImageButton imageButton8;
-    ImageButton imageButton;
+    ImageButton game;
+    ImageButton imageButton9;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,23 +38,39 @@ public class interactMenu extends AppCompatActivity {
 
             }
         });
-        imageButton5 = (ImageButton) findViewById(R.id.imageButton5);
-        imageButton5.setOnClickListener(new View.OnClickListener() {
+        imageButton7 = (ImageButton) findViewById(R.id.imageButton7);
+        imageButton7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLoadNewActivity = new Intent(interactMenu.this, AddWordUi.class);
                 startActivity(intentLoadNewActivity);
             }
         });
-        imageButton = (ImageButton) findViewById(R.id.imageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        imageButton8 = (ImageButton) findViewById(R.id.imageButton8);
+        imageButton8.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLoadNewActivity = new Intent(interactMenu.this, DemoActivity.class);
                 startActivity(intentLoadNewActivity);
             }
         });
+        game = (ImageButton) findViewById(R.id.game);
+        game.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLoadNewActivity = new Intent(interactMenu.this, startScreen.class);
+                startActivity(intentLoadNewActivity);
 
+            }
+        });
+        imageButton9 = (ImageButton) findViewById(R.id.imageButton9);
+        imageButton9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLoadNewActivity = new Intent(interactMenu.this, CoverFlowActivity.class);
+                startActivity(intentLoadNewActivity);
+            }
+        });
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
@@ -62,5 +82,11 @@ public class interactMenu extends AppCompatActivity {
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+    @Override
+    public void onBackPressed(){
+        Intent setIntent = new Intent(this, MenuActivity.class);
+        startActivity(setIntent);
+
     }
 }

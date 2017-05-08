@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.tarik.triggerwordsv1.Information.information;
 import com.example.tarik.triggerwordsv1.diary.ActivityMain;
@@ -25,9 +26,10 @@ import com.example.tarik.triggerwordsv1.map.MapsActivity;
 public class MenuActivity extends AppCompatActivity
          {
     ImageButton imageButton2;
-    ImageButton imageButton3;
+    ImageButton imageButton10;
     ImageButton imageButton4;
     ImageButton imageButton1;
+    int backButtonCount = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,8 +52,8 @@ public class MenuActivity extends AppCompatActivity
                 startActivity(intentLoadNewActivity);
             }
         });
-        imageButton3 = (ImageButton) findViewById(R.id.imageButton3);
-        imageButton3.setOnClickListener(new View.OnClickListener() {
+        imageButton10 = (ImageButton) findViewById(R.id.imageButton10);
+        imageButton10.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intentLoadNewActivity = new Intent(MenuActivity.this, ActivityMain.class);
@@ -66,6 +68,8 @@ public class MenuActivity extends AppCompatActivity
                 startActivity(intentLoadNewActivity);
             }
         });
+
+
 
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -86,13 +90,26 @@ public class MenuActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if(backButtonCount >= 1)
+        {
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to close the application.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
-        }
+        }*/
     }
+
 
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {

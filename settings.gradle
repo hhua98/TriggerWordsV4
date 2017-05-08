@@ -1,4 +1,4 @@
-include ':app', ':library', ':library', ':sublimepickerlibrary', ':maptest', ':floataction'
+include ':app', ':library', ':library', ':sublimepickerlibrary', ':maptest', ':floataction', ':lib'
 def projectDialogsDir = file('com.sothree.slidinguppanel')
 def rootProjectDescriptor = settings.rootProject
 settings.createProjectDescriptor(rootProjectDescriptor, 'library', projectDialogsDir)

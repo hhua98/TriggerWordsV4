@@ -22,10 +22,10 @@
             </item>
 
             <item
-                android:left="9dp"
-                android:top="9dp"
-                android:right="9dp"
-                android:bottom="9dp">
+                android:left="7dp"
+                android:top="7dp"
+                android:right="7dp"
+                android:bottom="7dp">
                 <shape android:shape="oval">
                     <solid android:color="@color/colorPrimary" />
                 </shape>

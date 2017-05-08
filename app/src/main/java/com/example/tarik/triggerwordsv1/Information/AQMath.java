@@ -27,6 +27,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
 
     //private TextView mTitle;
     private Button mQuit;
+    private Button mBack;
     private Button mNext;
 
     //Group1
@@ -76,6 +77,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
         //mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
+        mBack = (Button) findViewById(R.id.backButton);
         mNext = (Button) findViewById(R.id.nextButton);
 
         //Group1
@@ -115,6 +117,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
 
         //mTitle.setText("Math and time management");
         mQuit.setOnClickListener(this);
+        mBack.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
         mQuestion1.setText("Has difficulty telling time, managing time, learning sequenced information or tasks, or being on time.");
@@ -133,6 +136,14 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
         onBackPressed();
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -145,12 +156,18 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 Log.d("scoreBotM", "scoreBotM: " + score.toString());
                 intent1.putExtra("score", score);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                break;
+
+            case R.id.backButton:
+                onBackPressed();
                 break;
 
             case R.id.quitButton:
                 Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
                 break;
 
         }
@@ -191,7 +208,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.radioButton1S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton1N:
@@ -210,7 +227,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.radioButton2S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton2N:
@@ -229,7 +246,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.radioButton3S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton3N:
@@ -248,7 +265,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.radioButton4S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton4N:
@@ -267,7 +284,7 @@ public class AQMath extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.radioButton5S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton5N:

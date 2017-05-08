@@ -1,0 +1,157 @@
+package com.example.tarik.triggerwordsv1.wordgame;
+
+/**
+ * Created by huanghe on 3/05/2017.
+ */
+
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import com.example.tarik.triggerwordsv1.R;
+import com.example.tarik.triggerwordsv1.interactMenu;
+
+
+public class startScreen extends AppCompatActivity {
+
+    private Button play;
+    private Button commandButton;
+    private RadioGroup rg;
+    private RadioButton rb1;
+    private RadioButton rb2;
+    private RadioButton rb3;
+    static ProgressDialog progressDialog;
+    private int selectedId=1;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.gamestart_activity);
+
+        progressDialog = new ProgressDialog(startScreen.this);
+
+        play=(Button)findViewById(R.id.play);
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Set progressDialog properties and Intent in BackGroundTask ...
+                BackGroundTask backGroundTask = new BackGroundTask(startScreen.this , progressDialog);
+                backGroundTask.execute();
+            }
+        });
+
+        rg = (RadioGroup) findViewById(R.id.radiogrp);
+        rb1=(RadioButton) findViewById(R.id.easy);
+        rb2=(RadioButton) findViewById(R.id.moderate);
+        rb3=(RadioButton) findViewById(R.id.hard);
+        //final String value = ((RadioButton)findViewById(rg.getCheckedRadioButtonId())).getText().toString();
+
+        //rb = (RadioButton) findViewById(selectedId);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                if(checkedId==rb1.getId())
+                    selectedId=1;
+                else if(checkedId==rb2.getId())
+                    selectedId=2;
+                else
+                    selectedId=3;
+                /*Toast.makeText(getBaseContext(), selectedId+"", Toast.LENGTH_SHORT).show();*/
+            }
+        });
+        commandButton = (Button) findViewById(R.id.instr);
+        commandButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        startScreen.this);
+
+                // set title
+                alertDialogBuilder.setTitle("Instructions");
+
+                // set dialog message
+                alertDialogBuilder.setMessage(R.string.instructions);
+                alertDialogBuilder.setNegativeButton(R.string.leave, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // User cancelled the dialog
+                    }
+                });
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+                // show it
+                alertDialog.show();
+            }
+        });
+
+
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar17);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+    @Override
+    public void onBackPressed(){
+        Intent setIntent = new Intent(this, interactMenu.class);
+        startActivity(setIntent);
+    }
+
+    public int getSelectedId() {
+        return selectedId;
+    }
+}
+
+
+class BackGroundTask extends AsyncTask<Void , Void ,Void> {
+    private ProgressDialog dialog;
+    private startScreen activity ;
+
+    public BackGroundTask(startScreen activity , ProgressDialog dialog) {
+        BackGroundTask.this.activity = activity ;
+        BackGroundTask.this.dialog = dialog ;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        // Set Dialog properties here ...
+        dialog.setTitle("Please Wait");
+        dialog.setMessage("Loading ... ");
+        dialog.setIndeterminate(true);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
+    }
+
+    @Override
+    protected Void doInBackground(Void... params) {
+        Intent i =new Intent(BackGroundTask.this.activity , gameActivity.class);
+        i.putExtra("Level",BackGroundTask.this.activity.getSelectedId());
+        BackGroundTask.this.activity.startActivity(i);
+        return  null ;
+    }
+
+    @Override
+    protected void onPostExecute(Void result) {
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+}

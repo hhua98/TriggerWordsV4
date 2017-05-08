@@ -28,12 +28,11 @@ public class questionnare extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.questionnare, container, false);
         mDisclaimer = (TextView) myView.findViewById(R.id.disclaimerTextView);
-        mDisclaimer.setText("This test is not surety of dyslexia. " +
-                "It is a simple assessment of an indication of dyslexia amongst " +
+        mDisclaimer.setText("This is a simple assessment of an indication of dyslexia amongst " +
                 "children aged 7 to 9. The test was originally devised by " +
-                "Ronald D. Davis where the user rates each description according" +
-                "to how accurately it describes the person you're concerned" + "about (or yourself). For adults, estimate any past " +
-                "school problems as closely as possible." + "\n https://www.davisdyslexia.com/isit.html");
+                "Ronald D. Davis. /n/nThe user rates each description according" +
+                "to how accurately it describes the person concerned" + "\n More info at: \n\n" +
+                "https://www.davisdyslexia.com/isit.html");
 
         myView.findViewById(R.id.startButton).setOnClickListener(new View.OnClickListener() {
             @Override

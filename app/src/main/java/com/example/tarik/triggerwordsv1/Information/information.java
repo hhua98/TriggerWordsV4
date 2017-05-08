@@ -1,5 +1,7 @@
 package com.example.tarik.triggerwordsv1.Information;
 
+import android.content.Intent;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +14,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.tarik.triggerwordsv1.MenuActivity;
 import com.example.tarik.triggerwordsv1.R;
 
 public class information extends AppCompatActivity {
@@ -60,6 +63,13 @@ public class information extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+    @Override
+    public void onBackPressed() {
+
+            Intent setIntent = new Intent(this, MenuActivity.class);
+            startActivity(setIntent);
+
+}
 
 
    /* @Override
@@ -123,7 +133,7 @@ public class information extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "General Infor";
+                    return "General Info";
                 case 1:
                     return "Success Stories";
                 case 2:

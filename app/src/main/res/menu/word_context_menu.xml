@@ -13,5 +13,7 @@
         android:id="@+id/changePicture"
         android:title="Change picture"/>
 
-
+    <item
+        android:id="@+id/deletePicture"
+        android:title="Delete picture"/>
 </menu>

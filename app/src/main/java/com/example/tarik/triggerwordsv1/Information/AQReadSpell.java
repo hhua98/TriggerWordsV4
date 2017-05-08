@@ -40,6 +40,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
 
     //private TextView mTitle;
     private Button mQuit;
+    private Button mBack;
     private Button mNext;
 
     //Group1
@@ -85,9 +86,10 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
         score = (ArrayList<Float>) getIntent().getSerializableExtra("score");
         Log.d("scoreTopRS", "scoreTopRS: " + score.toString());
 
-       // mTitle = (TextView) findViewById(R.id.titleTextView);
+        // mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
+        mBack = (Button) findViewById(R.id.backButton);
         mNext = (Button) findViewById(R.id.nextButton);
 
         //Group1
@@ -127,6 +129,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
 
         //mTitle.setText("Vision, Reading and Spelling");
         mQuit.setOnClickListener(this);
+        mBack.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
         mQuestion1.setText("Appears bright, highly intelligent, and articulate but unable to read, write, or spell at grade level.");
@@ -145,6 +148,14 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
         onBackPressed();
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -157,12 +168,18 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 Log.d("scoreBotRS", "scoreBotRS: " + score.toString());
                 intent1.putExtra("score", score);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                break;
+
+            case R.id.backButton:
+                onBackPressed();
                 break;
 
             case R.id.quitButton:
                 Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
                 break;
 
         }
@@ -203,7 +220,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.radioButton1S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton1N:
@@ -222,7 +239,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.radioButton2S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton2N:
@@ -241,7 +258,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.radioButton3S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton3N:
@@ -260,7 +277,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.radioButton4S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton4N:
@@ -279,7 +296,7 @@ public class AQReadSpell extends AppCompatActivity implements View.OnClickListen
                 break;
 
             case R.id.radioButton5S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton5N:

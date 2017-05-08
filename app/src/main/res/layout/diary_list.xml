@@ -36,7 +36,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:cacheColorHint="#00000000"></ListView>
+                    android:cacheColorHint="#00000000"
+                    ></ListView>
         </LinearLayout>
         <!--<com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/pink_icon"
@@ -313,7 +314,8 @@
             app:fab_labelStyle="@style/menu_labels_style"
             android:layout_marginBottom="16dp"
             android:layout_marginRight="16dp"
-            android:layout_marginEnd="16dp">
+            android:layout_marginEnd="16dp"
+            >
 
                 <com.getbase.floatingactionbutton.FloatingActionButton
                     android:id="@+id/action_a"

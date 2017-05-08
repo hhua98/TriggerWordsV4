@@ -7,353 +7,412 @@
     tools:context="com.example.tarik.triggerwordsv1.Information.generalInformation">
 
 
+    <com.melnykov.fab.ObservableScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
 
-
-        <com.melnykov.fab.ObservableScrollView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/mainScrollView"
-            android:scrollbars="vertical">
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.CardView
+                android:id="@+id/titleBoxView1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="5dp"
-                android:background="#ffffff">
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
+
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:id="@+id/titleBoxView1"
-                        android:clickable="true"
-                        android:background="@color/colorPrimary"
-                        android:orientation="vertical"
-                        android:layout_marginTop="10dp">
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
                             <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2">
 
                                 <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
                                     android:id="@+id/downArrowImageView1"
-                                    android:src="@drawable/ic_details"/>
-
-                                <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_action_downinfo" />
+
+                                <ImageView
                                     android:id="@+id/upArrowImageView1"
-                                    android:src="@drawable/ic_change_history"/>
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_action_upinfo" />
 
                             </RelativeLayout>
 
                             <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
                                 android:id="@+id/titleTextView1"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="8"
                                 android:text="title1"
-                                android:layout_marginTop="9dp"
-                                android:textSize="30sp"
-                                android:textColor="#ffffff"/>
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
-                        <View style="@style/Divider"/>
-
                     </LinearLayout>
 
+                    <View style="@style/Divider" />
+
                     <LinearLayout
+                        android:id="@+id/contentBoxView1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:id="@+id/contentBoxView1"
-                        android:background="#ffffff"
                         android:padding="5dp">
 
                         <ImageView
+                            android:id="@+id/image1"
                             android:layout_width="388dp"
                             android:layout_height="243dp"
-                            android:src="@drawable/generalinformation"
-                            />
+                            android:layout_marginTop="6dp"
+                            android:src="@drawable/infor4" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#000000"></View>
 
                         <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
                             android:id="@+id/contentTextView1"
-                            android:text="txt_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="right"
-                            android:gravity="left"
-                            android:layout_marginTop="20dp"
                             android:layout_marginBottom="20dp"
-                            android:textSize="20sp"/>
+                            android:layout_marginTop="20dp"
+                            android:gravity="left"
+                            android:text="txt_content"
+                            android:textSize="20sp" />
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/titleBoxView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="10dp">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:id="@+id/titleBoxView2"
-                            android:clickable="true"
-                            android:background="@color/colorPrimary"
-                            android:orientation="vertical"
-                            android:layout_marginTop="5dp">
+                            android:layout_height="wrap_content">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2">
 
-                                <RelativeLayout
+                                <ImageView
+                                    android:id="@+id/downArrowImageView2"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/downArrowImageView2"
-                                        android:src="@drawable/ic_details"/>
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/upArrowImageView2"
-                                        android:src="@drawable/ic_change_history"/>
-
-                                </RelativeLayout>
-
-                                <TextView
-                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/titleTextView2"
-                                    android:text="title2"
-                                    android:textSize="30sp"
-                                    android:layout_marginTop="9dp"
-                                    android:textColor="#ffffff"/>
+                                    android:src="@drawable/ic_action_downinfo" />
 
-                            </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/upArrowImageView2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_action_upinfo" />
 
-                            <View style="@style/Divider"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:id="@+id/contentBoxView2"
-                            android:background="#ffffff"
-                            android:padding="5dp">
+                            </RelativeLayout>
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/titleTextView2"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/contentTextView2"
-                                android:text="txt_content"
-                                android:layout_gravity="right"
-                                android:gravity="left"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="20dp"
-                                android:textSize="20sp"/>
+                                android:layout_weight="8"
+                                android:text="title1"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
+                    <View style="@style/Divider" />
+
+                    <LinearLayout
+                        android:id="@+id/contentBoxView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/image2"
+                            android:layout_width="388dp"
+                            android:layout_height="243dp"
+                            android:layout_marginTop="6dp"
+                            android:src="@drawable/infor5" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#000000">
+
+                        </View>
+
+                        <TextView
+                            android:id="@+id/contentTextView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="left"
+                            android:text="txt_content"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
+            </android.support.v7.widget.CardView>
 
+            <android.support.v7.widget.CardView
+                android:id="@+id/titleBoxView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:id="@+id/titleBoxView3"
-                            android:clickable="true"
-                            android:background="@color/colorPrimary"
-                            android:orientation="vertical"
-                            android:layout_marginTop="5dp">
+                            android:layout_height="wrap_content">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2">
 
-                                <RelativeLayout
+                                <ImageView
+                                    android:id="@+id/downArrowImageView3"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/downArrowImageView3"
-                                        android:src="@drawable/ic_details"/>
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/upArrowImageView3"
-                                        android:src="@drawable/ic_change_history"/>
-
-                                </RelativeLayout>
-
-                                <TextView
-                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/titleTextView3"
-                                    android:text="title2"
-                                    android:textSize="30sp"
-                                    android:layout_marginTop="9dp"
-                                    android:textColor="#ffffff"/>
+                                    android:src="@drawable/ic_action_downinfo" />
 
-                            </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/upArrowImageView3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_action_upinfo" />
 
-                            <View style="@style/Divider"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:id="@+id/contentBoxView3"
-                            android:background="#ffffff"
-                            android:padding="5dp">
+                            </RelativeLayout>
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/titleTextView3"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/contentTextView3"
-                                android:text="txt_content"
-                                android:layout_gravity="right"
-                                android:gravity="left"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="20dp"
-                                android:textSize="20sp"/>
+                                android:layout_weight="8"
+                                android:text="title1"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
+                    <View style="@style/Divider" />
+
+                    <LinearLayout
+                        android:id="@+id/contentBoxView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/image3"
+                            android:layout_width="388dp"
+                            android:layout_height="243dp"
+                            android:layout_marginTop="6dp"
+                            android:src="@drawable/infor3" />
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#000000">
+
+                        </View>
+
+                        <TextView
+                            android:id="@+id/contentTextView3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20dp"
+                            android:gravity="left"
+                            android:text="txt_content"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/titleBoxView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp"
                         android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="80dp"
-                            android:id="@+id/titleBoxView4"
-                            android:clickable="true"
-                            android:background="@color/colorPrimary"
-                            android:orientation="vertical"
-                            android:layout_marginTop="5dp">
+                            android:layout_height="wrap_content">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="2">
 
-                                <RelativeLayout
+                                <ImageView
+                                    android:id="@+id/downArrowImageView4"
                                     android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/downArrowImageView4"
-                                        android:src="@drawable/ic_details"/>
-
-                                    <ImageView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:id="@+id/upArrowImageView4"
-                                        android:src="@drawable/ic_change_history"/>
-
-                                </RelativeLayout>
-
-                                <TextView
-                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:id="@+id/titleTextView4"
-                                    android:text="title2"
-                                    android:textSize="30sp"
-                                    android:layout_marginTop="9dp"
-                                    android:textColor="#ffffff"/>
+                                    android:src="@drawable/ic_action_downinfo" />
 
-                            </LinearLayout>
+                                <ImageView
+                                    android:id="@+id/upArrowImageView4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_action_upinfo" />
 
-                            <View style="@style/Divider"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:id="@+id/contentBoxView4"
-                            android:background="#ffffff"
-                            android:padding="5dp">
+                            </RelativeLayout>
 
                             <TextView
-                                android:layout_width="match_parent"
+                                android:id="@+id/titleTextView4"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/contentTextView4"
-                                android:autoLink="all"
-                                android:linksClickable="true"
-                                android:layout_gravity="right"
-                                android:gravity="left"
-                                android:layout_marginTop="20dp"
-                                android:layout_marginBottom="20dp"
-                                android:textSize="20sp"
-                                android:text="@string/txtCredits"/>
-
+                                android:layout_weight="8"
+                                android:text="title1"
+                                android:textSize="22sp"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                     </LinearLayout>
 
+                    <View style="@style/Divider" />
+
+                    <LinearLayout
+                        android:id="@+id/contentBoxView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="6dp"
+                            android:layout_marginTop="3dp"
+                            android:background="#000000"></View>
+
+                        <TextView
+                            android:id="@+id/contentTextView4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginTop="20dp"
+                            android:autoLink="all"
+                            android:gravity="left"
+                            android:linksClickable="true"
+                            android:text="@string/txtCredits"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
+        </LinearLayout>
 
-        </com.melnykov.fab.ObservableScrollView>
+    </com.melnykov.fab.ObservableScrollView>
 
     <com.melnykov.fab.FloatingActionButton
         android:id="@+id/fab"
@@ -365,8 +424,6 @@
         android:background="@color/colorPrimary"
         android:backgroundTint="@color/colorPrimary"
         android:scaleType="fitCenter"
-        android:src="@mipmap/ic_uptop" />
-
-
+        android:src="@drawable/ic_action_upinfo" />
 
 </RelativeLayout>

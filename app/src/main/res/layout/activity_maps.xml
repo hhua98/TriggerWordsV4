@@ -61,33 +61,48 @@
 
             <Button
                 android:id="@+id/btnOrganisation"
-                android:layout_width="110sp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20sp"
-                android:background="#FFFFFF"
+                android:background="?android:attr/selectableItemBackground"
                 android:shadowColor="#ECEFF1"
-                android:text="Organisation" />
+                android:text="Center"
+                android:textColor="@color/black_semi_transparent"
+                android:layout_weight="1"
+                android:textAlignment="center"
+                />
+
 
             <Button
                 android:id="@+id/btnHospital"
-                android:layout_width="110sp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20sp"
-                android:background="#FFFFFF"
+                android:background="?android:attr/selectableItemBackground"
                 android:shadowColor="#ECEFF1"
-                android:text="Dyslexia" />
+                android:text="Dyslexia"
+                android:layout_weight="1"
+                android:textColor="@color/black_semi_transparent"
+                android:textAlignment="center"
+
+
+                />
+
 
             <Button
                 android:id="@+id/btnSchool"
-                android:layout_width="110sp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20sp"
-                android:background="@color/common_google_signin_btn_text_dark_pressed"
+                android:background="?android:attr/selectableItemBackground"
                 android:shadowColor="#ECEFF1"
-                android:text="Schools" />
+                android:text="Schools"
+                android:layout_weight="1"
+                android:textColor="@color/black_semi_transparent"
+                android:textAlignment="center"
+
+
+                />
 
         </LinearLayout>
 

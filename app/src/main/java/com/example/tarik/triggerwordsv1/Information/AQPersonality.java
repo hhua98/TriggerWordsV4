@@ -39,6 +39,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
 
     //private TextView mTitle;
     private Button mQuit;
+    private Button mBack;
     private Button mNext;
 
     //Group1
@@ -87,6 +88,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         //mTitle = (TextView) findViewById(R.id.titleTextView);
 
         mQuit = (Button) findViewById(R.id.quitButton);
+        mBack = (Button) findViewById(R.id.backButton);
         mNext = (Button) findViewById(R.id.nextButton);
 
         //Group1
@@ -126,6 +128,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
 
         //mTitle.setText("Personality and self-esteem");
         mQuit.setOnClickListener(this);
+        mBack.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
         mQuestion1.setText("Talented in art, drama, music, mechanics, designing, building, or engineering.");
@@ -147,6 +150,13 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
+    }
+
+    @Override
     public void onClick(View v) {
 
         switch(v.getId()) {
@@ -156,12 +166,18 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 Intent intent1 = new Intent(this, AQResult.class);
                 intent1.putExtra("score", score);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                break;
+
+            case R.id.backButton:
+                onBackPressed();
                 break;
 
             case R.id.quitButton:
                 Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
                 break;
 
         }
@@ -192,7 +208,6 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         }
     }
 
-
     private float RadioFunction1() {
         float result = 0;
         int selectedId = mRadioG1.getCheckedRadioButtonId();
@@ -202,7 +217,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.radioButton1S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton1N:
@@ -221,7 +236,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.radioButton2S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton2N:
@@ -240,7 +255,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.radioButton3S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton3N:
@@ -259,7 +274,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.radioButton4S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton4N:
@@ -278,7 +293,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.radioButton5S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton5N:

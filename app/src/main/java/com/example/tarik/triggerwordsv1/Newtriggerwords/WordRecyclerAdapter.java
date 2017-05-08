@@ -1,9 +1,15 @@
 package com.example.tarik.triggerwordsv1.Newtriggerwords;
 
+/**
+ * Created by huanghe on 30/04/2017.
+ */
+
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,11 +53,14 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
     @Override
     public void onBindViewHolder(final WordViewHolder holder, int position) {
         Word currentWord = wordList.get(position);
+        holder.mWordName.setTypeface(Typeface.createFromAsset(context.getAssets(), "font/dyslexiafont.ttf"));
         holder.mWordName.setText(currentWord.getWordName());
         int points = currentWord.getPoints();
         holder.mPoints.setText(Integer.toString(points) + ")");
         ratingBarSetter(holder, points);
-        imageSetter(holder, currentWord);
+        if (currentWord.getImageUrl() != null) {
+            imageSetter(holder, currentWord);
+        }
         Log.d("bind", "onBind called");
     }
 
@@ -83,6 +92,11 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         notifyItemRemoved(position);
     }
 
+    public void removingAllWords() {
+        this.wordList.clear();
+        notifyDataSetChanged();
+    }
+
     public void editingWord(Word oldWord, Word newWord, int position){
         for (Word word : wordList) {
             if (word.getWordName().equalsIgnoreCase(oldWord.getWordName())) {
@@ -95,8 +109,9 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
 
     public void settingImage(Word word, String newImageUrl, int position){
         for (Word currentWord : wordList) {
-            if (currentWord.getWordName().equalsIgnoreCase(word.getWordName())) {
+            if ((currentWord.getWordName()).equalsIgnoreCase(word.getWordName())) {
                 wordList.get(wordList.indexOf(currentWord)).setImageUrl(newImageUrl);
+                //Toast.makeText(context, "Image updated for word: " + word.getWordName(), Toast.LENGTH_SHORT).show();
                 break;
             }
         }
@@ -148,13 +163,15 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
 
     public void imageSetter(WordViewHolder holder, Word word) {
         String imageUrl = word.getImageUrl();
-        if (!imageUrl.equals("a")) {
+        if (word.getImageUrl() != "a") {
             File imgFile = new File(imageUrl);
             if (imgFile.exists()) {
                 Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
                 holder.mWordImage.setImageBitmap(myBitmap);
             }
-            Toast.makeText(context, "Image updated for word: " + word.getWordName(), Toast.LENGTH_SHORT).show();
+        }
+        else {
+            holder.mWordImage.setImageResource(R.drawable.ic_action_default);
         }
     }
 
@@ -178,7 +195,8 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         }
 
         private void init() {
-            mWordImage = (ImageView) itemView.findViewById(R.id.wordImageView);
+            mWordImage = (ImageView) itemView.findViewById(R.id.listWordImageView);
+            mWordImage.setOnClickListener(this);
             mWordName = (TextView) itemView.findViewById(R.id.wordNameView);
             mLikeButton = (ImageView) itemView.findViewById(R.id.likeButton);
             mLikeButton.setOnClickListener(this);
@@ -217,6 +235,13 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
                     }
                     break;
 
+                case R.id.listWordImageView:
+                    //Toast.makeText(context, "CLICKED!L", Toast.LENGTH_SHORT).show();
+                    if (clickListener!=null) {
+                        clickListener.imageClickHandler(currentWord.getImageUrl());
+                    }
+                    break;
+
             }
         }
     }
@@ -225,5 +250,6 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         void increaseWordPoints(String currentWordName, int position);
         void decreaseWordPoints(String currentWordName, int position);
         void contextMenuHandler(Context context, TextView contextMenuView, String currentWordName, int position);
+        void imageClickHandler(String imageUrl);
     }
 }

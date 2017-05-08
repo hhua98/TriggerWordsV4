@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.tarik.triggerwordsv1.R;
 
@@ -52,16 +53,22 @@ public class ActivityDiaryEdit extends AppCompatActivity {
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                String title = mTitleText.getText().toString();
-                String body = mBodyText.getText().toString();
-                if (mRowId != null) {
-                    mDbHelper.updateDiary(mRowId, title, body);
-                } else
-                    mDbHelper.createDiary(title, body);
-                Intent mIntent = new Intent();
-                setResult(RESULT_OK, mIntent);
-                finish();
+
+
+
+                    String title = mTitleText.getText().toString();
+                    String body = mBodyText.getText().toString();
+                    if (mRowId != null) {
+                        mDbHelper.updateDiary(mRowId, title, body);
+                    } else
+                        mDbHelper.createDiary(title, body);
+                    Intent mIntent = new Intent();
+                    setResult(RESULT_OK, mIntent);
+                    finish();
+
             }
+
+
 
         });
 

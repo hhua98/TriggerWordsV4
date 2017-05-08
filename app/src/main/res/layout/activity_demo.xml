@@ -26,7 +26,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
 
-        sothree:theme="@style/AppTheme" />
+        sothree:theme="?attr/actionBarTheme" >
+
+    </android.support.v7.widget.Toolbar>
     <!--<TextView-->
     <!--android:id="@+id/main"-->
     <!--android:layout_width="match_parent"-->

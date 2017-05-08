@@ -4,214 +4,258 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.tarik.addtriggerwords.AddWordUi"
+    tools:context="com.example.tarik.triggerwordsv1.Newtriggerwords.AddWordUi"
     android:id="@+id/mainLayout">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:id="@+id/mainLinearLayout"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="16dp"
-        android:orientation="vertical">
+        android:layout_below="@id/toolbar14">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/wtfButton"
-            android:text="GO!"/>
-
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:padding="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/wordNameEditView"
-                    android:textSize="16sp"
-                    android:inputType="textNoSuggestions|textPersonName"
-                    android:maxLength="20"
-                    android:maxLines="1"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="8.5"/>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_add_word"
-                    android:id="@+id/addWordButton"
-                    android:layout_marginTop="4dp"
-                    android:layout_weight="1.5"/>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginTop="10dp"
-            android:padding="6dp">
+            android:layout_marginRight="16dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="7">
 
-            <LinearLayout
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:id="@+id/wtfButton"
+                android:text="Blackboard"
+                android:padding="6dp"
+                android:background="@drawable/button"
+
+                android:textColor="#ffffff"
+                android:layout_weight="2"/>
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_marginTop="20dp"
+                android:padding="6dp"
+                android:layout_weight="2">
 
-                <EditText
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/searchNameEditView"
-                    android:textSize="16sp"
-                    android:inputType="textNoSuggestions|textPersonName"
-                    android:maxLength="20"
-                    android:maxLines="1"
-                    android:maxWidth="5dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_weight="8.5"/>
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_search"
-                    android:id="@+id/searchWordButton"
-                    android:layout_marginTop="4dp"
-                    android:layout_weight="1.5"/>
-
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Order by"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="18sp"
-                    android:layout_marginLeft="6dp"
-                    android:layout_marginBottom="15dp"/>
-
-                <RadioGroup
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/mainRadioGroupView"
-                    android:layout_marginBottom="4dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content">
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <EditText
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/latestRadioButton"
-                        android:text="Latest"
-                        android:checked="true"
-                        android:textSize="18sp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_weight="3.33"/>
+                        android:id="@+id/wordNameEditView"
+                        android:textSize="16sp"
+                        android:inputType="textNoSuggestions|textPersonName"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="8.5"/>
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/difficultyRadioButton"
-                        android:text="Difficulty"
-                        android:textSize="18sp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_weight="3.33"/>
+                        android:src="@drawable/ic_action_add_word"
+                        android:id="@+id/addWordButton"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="1.5"/>
 
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:padding="6dp"
+                android:layout_weight="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/alphabeticalRadioButton"
-                        android:text="Alphabet"
-                        android:textSize="18sp"
-                        android:buttonTint="@color/colorPrimary"
-                        android:textColor="@color/colorPrimary"
-                        android:layout_weight="3.33"/>
+                        android:id="@+id/searchNameEditView"
+                        android:textSize="16sp"
+                        android:inputType="text"
+                        android:maxLength="20"
+                        android:maxLines="1"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="8.5"
+                        android:imeOptions="actionSearch" />
 
-                </RadioGroup>
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_action_search"
+                        android:id="@+id/searchWordButton"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="1.5"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="6">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="6dp"
-                    android:layout_marginBottom="6dp">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:text="Order by"
                         android:textColor="@color/colorPrimary"
-                        android:text="Results:"
-                        android:layout_weight="0.2"/>
+                        android:textSize="18sp"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginBottom="15dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <RadioGroup
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorPrimary"
-                        android:id="@+id/resultCountView"
+                        android:id="@+id/mainRadioGroupView"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/latestRadioButton"
+                            android:text="Latest"
+                            android:checked="true"
+                            android:textSize="18sp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_weight="3.33"/>
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/difficultyRadioButton"
+                            android:text="Difficulty"
+                            android:textSize="18sp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_weight="3.33"/>
+
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/alphabeticalRadioButton"
+                            android:text="Alphabet"
+                            android:textSize="18sp"
+                            android:buttonTint="@color/colorPrimary"
+                            android:textColor="@color/colorPrimary"
+                            android:layout_weight="3.33"/>
+
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:layout_weight="5.8"/>
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="6dp">
 
-                    <ToggleButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/orderToggleButton"
-                        android:textOff="Ascending"
-                        android:textOn="Descending"
-                        android:background="@color/colorPrimary"
-                        android:textColor="#ffffff"
-                        android:layout_weight="4"
-                        android:layout_marginRight="10dp"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorPrimary"
+                            android:text="Results:"
+                            android:layout_weight="2.2"
+                            android:layout_marginTop="10dp"/>
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorPrimary"
+                            android:id="@+id/resultCountView"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1.8"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="6">
+
+                            <Button
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/deleteAllButton"
+                                android:padding="6dp"
+                                android:text="Delete All"
+                                android:background="@drawable/button"
+                                android:textColor="#ffffff"
+                                android:layout_marginLeft="4dp"/>
+
+                            <ToggleButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/orderToggleButton"
+                                android:padding="6dp"
+                                android:textOff="Ascending"
+                                android:textOn="Descending"
+                                android:background="@drawable/button"
+                                android:textColor="#ffffff"
+                                android:layout_marginLeft="20dp"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
+        </LinearLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/mainLinearLayout"
+            android:layout_weight="7">
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/wordRecyclerView"
+                android:scrollbars="vertical"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp">
+            </android.support.v7.widget.RecyclerView>
+
+        </FrameLayout>
 
     </LinearLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mainLinearLayout">
-
-        <android.support.v7.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/wordRecyclerView"
-            android:scrollbars="vertical"
-            android:layout_gravity="center_horizontal"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp">
-        </android.support.v7.widget.RecyclerView>
-
-    </FrameLayout>
-
-
 
 </RelativeLayout>

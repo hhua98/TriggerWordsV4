@@ -27,7 +27,7 @@ public class interactiveSession extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.interactivesession);
+        setContentView(R.layout.interactivesession2);
 
         context = this;
 
@@ -39,7 +39,7 @@ public class interactiveSession extends AppCompatActivity {
 
         initWords();
 
-        wordImageView = (ImageView) findViewById(R.id.wordsImage);
+        wordImageView = (ImageView) findViewById(R.id.swipeWordImageView);
 
         Word imageId = (Word)al.get(0);
         wordImageView.setImageResource(imageId.getImageId());

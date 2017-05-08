@@ -1,7 +1,7 @@
 package com.example.tarik.triggerwordsv1.Newtriggerwords;
 
 /**
- * Created by huanghe on 30/04/2017.
+ * Created by Tarik on 30/04/2017.
  */
 
 import android.content.ContentValues;
@@ -10,8 +10,13 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.widget.Toast;
 import com.example.tarik.triggerwordsv1.R;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import android.content.ContentValues;
 import android.content.Context;
@@ -29,9 +34,8 @@ import java.util.ArrayList;
 
 public class SqliteAdapter {
 
-    Context context;
-    SqliteHelper sqliteHelper;
-    SQLiteDatabase db;
+    private Context context;
+    private SqliteHelper sqliteHelper;
 
     public SqliteAdapter (Context context) {
 
@@ -45,14 +49,14 @@ public class SqliteAdapter {
         contentValues.put(sqliteHelper.WORD_NAME, newWord.getWordName());
         contentValues.put(sqliteHelper.WORD_IMAGE_URL, newWord.getImageUrl());
         contentValues.put(sqliteHelper.WORD_POINTS, newWord.getPoints());
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
         long exitId = db.insert(sqliteHelper.TABLE_NAME, null, contentValues);
         db.close();
         return exitId;
     }
 
     public int getRowCount() {
-        db = sqliteHelper.getReadableDatabase();
+        SQLiteDatabase db = sqliteHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT Count(*) FROM " + sqliteHelper.TABLE_NAME + ";", null);
         cursor.moveToFirst();
         int count = cursor.getInt(0);
@@ -67,7 +71,7 @@ public class SqliteAdapter {
                 sqliteHelper.WORD_IMAGE_URL,
                 sqliteHelper.WORD_POINTS};
 
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
 
         Cursor cursor = db.query(sqliteHelper.TABLE_NAME, attributesWanted,
                 null, null, null, null, sqliteHelper.WORD_NAME, null);
@@ -81,7 +85,7 @@ public class SqliteAdapter {
     public boolean compareName(String inputWordName) {
         inputWordName = inputWordName.toLowerCase();
         boolean nameFoundFlag = false;
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
         Cursor cursor = db.query(sqliteHelper.TABLE_NAME, new String [] {sqliteHelper.WORD_NAME},
                 sqliteHelper.WORD_NAME + "=?", new String [] {inputWordName}, null, null, null, null);
 
@@ -108,7 +112,7 @@ public class SqliteAdapter {
                     sqliteHelper.WORD_IMAGE_URL,
                     sqliteHelper.WORD_POINTS};
 
-            db = sqliteHelper.getWritableDatabase();
+            SQLiteDatabase db = sqliteHelper.getWritableDatabase();
 
             Cursor cursor = db.query(sqliteHelper.TABLE_NAME, attributesWanted,
                     sqliteHelper.WORD_NAME + "=?", new String[]{inputWordName},
@@ -127,18 +131,24 @@ public class SqliteAdapter {
         contentValues.put(sqliteHelper.WORD_NAME, newWord.getWordName());
         contentValues.put(sqliteHelper.WORD_IMAGE_URL, newWord.getImageUrl());
         contentValues.put(sqliteHelper.WORD_POINTS, newWord.getPoints());
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
         long exitId = db.update(sqliteHelper.TABLE_NAME, contentValues, sqliteHelper.WORD_NAME + "=?", new String [] {oldWordName});
         return exitId;
     }
 
     public long deleteWordFromDB(String inputWordName) {
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
 
         long exitId = db.delete(sqliteHelper.TABLE_NAME,
                 sqliteHelper.WORD_NAME + " =? ", new String [] {inputWordName});
         db.close();
         return exitId;
+    }
+
+    public void deleteAllWordsFromDB() {
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
+        db.delete(sqliteHelper.TABLE_NAME, null,null);
+        db.close();
     }
 
     public long updateWordImage(Word word, String newImageUrl) {
@@ -148,7 +158,7 @@ public class SqliteAdapter {
         contentValues.put(sqliteHelper.WORD_NAME, wordName);
         contentValues.put(sqliteHelper.WORD_IMAGE_URL, newImageUrl);
         contentValues.put(sqliteHelper.WORD_POINTS, points);
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
         long exitId = db.update(sqliteHelper.TABLE_NAME, contentValues, sqliteHelper.WORD_NAME + "=?", new String [] {wordName});
         return exitId;
     }
@@ -160,7 +170,7 @@ public class SqliteAdapter {
         contentValues.put(sqliteHelper.WORD_NAME, wordName);
         contentValues.put(sqliteHelper.WORD_IMAGE_URL, imageUrl);
         contentValues.put(sqliteHelper.WORD_POINTS, newWordPoints);
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
         long exitId = db.update(sqliteHelper.TABLE_NAME, contentValues, sqliteHelper.WORD_NAME + "=?", new String [] {wordName});
         return exitId;
     }
@@ -173,7 +183,7 @@ public class SqliteAdapter {
                 sqliteHelper.WORD_IMAGE_URL,
                 sqliteHelper.WORD_POINTS};
 
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
 
         Cursor cursor = db.query(sqliteHelper.TABLE_NAME, attributesWanted,
                 null, null, null, null, rankingAttribute + " ASC", null);
@@ -191,7 +201,7 @@ public class SqliteAdapter {
                 sqliteHelper.WORD_IMAGE_URL,
                 sqliteHelper.WORD_POINTS};
 
-        db = sqliteHelper.getWritableDatabase();
+        SQLiteDatabase db = sqliteHelper.getWritableDatabase();
 
         Cursor cursor = db.query(sqliteHelper.TABLE_NAME, attributesWanted,
                 null, null, null, null, rankingAttribute + " "+ orderingOption, null);
@@ -273,12 +283,10 @@ public class SqliteAdapter {
 
         private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-        public SqliteHelper(Context context) {
+        private SqliteHelper(Context context) {
 
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
             this.context = context;
-            db = getWritableDatabase();
-            db.close();
         }
 
         @Override
@@ -286,12 +294,12 @@ public class SqliteAdapter {
 
             try {
                 db.execSQL(CREATE_TABLE);
-                Toast.makeText(context, "onCre", Toast.LENGTH_SHORT).show();
-            } catch (SQLException e) {
-                Toast.makeText(context, "onCreFAILED", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "onCre", Toast.LENGTH_SHORT).show();
+            }
+            catch (SQLException e) {
+                //Toast.makeText(context, "onCreFAILED", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
-
         }
 
         @Override
@@ -299,11 +307,12 @@ public class SqliteAdapter {
             try {
                 db.execSQL(DROP_TABLE);
                 onCreate(db);
-                Toast.makeText(context, "onUp", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "onUp", Toast.LENGTH_SHORT).show();
             } catch (SQLException e) {
                 Toast.makeText(context, "onUpFAILED", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
         }
+
     }
 }

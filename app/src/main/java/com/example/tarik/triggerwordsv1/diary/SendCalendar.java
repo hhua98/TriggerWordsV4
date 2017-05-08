@@ -3,13 +3,18 @@ package com.example.tarik.triggerwordsv1.diary;
 /**
  * Created by huanghe on 5/04/2017.
  */
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
@@ -27,7 +32,10 @@ import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicke
 
 import com.example.tarik.triggerwordsv1.CustomOnItemSelectedListener;
 import com.example.tarik.triggerwordsv1.DateTime2.SublimePickerFragment;
+import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.EyeTracker;
 import com.example.tarik.triggerwordsv1.R;
+import com.example.tarik.triggerwordsv1.interactMenu;
+import com.example.tarik.triggerwordsv1.wordgame.gameActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,6 +71,7 @@ public class SendCalendar extends AppCompatActivity {
     EditText editText;
     ArrayList<String> list ;
     ImageButton mbutton7;
+    private TextView wordsBtn;
 
 
     String description ="";
@@ -105,8 +114,6 @@ public class SendCalendar extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_activity);
-
-
         ivLaunchPicker = (ImageView) findViewById(R.id.ivLaunchPicker);
         llDateHolder = (LinearLayout) findViewById(R.id.llDateHolder);
         llDateRangeHolder = (LinearLayout) findViewById(R.id.llDateRangeHolder);
@@ -121,7 +128,7 @@ public class SendCalendar extends AppCompatActivity {
         tvMinute = ((TextView) findViewById(R.id.tvMinute));
         rlDateTimeRecurrenceInfo
                 = (RelativeLayout) findViewById(R.id.rlDateTimeRecurrenceInfo);
-        ivLaunchPicker.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+        //ivLaunchPicker.setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
         ivLaunchPicker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,13 +146,15 @@ public class SendCalendar extends AppCompatActivity {
 
                 pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
                 pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
+
             }
         });
         dealWithSavedInstanceState(savedInstanceState);
 
 
 
-
+        wordsBtn = (TextView) findViewById(R.id.connectCalendar);
+        wordsBtn.setPaintFlags(wordsBtn.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         mbutton7 = (ImageButton)findViewById(R.id.imageButton7);
         calendarIdSpinner = (Spinner) findViewById(R.id.calendarid_spinner);
@@ -153,6 +162,8 @@ public class SendCalendar extends AppCompatActivity {
 
         addListenerButton();
         editText = (EditText) findViewById(R.id.editText);
+        editText.setHint(Html.fromHtml("<i>" + "Enter the Title" + "</i>"));
+        editText.setSelectAllOnFocus(true);
         checkBox = (CheckBox) findViewById(R.id.checkBox);
         checkBox2 = (CheckBox) findViewById(R.id.checkBox2);
         checkBox3 = (CheckBox) findViewById(R.id.checkBox3);
@@ -160,6 +171,8 @@ public class SendCalendar extends AppCompatActivity {
 
 
         list = new ArrayList<String>();
+        CalendarHelper.requestCalendarReadWritePermission(SendCalendar.this);
+
 
         calendarIdSpinner.setOnItemSelectedListener(new CustomOnItemSelectedListener());
 
@@ -169,15 +182,46 @@ public class SendCalendar extends AppCompatActivity {
             calendarIdTable = CalendarHelper.listCalendarId(this);
 
             updateCalendarIdSpinner();
+            wordsBtn.setText("Calendar Connected");
+            wordsBtn.setTextColor(getResources().getColor(R.color.fab1_color));
 
+        }else {
+            wordsBtn.setText("Connect Calendar");
         }
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar13);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        updateCalendarIdSpinner();
+        list.clear();
+
+        description = "";
+
+
+    }
 
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode==CalendarHelper.CALENDARHELPER_PERMISSION_REQUEST_CODE)
+        {
+            if (CalendarHelper.haveCalendarReadWritePermissions(this))
+            {
+                Toast.makeText(this, (String)"Have Calendar Read/Write Permission.",
+                        Toast.LENGTH_LONG).show();
+
+
+
+
+
+            }
+
+        }
+
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
     @Override
     public boolean onSupportNavigateUp() {
@@ -250,6 +294,7 @@ public class SendCalendar extends AppCompatActivity {
         tvMinute.setText(applyBoldStyle("MINUTE: ").append(String.valueOf(mMinute)));
 
         rlDateTimeRecurrenceInfo.setVisibility(View.VISIBLE);
+        updateCalendarIdSpinner();
     }
 
     // Applies a StyleSpan to the supplied text
@@ -312,36 +357,39 @@ public class SendCalendar extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
-                for (String str : list) {
-
-                    description += str + ",";
-                }
-
                 if (CalendarHelper.haveCalendarReadWritePermissions(SendCalendar.this))
                 {
+                    if (checkBox.isChecked()) {
+                        list.add(checkBox.getText().toString());
+                        checkBox.setChecked(false);
+                    }
+                    if (checkBox2.isChecked()) {
+                        list.add(checkBox2.getText().toString());
+                        checkBox2.setChecked(false);
+                    }
+                    if (checkBox3.isChecked()) {
+                        list.add(checkBox3.getText().toString());
+                        checkBox3.setChecked(false);
+                    }
+                    if (checkBox4.isChecked()) {
+                        list.add(checkBox4.getText().toString());
+                        checkBox4.setChecked(false);
+                    }
+
+
+                    for (String str : list) {
+
+                        description += str + ",";
+                    }
                     try {
                         addNewEvent();
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    if (checkBox.isChecked()) {
-                        checkBox.setChecked(false);
-                    }
-                    if (checkBox2.isChecked()) {
-                        checkBox2.setChecked(false);
-                    }
-                    if (checkBox3.isChecked()) {
-                        checkBox3.setChecked(false);
-                    }
-                    if (checkBox4.isChecked()) {
-                        checkBox4.setChecked(false);
-                    }
+
                     list.clear();
 
                     description = "";
-
-
 
                 }
                 else
@@ -358,25 +406,26 @@ public class SendCalendar extends AppCompatActivity {
 
     public void onCheckboxClicked(View view) {
 
-        //boolean checked = ((CheckBox) view).isChecked();
+        boolean checked = ((CheckBox) view).isChecked();
 
         switch (view.getId()) {
             case R.id.checkBox:
-               list.add(checkBox.getText().toString());
+
+               //list.add(checkBox.getText().toString());
 
 
                 break;
             case R.id.checkBox2:
-               list.add(checkBox2.getText().toString());
+               //list.add(checkBox2.getText().toString());
 
                 break;
 
             case R.id.checkBox3:
-                list.add(checkBox3.getText().toString());
+                //list.add(checkBox3.getText().toString());
 
                 break;
             case R.id.checkBox4:
-                list.add(checkBox4.getText().toString());
+                //list.add(checkBox4.getText().toString());
 
                 break;
         }
@@ -404,52 +453,14 @@ public class SendCalendar extends AppCompatActivity {
     }
 
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 
-        if (requestCode==CalendarHelper.CALENDARHELPER_PERMISSION_REQUEST_CODE)
-        {
-            if (CalendarHelper.haveCalendarReadWritePermissions(this))
-            {
-                Toast.makeText(this, (String)"Have Calendar Read/Write Permission.",
-                        Toast.LENGTH_LONG).show();
-
-            }
-
-        }
-
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-    }
 
     private void addNewEvent() throws ParseException {
-        if (calendarIdTable==null)
-        {
-            Toast.makeText(this, (String)"No calendars found. Please ensure at least one google account has been added.",
-                    Toast.LENGTH_LONG).show();
-            //Load calendars
-            calendarIdTable = CalendarHelper.listCalendarId(this);
-
-            updateCalendarIdSpinner();
-
-            return;
-        }
-
 
         int startYear = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.YEAR) : INVALID_VAL;
         int startMonth = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.MONTH) : INVALID_VAL;
         int startDayOfMonth = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH) : INVALID_VAL;
-
-
-
-
         final long oneHour = 1000 * 60 * 60;
-
-
-
-
-
-
-
         String dates = String.valueOf(startMonth+1)+"-"+String.valueOf(startDayOfMonth)+"-"+String.valueOf(startYear)+" "+String.valueOf(mHour)+":"+String.valueOf(mMinute)+":"+"00"+".999";
         SimpleDateFormat fmt = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss.S");
         Date myDate = fmt.parse(dates);
@@ -460,21 +471,61 @@ public class SendCalendar extends AppCompatActivity {
         long xxx = myDate.getTime();
         Log.d("jhg", "hjg" + now);
         Log.d("qwe", "hjg" + xxx);
-
-
-
         String calendarString = calendarIdSpinner.getSelectedItem().toString();
         String title = editText.getText().toString();
+        if (calendarIdTable==null)
+        {
+            Toast.makeText(this, (String)"No calendars found. Please ensure at least one google account has been added.",
+                    Toast.LENGTH_LONG).show();
+            //Load calendars
+            calendarIdTable = CalendarHelper.listCalendarId(this);
+
+            updateCalendarIdSpinner();
+
+            return;
+        }else if(description == "")
+        {Toast.makeText(this, (String)"please choose at least one activity",
+                Toast.LENGTH_LONG).show();
+            return;
+        }else if(tvYear.getText() == ""){
+            Toast.makeText(this, (String)"please choose a date to remind",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }else if(editText.getText().toString() == ""){
+            Toast.makeText(this, (String)"please enter a title",
+                    Toast.LENGTH_LONG).show();
+        }
 
 
 
         int calendar_id = Integer.parseInt(calendarIdTable.get(calendarString));
 
         CalendarHelper.MakeNewCalendarEntry(this, title, description, "Somewhere",xxx,yyy,false,true,calendar_id,3);
+        Toast.makeText(this, (String)"Your reminder has been sent to your calendar.",
+                Toast.LENGTH_LONG).show();
+
+        }
+    public void buttonShow2(View view) {
+        if (CalendarHelper.haveCalendarReadWritePermissions(this)) {
+            //Load calendars
+            calendarIdTable = CalendarHelper.listCalendarId(this);
+
+            updateCalendarIdSpinner();
+            wordsBtn.setText("Calendar Connected");
+            wordsBtn.setTextColor(getResources().getColor(R.color.fab1_color));
+
+        } else {
+            Toast.makeText(this, (String) "No calendar found",
+                    Toast.LENGTH_LONG).show();
+            wordsBtn.setText("Calendar Disconnected");
+            wordsBtn.setTextColor(getResources().getColor(R.color.colorAccentDark));
+        }
+
 
     }
 
-
-
-
 }
+
+
+
+

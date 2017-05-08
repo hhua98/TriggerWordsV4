@@ -24,17 +24,25 @@
             android:layout_height="wrap_content" android:layout_weight="1" />
     </LinearLayout>
 
-    <TextView android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="@string/body" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Content" />
     <EditText android:id="@+id/body" android:layout_width="fill_parent"
         android:layout_height="149dp"
         android:scrollbars="vertical" android:gravity="top" />
 
     <Button
         android:id="@+id/confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
         android:text="@string/confirm"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:background="@drawable/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="7dp"
+        android:textColor="#C0FFFFFF"
+        android:textStyle="bold"
+        />
 
 </LinearLayout>

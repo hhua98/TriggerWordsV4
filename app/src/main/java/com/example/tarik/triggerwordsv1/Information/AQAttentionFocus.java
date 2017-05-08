@@ -21,6 +21,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
 
     //private TextView mTitle;
     private Button mQuit;
+    private Button mBack;
     private Button mNext;
 
     //Group1
@@ -74,6 +75,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         mQuit = (Button) findViewById(R.id.quitButton);
+        mBack = (Button) findViewById(R.id.backButton);
         mNext = (Button) findViewById(R.id.nextButton);
 
         //Group1
@@ -113,6 +115,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
 
         //mTitle.setText("Hearing, speech and motor skills");
         mQuit.setOnClickListener(this);
+        mBack.setOnClickListener(this);
         mNext.setOnClickListener(this);
 
         mQuestion1.setText("Difficulty putting thoughts into words; leaves sentences incomplete; speaks in halting phrases or stutters under stress; mispronounces long words, or transposes phrases, words, and syllables when speaking.");
@@ -126,6 +129,14 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
         onBackPressed();
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+
+    }
+
     @Override
     public void onClick(View v) {
 
@@ -137,12 +148,18 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 Log.d("scoreBotAF", "scoreBotAF: " + score.toString());
                 intent1.putExtra("score", score);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+                break;
+
+            case R.id.backButton:
+                onBackPressed();
                 break;
 
             case R.id.quitButton:
                 Intent intent2 = new Intent(this, information.class);
                 intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent2);
+                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
                 break;
 
         }
@@ -183,7 +200,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton1S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton1N:
@@ -202,7 +219,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton2S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton2N:
@@ -221,7 +238,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton3S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton3N:
@@ -240,7 +257,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton4S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton4N:
@@ -259,7 +276,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.radioButton5S:
-                result = 0.75f;
+                result = 0.55f;
                 break;
 
             case R.id.radioButton5N:

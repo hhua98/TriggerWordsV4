@@ -8,6 +8,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.PointF;
@@ -16,9 +17,13 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +46,10 @@ public class EyeTracker extends AppCompatActivity {
     ObjectAnimator objectAnimator;
     //Using for count the times of click button
     int repeat = 0;
+    int x = 0;
+    int y = 0;
+    //Using for model control
+    private Boolean startFlag = true;
 
     /**
      * Create method.
@@ -61,19 +70,35 @@ public class EyeTracker extends AppCompatActivity {
         //customer method for onclick listener
         button.setOnClickListener(myOnClickListener);
         buttonStop.setOnClickListener(myOnClickListenerStop);
+
+
+        x = dpToPx(170);
+        y = dpToPx(280);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-
     }
-
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }
+
+    /**
+     * convert dp to px
+     * @param dp
+     * @return
+     */
+    public static int dpToPx(int dp)
+    {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+
+
 
     /**
      * This method controls the start button.
@@ -84,9 +109,18 @@ public class EyeTracker extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.button1:
-                    switchModel();
-                    imageChange();
-                    repeat++;
+                    if (startFlag == true) {
+                        stopAnimation();
+                        imageView.setImageResource(R.drawable.cake);
+                        switchModel();
+                        button.setImageResource(R.drawable.stop2);
+                        startFlag = false;
+                    } else {
+                        stopAnimation();
+                        button.setImageResource(R.drawable.start2);
+                        startFlag = true;
+                    }
+
                     break;
                 default:
                     break;
@@ -105,6 +139,9 @@ public class EyeTracker extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.buttonStop:
                     stopAnimation();
+                    switchModel();
+                    imageChange();
+                    repeat++;
                     break;
                 default:
                     break;
@@ -118,34 +155,44 @@ public class EyeTracker extends AppCompatActivity {
      * The path of the animation looks like number 8
      * @param view
      */
-    private void moveImage(final View view) {
+    private void moveImage(ImageView view) {
         // float x = view.getX();
         // float y = view.getY();
+
+        imageView.setVisibility(View.VISIBLE);
+
+//        int[] location = new int[2];
+//        imageView.getLocationInWindow(location);
+//        x = location[0];
+//        y = location[1];
+
+        Log.d("xxx", Integer.toString(y));
+
         Path path =  new Path();
 
-        path.moveTo(480, 700);
-        path.lineTo(780, 300);
-        path.quadTo(480, 75, 180, 300);
-        path.lineTo(480, 700);
-        path.lineTo(780, 1100);
-        path.quadTo(480, 1325, 180, 1100);
-        path.lineTo(480, 700);
+        path.moveTo(x, y);
+        path.lineTo(1.6f * x, 0.4f * y);
+        path.quadTo(x, 0.2f * y, 0.2f * x, 0.4f * y);
+        path.lineTo(x, y);
+        path.lineTo(1.44f * x, 1.36f * y);
+        path.quadTo(x, 1.6f * y, 0.56f * x, 1.36f * y);
+        path.lineTo(x, y);
 
-        path.moveTo(480, 700);
-        path.lineTo(780, 300);
-        path.quadTo(480, 75, 180, 300);
-        path.lineTo(480, 700);
-        path.lineTo(780, 1100);
-        path.quadTo(480, 1325, 180, 1100);
-        path.lineTo(480, 700);
+        path.moveTo(x, y);
+        path.lineTo(1.6f * x, 0.4f * y);
+        path.quadTo(x, 0.2f * y, 0.2f * x, 0.4f * y);
+        path.lineTo(x, y);
+        path.lineTo(1.44f * x, 1.36f * y);
+        path.quadTo(x, 1.6f * y, 0.56f * x, 1.36f * y);
+        path.lineTo(x, y);
 
-        path.moveTo(480, 700);
-        path.lineTo(780, 300);
-        path.quadTo(480, 75, 180, 300);
-        path.lineTo(480, 700);
-        path.lineTo(780, 1100);
-        path.quadTo(480, 1325, 180, 1100);
-        path.lineTo(480, 700);
+        path.moveTo(x, y);
+        path.lineTo(1.6f * x, 0.4f * y);
+        path.quadTo(x, 0.2f * y, 0.2f * x, 0.4f * y);
+        path.lineTo(x, y);
+        path.lineTo(1.44f * x, 1.36f * y);
+        path.quadTo(x, 1.6f * y, 0.56f * x, 1.36f * y);
+        path.lineTo(x, y);
 
 
         objectAnimator = ObjectAnimator.ofFloat(view, View.X, View.Y, path);
@@ -163,20 +210,36 @@ public class EyeTracker extends AppCompatActivity {
      * The animation is straight.
      * @param view
      */
-    private void moveImageLine(final View view) {
+    private void moveImageLine(ImageView view) {
+
+
+        imageView.setVisibility(View.VISIBLE);
+
+//        int[] location = new int[2];
+//        imageView.getLocationInWindow(location);
+//        x = location[0];
+//        y = location[1];
+
+
+        Log.d("xxx", Integer.toString(y));
+
+
         Path path = new Path();
-        path.moveTo(480, 700);
-        path.lineTo(480, 75);
-        path.lineTo(480, 1325);
-        path.lineTo(480, 75);
-        path.lineTo(480, 1325);
-        path.lineTo(480, 700);
-        path.moveTo(480, 700);
-        path.lineTo(480, 75);
-        path.lineTo(480, 1325);
-        path.lineTo(480, 75);
-        path.lineTo(480, 1325);
-        path.lineTo(480, 700);
+        path.moveTo(x, y);
+        path.lineTo(x, 0.2f * y);
+        path.lineTo(x, y);
+        path.lineTo(x, 1.6f * y);
+        path.lineTo(x, y);
+        path.lineTo(x, 0.2f * y);
+        path.lineTo(x, y);
+        path.lineTo(x, 1.6f * y);
+        path.lineTo(x, y);
+        path.lineTo(x, 0.2f * y);
+        path.lineTo(x, y);
+        path.lineTo(x, 1.6f * y);
+        path.lineTo(x, y);
+
+
 
 
 
@@ -194,15 +257,18 @@ public class EyeTracker extends AppCompatActivity {
     private void switchModel() {
         if (switchFlag == true) {
             if (flag == true) {
-                objectAnimator.cancel();
+                stopAnimation();
             }
-            button.setImageResource(R.drawable.cycle2);
-            imageView.setImageResource(R.drawable.images);
+            buttonStop.setImageResource(R.drawable.model1);
+            //imageView.setImageResource(R.drawable.images);
+            button.setImageResource(R.drawable.stop2);
             moveImage(imageView);
         } else {
-            objectAnimator.cancel();
-            button.setImageResource(R.drawable.change2);
-            imageView.setImageResource(R.drawable.images);
+            stopAnimation();
+            buttonStop.setImageResource(R.drawable.model2);
+            //imageView.setImageResource(R.drawable.images);
+            button.setImageResource(R.drawable.stop2);
+
             moveImageLine(imageView);
         }
 
@@ -215,11 +281,23 @@ public class EyeTracker extends AppCompatActivity {
      */
     private void stopAnimation() {
         if (flag == true) {
-            Log.d("aa", "aaaa");
+            imageView.clearAnimation();
+            objectAnimator.end();
             objectAnimator.cancel();
-            imageView.setX(480);
-            imageView.setY(700);
-            button.setImageResource(R.drawable.start2);
+            imageView.setVisibility(View.INVISIBLE);
+
+            x = dpToPx(170);
+            y = dpToPx(220);
+
+//            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+//            params.gravity = Gravity.CENTER;
+//            imageView.setLayoutParams(params);
+//            int[] location = new int[2];
+//            imageView.getLocationInWindow(location);
+//            x = location[0];
+//            y = location[1];
+            Log.d("aa", Integer.toString(y));
+
             flag = false;
         }
     }
@@ -232,10 +310,10 @@ public class EyeTracker extends AppCompatActivity {
     private void imageChange() {
         switch(repeat % 10) {
             case 1:
-            case 5: imageView.setImageResource(R.drawable.cat2);
+            case 5: imageView.setImageResource(R.drawable.dog2);
                 break;
             case 6:
-            case 2: imageView.setImageResource(R.drawable.dog2);
+            case 2: imageView.setImageResource(R.drawable.cat2);
                 break;
             case 7:
             case 9:

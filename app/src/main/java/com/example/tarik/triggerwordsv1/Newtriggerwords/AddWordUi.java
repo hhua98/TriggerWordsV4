@@ -1,7 +1,7 @@
 package com.example.tarik.triggerwordsv1.Newtriggerwords;
 
 /**
- * Created by huanghe on 30/04/2017.
+ * Created by Tarik on 32/04/2017.
  */
 
 import android.Manifest;
@@ -10,6 +10,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,12 +22,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.text.Html;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -39,13 +44,16 @@ import android.widget.ToggleButton;
 
 import com.example.tarik.triggerwordsv1.R;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.onClickItemListener,
         View.OnClickListener,
         CompoundButton.OnCheckedChangeListener,
         View.OnCreateContextMenuListener{
-    private SqliteAdapter sqliteAdapter;
+    public SqliteAdapter sqliteAdapter;
     private RecyclerView recyclerView;
     private WordRecyclerAdapter wordRecyclerAdapter;
     private EditText wordNameEdit;
@@ -57,32 +65,160 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     private RadioButton difficultyRadioBtn;
     private RadioButton alphabeticalRadioBtn;
     private TextView resultCount;
+    private Button deleteAllWordsBtn;
     private ToggleButton orderToggleBtn;
+    private Button gobtn;
     private ArrayList<Word> wordList;
     private PopupMenu popupMenu;
     private String wordNameForPic;
     private int wordPositionForPic;
     private static final int SELECTED_PICTURE = 1;
     private static final int  REQUEST_PERMISSION = 2;
-    private Button gobtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_word_ui);
         init();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar14);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        searchNameEdit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    performSearch();
+                    return true;
+                }
+                return false;
+            }
+        });
+
+    }
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
-    private void initDB() {
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        if (sqliteAdapter.getRowCount() > 0) {
+            wordList.clear();
+            initList();
+        }
+        else {
+            initListDialog();
+        }
+    }
+
+    private void init() {
+        initWidgets();
+        wordList = new ArrayList<Word>();
+        sqliteAdapter = new SqliteAdapter(this);
+        int tableRowCount = sqliteAdapter.getRowCount();
+
+        try {
+            Thread.sleep(1000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+        if (tableRowCount > 0) {
+            wordList.clear();
+            initList();
+        }
+        else {
+            initListDialog();
+        }
+    }
+
+    private ArrayList<String> initListWithTriggerWords() {
+        ArrayList<String> givenTriggerWordsList = new ArrayList<String>();
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(
+                    new InputStreamReader(getAssets().open("addtriggerwords.txt")));
+
+            String mLine;
+            while ((mLine = reader.readLine()) != null) {
+                givenTriggerWordsList.add(mLine);
+            }
+        } catch (IOException e) {
+            Log.d("Error trigger words DB:", "Could not load trigger words from assets");
+        } finally {
+            if (reader != null) {
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    Log.d("Error trigger words DB:", "Could not load trigger words from assets");
+                }
+            }
+        }
+        return givenTriggerWordsList;
+    }
+
+    public void initWidgets() {
+        recyclerView = (RecyclerView) findViewById(R.id.wordRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        wordNameEdit = (EditText) findViewById(R.id.wordNameEditView);
+        wordNameEdit.setHint(Html.fromHtml("<i>" + "Add word to list.." + "</i>"));
+        wordNameEdit.setSelectAllOnFocus(true);
+
+        addWordButton = (ImageView) findViewById(R.id.addWordButton);
+        addWordButton.setOnClickListener(this);
+
+        searchNameEdit = (EditText) findViewById(R.id.searchNameEditView);
+        searchNameEdit.setHint(Html.fromHtml("<i>" + "Search word from list.." + "</i>"));
+        searchNameEdit.setSelectAllOnFocus(true);
+
+        searchWordBtn = (ImageView) findViewById(R.id.searchWordButton);
+        searchWordBtn.setOnClickListener(this);
+
+        mainRadioGrp = (RadioGroup) findViewById(R.id.mainRadioGroupView);
+
+        latestRadioBtn = (RadioButton) findViewById(R.id.latestRadioButton);
+        latestRadioBtn.setOnClickListener(this);
+
+        difficultyRadioBtn = (RadioButton) findViewById(R.id.difficultyRadioButton);
+        difficultyRadioBtn.setOnClickListener(this);
+
+        alphabeticalRadioBtn = (RadioButton) findViewById(R.id.alphabeticalRadioButton);
+        alphabeticalRadioBtn.setOnClickListener(this);
+
+        resultCount = (TextView) findViewById(R.id.resultCountView);
+
+        deleteAllWordsBtn = (Button)findViewById(R.id.deleteAllButton);
+        deleteAllWordsBtn.setOnClickListener(this);
+
+        orderToggleBtn = (ToggleButton) findViewById(R.id.orderToggleButton);
+        orderToggleBtn.setOnCheckedChangeListener(this);
+
+        gobtn = (Button) findViewById(R.id.wtfButton);
+        gobtn.setOnClickListener(this);
+
+        findViewById(R.id.mainLayout).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return true;
+            }
+        });
+    }
+
+    protected void initList() {
         wordList.addAll(sqliteAdapter.getAllWords());
         wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
         recyclerView.setAdapter(wordRecyclerAdapter);
         wordRecyclerAdapter.setOnClickItemListener(this);
-        Log.d("initDB", "initDB " + wordList.size());
+        //Log.d("initDB", "initDB " + wordList.size());
         setResultsFoundCounter(wordList.size());
     }
 
-    private void initRankingDB(String rankingOption) {
+    private void initRankingList(String rankingOption) {
         if (!wordList.isEmpty()) {
             wordList.clear();
             wordList.addAll(sqliteAdapter.rankBy(rankingOption));
@@ -93,7 +229,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         }
     }
 
-    private void initOrderingDB(String rankingOption, String orderingOption) {
+    private void initOrderingList(String rankingOption, String orderingOption) {
         if (!wordList.isEmpty()) {
             wordList.clear();
             wordList.addAll(sqliteAdapter.orderBy(rankingOption, orderingOption));
@@ -104,7 +240,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         }
     }
 
-    private void initSearchDB(String searchWordName) {
+    private void initSearchList(String searchWordName) {
         wordList.clear();
         wordList.add(sqliteAdapter.searchWord(searchWordName));
         wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
@@ -112,64 +248,49 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         recyclerView.setAdapter(wordRecyclerAdapter);
     }
 
-    private void init() {
-        recyclerView = (RecyclerView) findViewById(R.id.wordRecyclerView);
-        wordList = new ArrayList<Word>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        wordNameEdit = (EditText) findViewById(R.id.wordNameEditView);
-        wordNameEdit.setHint(Html.fromHtml("<i>" + "Add word to list.." + "</i>"));
-        wordNameEdit.setSelectAllOnFocus(true);
-        addWordButton = (ImageView) findViewById(R.id.addWordButton);
-        addWordButton.setOnClickListener(this);
-        searchNameEdit = (EditText) findViewById(R.id.searchNameEditView);
-        searchNameEdit.setHint(Html.fromHtml("<i>" + "Search word from list.." + "</i>"));
-        searchNameEdit.setSelectAllOnFocus(true);
-        searchWordBtn = (ImageView) findViewById(R.id.searchWordButton);
-        searchWordBtn.setOnClickListener(this);
-        mainRadioGrp = (RadioGroup) findViewById(R.id.mainRadioGroupView);
-        latestRadioBtn = (RadioButton) findViewById(R.id.latestRadioButton);
-        latestRadioBtn.setOnClickListener(this);
-        difficultyRadioBtn = (RadioButton) findViewById(R.id.difficultyRadioButton);
-        difficultyRadioBtn.setOnClickListener(this);
-        alphabeticalRadioBtn = (RadioButton) findViewById(R.id.alphabeticalRadioButton);
-        alphabeticalRadioBtn.setOnClickListener(this);
-        resultCount = (TextView) findViewById(R.id.resultCountView);
-        orderToggleBtn = (ToggleButton) findViewById(R.id.orderToggleButton);
-        orderToggleBtn.setOnCheckedChangeListener(this);
-        findViewById(R.id.mainLayout).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
-                return true;
-            }
-        });
 
-        gobtn = (Button) findViewById(R.id.wtfButton);
-        gobtn.setOnClickListener(this);
-
-        sqliteAdapter = new SqliteAdapter(this);
-        if (sqliteAdapter.getRowCount() != 0) {
-            initDB();
-        }
+    private void hideKeyboard() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
     }
 
     private void addNewWord() {
         String newWordName = wordNameEdit.getText().toString().trim();
+        int tableRowCount = sqliteAdapter.getRowCount();
         if (newWordName.length() != 0) {
-            if (sqliteAdapter.compareName(newWordName))
-                alertDialog("That word is already in the list.");
+            if (tableRowCount > 0) {
+                if (sqliteAdapter.compareName(newWordName))
+                    alertDialog("That word is already in the list.");
+                else {
+                    Word newWord = new Word(newWordName, "a", 0);
+                    long exitId = sqliteAdapter.insertData(newWord);
+                    if (exitId < 0)
+                        alertDialog("Error: Could not add that word");
+                    else {
+                        Toast.makeText(AddWordUi.this, "Word: " + newWordName + " added", Toast.LENGTH_SHORT).show();
+                        wordRecyclerAdapter.addingWord(newWord, 0);
+                        recyclerView.smoothScrollToPosition(0);
+                        setResultsFoundCounter(tableRowCount + 1);
+
+                    }
+                }
+            }
             else {
-                Word newWord = new  Word(newWordName, "a", 0);
+                Word newWord = new Word(newWordName, "a", 0);
                 long exitId = sqliteAdapter.insertData(newWord);
                 if (exitId < 0)
                     alertDialog("Error: Could not add that word");
                 else {
                     Toast.makeText(AddWordUi.this, "Word: " + newWordName + " added", Toast.LENGTH_SHORT).show();
+                    wordList.clear();
+                    wordList.add(newWord);
+                    wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
                     wordRecyclerAdapter.addingWord(newWord, 0);
+                    latestRadioBtn.performClick();
                     recyclerView.smoothScrollToPosition(0);
-                    setResultsFoundCounter(sqliteAdapter.getRowCount());;
+                    setResultsFoundCounter(1);
+                    ;
                 }
             }
         }
@@ -181,16 +302,33 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     private void searchWord() {
         String searchWordName = searchNameEdit.getText().toString().trim();
         if (searchWordName.length() != 0) {
-            if (!sqliteAdapter.compareName(searchWordName))
-                alertDialog("That word is not in the list.");
+            if (sqliteAdapter.getRowCount() > 0) {
+                if (!sqliteAdapter.compareName(searchWordName)) {
+                    alertDialog("That word is not in the list.");
+                    //setResultsFoundCounter(0);
+                }
+                else {
+                    initSearchList(searchWordName);
+                    setResultsFoundCounter(1);
+                }
+            }
             else {
-                initSearchDB(searchWordName);
+                alertDialog("No words are present in the list.");
             }
         }
         else {
             alertDialog("Please type in a word first");
         }
     }
+    public void performSearch(){
+        searchNameEdit.clearFocus();
+        InputMethodManager in = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        in.hideSoftInputFromWindow(searchNameEdit.getWindowToken(), 0);
+        searchWord();
+
+
+    }
+
 
     public void editWord(String oldWordName, String newWordName, int position) {
         Word oldWord = sqliteAdapter.searchWord(oldWordName);
@@ -247,6 +385,108 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         myAlert.show();
     }
 
+    public void initListDialog() {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Do you wish to add a given list of words?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ArrayList<String> givenTriggerWordsList = new ArrayList<String>();
+                        givenTriggerWordsList.addAll(initListWithTriggerWords());
+                        //Log.d("triggerwordslist size", ": " + givenTriggerWordsList.size());
+                        for (String currentWord : givenTriggerWordsList) {
+                            sqliteAdapter.insertData(new Word(currentWord, "a", 0));
+                        }
+                        initList();
+
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
+    public void deleteOneWordDialog(final String currentWordName, final int position) {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Confirm deleting this word?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        hideKeyboard();
+                        deleteWord(currentWordName, position);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
+    public void deleteAllWordsDialog() {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Confirm deleting all words?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        hideKeyboard();
+                        deleteAllWords();
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
+    public void deletePictureDialog(final String imageUrl) {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Confirm deleting this picture?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        hideKeyboard();
+                        replacePictureUrl(imageUrl);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
     public void deleteWord(String inputWordName, int position) {
         //Toast.makeText(this, "delete clicked on" + inputWordName, Toast.LENGTH_SHORT).show();
         long exitId = sqliteAdapter.deleteWordFromDB(inputWordName);
@@ -257,6 +497,23 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
             wordRecyclerAdapter.removingWord(inputWordName, position);
             setResultsFoundCounter(sqliteAdapter.getRowCount());
         }
+    }
+
+    public void deleteAllWords() {
+        //Toast.makeText(this, "delete All clicked on", Toast.LENGTH_SHORT).show();
+        sqliteAdapter.deleteAllWordsFromDB();
+        if (sqliteAdapter.getRowCount() == 0) {
+            Toast.makeText(this, "All words have been deleted.", Toast.LENGTH_SHORT).show();
+            wordList.clear();
+            wordRecyclerAdapter.removingAllWords();
+            setResultsFoundCounter(0);
+
+        }
+        else
+        {
+            Toast.makeText(this, "Error: Could not delete all words.", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void askSDAccessPermission() {
@@ -316,7 +573,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         if (newImageUrl != null) {
             long exitId = sqliteAdapter.updateWordImage(word, newImageUrl);
             if (exitId < 0) {
-                alertDialog("Error: Could not increase that word's points");
+                alertDialog("Error: Could not change/delete that word's image");
             } else {
                 wordRecyclerAdapter.settingImage(word, newImageUrl, position);
             }
@@ -364,27 +621,53 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         popupMenu = new PopupMenu(context, contextMenuView);
         popupMenu.inflate(R.menu.word_context_menu);
         popupMenu.show();
+        MenuItem deletePicButton = popupMenu.getMenu().findItem(R.id.deletePicture);
+        if (wordList.size() > 0) {
+            for (Word word : wordList) {
+                if (currentWordName.equals(word.getWordName())) {
+                    if (word.getImageUrl().equals("a")) {
+                        deletePicButton.setEnabled(false);
+                        break;
+                    }
+                }
+            }
+        }
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.editItem:
                         editDialog(currentWordName, position);
+                        hideKeyboard();
                         break;
 
                     case R.id.deleteItem:
-                        deleteWord(currentWordName, position);
+                        deleteOneWordDialog(currentWordName, position);
                         break;
 
                     case R.id.changePicture:
                         setWordNameForPic(currentWordName);
                         setWordPositionForPic(position);
+                        hideKeyboard();
                         askSDAccessPermission();
+                        break;
+
+                    case R.id.deletePicture:
+                        setWordNameForPic(currentWordName);
+                        setWordPositionForPic(position);
+                        deletePictureDialog("a");
                         break;
                 }
                 return true;
             }
         });
+    }
+
+    @Override
+    public void imageClickHandler(String imageUrl) {
+        Intent intent = new Intent(this, ZoomPic.class);
+        intent.putExtra("ImageUrl", imageUrl);
+        startActivity(intent);
     }
 
     @Override
@@ -429,27 +712,41 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.addWordButton:
+                hideKeyboard();
                 addNewWord();
                 break;
 
             case R.id.searchWordButton:
+                hideKeyboard();
                 searchWord();
                 break;
 
+            case R.id.deleteAllButton:
+                if (wordList.size() != 0)
+                    deleteAllWordsDialog();
+                else
+                    Toast.makeText(this, "The List is already empty", Toast.LENGTH_SHORT).show();
+                break;
+
             case R.id.latestRadioButton:
-                initRankingDB("latest");
+                initRankingList("latest");
                 break;
 
             case R.id.difficultyRadioButton:
-                initRankingDB("difficulty");
+                initRankingList("difficulty");
                 break;
 
             case R.id.alphabeticalRadioButton:
-                initRankingDB("alphabet");
+                initRankingList("alphabet");
                 break;
 
             case R.id.wtfButton:
-                startActivity(new Intent(this, InteractiveSession.class));
+                if (wordList.size() >= 2) {
+                    startActivity(new Intent(this, InteractiveSession.class));
+                }
+                else {
+                    Toast.makeText(this, "Please add at least 2 words to the list first.", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -457,25 +754,29 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     private void rankOrdering(String orderingOption) {
         switch (mainRadioGrp.getCheckedRadioButtonId()) {
             case R.id.latestRadioButton:
-                initOrderingDB("latest", orderingOption);
+                initOrderingList("latest", orderingOption);
                 break;
 
             case R.id.difficultyRadioButton:
-                initOrderingDB("difficulty", orderingOption);
+                initOrderingList("difficulty", orderingOption);
                 break;
 
             case R.id.alphabeticalRadioButton:
-                initOrderingDB("alphabet", orderingOption);
+                initOrderingList("alphabet", orderingOption);
                 break;
         }
     }
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        if (isChecked)
+        if (isChecked) {
+            hideKeyboard();
             rankOrdering("DESC");
-        else
+        }
+        else {
+            hideKeyboard();
             rankOrdering("ASC");
+        }
     }
 
     public void alertDialog(String errorMessage) {
@@ -490,7 +791,6 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                 .create();
         myAlert.show();
     }
-
 
 }
 

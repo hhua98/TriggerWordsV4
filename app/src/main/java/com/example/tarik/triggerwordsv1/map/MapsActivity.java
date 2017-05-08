@@ -1,6 +1,8 @@
 package com.example.tarik.triggerwordsv1.map;
 
 import android.Manifest;
+
+import com.example.tarik.triggerwordsv1.MenuActivity;
 import com.example.tarik.triggerwordsv1.R;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
@@ -29,6 +31,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tarik.triggerwordsv1.diary.ActivityMain;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -126,7 +129,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
     private static final int INSERT_ID = Menu.FIRST;
     private static final int DELETE_ID = Menu.FIRST + 1;
-
+    private int buttonTag;
+    private Marker preMarker;
 
     //....
     double latitude;
@@ -135,7 +139,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLastLocation;
     Marker mCurrLocationMarker;
 
-    private PlaceAutocompleteAdapter mAdapter;
+    //private PlaceAutocompleteAdapter mAdapter;
 
     //   private AutoCompleteTextView mAutocompleteView;
 
@@ -169,8 +173,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-    private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
-            new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
+    //private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
+           // new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
 
     @Override
@@ -236,9 +240,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_SETTLING");
                         break;
                     case BottomSheetBehavior.STATE_EXPANDED:
+
+                        if (preMarker != null) {
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(12), 500, null);
+
+                        }
+
+
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_EXPANDED");
                         break;
                     case BottomSheetBehavior.STATE_COLLAPSED:
+                        if (preMarker != null) {
+                            mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 500, null);
+
+                        }
+
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_COLLAPSED");
                         break;
                     case BottomSheetBehavior.STATE_HIDDEN:
@@ -254,8 +270,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //.....set adapter
-        mAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, BOUNDS_GREATER_SYDNEY,
-                null);
+       //mAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, BOUNDS_GREATER_SYDNEY,
+               //null);
 //        mAutocompleteView.setAdapter(mAdapter);
 
         mImageView = (ImageView) findViewById(R.id.mImageView);
@@ -264,7 +280,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         progressbar = (ProgressBar) findViewById(R.id.progressbar);
 
-
+        //buildGoogleApiClient();
 
 
 
@@ -303,6 +319,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Log.i(TAG, "Called getPlaceById to get Place details for " + placeId);
 //        }
 //    };
+protected synchronized void buildGoogleApiClient() {
+    mGoogleApiClient = new GoogleApiClient.Builder(this)
+            .addConnectionCallbacks(this)
+            .addOnConnectionFailedListener(this)
+            .addApi(LocationServices.API)
+            .addApi(Places.GEO_DATA_API)
+            .build();
+    mGoogleApiClient.connect();
+}
 
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
@@ -416,8 +441,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnCameraIdleListener(this);
         mMap.setOnCameraMoveStartedListener(this);
 
-        //LatLng latLng = new LatLng(-34, 165);
-        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,14));
+        /*Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        double currentlatitude = location.getLatitude();
+        double currentlongtitude = location.getLongitude();
+
+
+
+        LatLng latLng = new LatLng(currentlatitude,currentlongtitude);
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,8));*/
+
+
+
+        //LatLng latLng2 = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+        //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng2,4));
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
@@ -435,12 +473,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
-        Button btnRestaurant = (Button) findViewById(R.id.btnOrganisation);
+        final Button btnRestaurant = (Button) findViewById(R.id.btnOrganisation);
+        final Button btnHospital = (Button) findViewById(R.id.btnHospital);
+        final Button btnSchool = (Button) findViewById(R.id.btnSchool);
+
+
         btnRestaurant.setOnClickListener(new View.OnClickListener() {
             //String type1 = "hospital";
             String keyDOrganisation = "kids+organisation";
             @Override
             public void onClick(View v) {
+                if (buttonTag == 1) {
+                    return;
+                }
                 //progressbar.setVisibility(View.VISIBLE);
 
                 Log.d("onClick", "Button is Clicked");
@@ -455,19 +500,25 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 // Toast.makeText(MapsActivity.this,"Nearby Organisation", Toast.LENGTH_LONG).show();
 
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
+                buttonTag = 1;
+                btnRestaurant.setTextColor(getResources().getColor(R.color.white));
+                btnSchool.setTextColor(getResources().getColor(R.color.black_semi_transparent));
+                btnHospital.setTextColor(getResources().getColor(R.color.black_semi_transparent));
 
-
+                preMarker = null;
 
             }
         });
 
-        Button btnHospital = (Button) findViewById(R.id.btnHospital);
         btnHospital.setOnClickListener(new View.OnClickListener() {
             // String type2 = "hospital";
             String keyDHospital = "dyslexia";
 
             @Override
             public void onClick(View v) {
+                if (buttonTag == 2) {
+                    return;
+                }
                 //progressbar.setVisibility(View.VISIBLE);
                 Log.d("onClick", "Button is Clicked");
                 mMap.clear();
@@ -481,16 +532,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //Toast.makeText(MapsActivity.this,"Nearby Hospitals", Toast.LENGTH_LONG).show();
 
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
+                buttonTag = 2;
+                btnHospital.setTextColor(getResources().getColor(R.color.white));
+                btnRestaurant.setTextColor(getResources().getColor(R.color.black_semi_transparent));
+                btnSchool.setTextColor(getResources().getColor(R.color.black_semi_transparent));
+
+
+                preMarker = null;
 
             }
         });
 
-        Button btnSchool = (Button) findViewById(R.id.btnSchool);
         btnSchool.setOnClickListener(new View.OnClickListener() {
+
             // String type3 = "school";
             String keyDSchool = "learning+disability";
             @Override
             public void onClick(View v) {
+                if (buttonTag == 3) {
+                    return;
+                }
                 // progressbar.setVisibility(View.VISIBLE);
 
                 Log.d("onClick", "Button is Clicked");
@@ -507,11 +568,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 getNearbyPlacesData.execute(DataTransfer);
                 //Toast.makeText(MapsActivity.this,"Nearby Schools", Toast.LENGTH_LONG).show();
                 mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 2000, null);
+                buttonTag = 3;
+                btnSchool.setTextColor(getResources().getColor(R.color.white));
+                btnRestaurant.setTextColor(getResources().getColor(R.color.black_semi_transparent));
+                btnHospital.setTextColor(getResources().getColor(R.color.black_semi_transparent));
+
+
+                preMarker = null;
 
 
             }
         });
-
 
 
 
@@ -540,7 +607,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public boolean onMarkerClick(Marker marker) {
         Log.w("Click", "test");
-        Log.d("Market test", marker.getTitle());
+        // Log.d("Market test", marker.getTitle());
         String placeId = marker.getSnippet();
         //,,,,
             /*
@@ -554,10 +621,17 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //mPlaceTitle.setText(marker.getTitle());
 
-        if (marker.isInfoWindowShown()) {
-            marker.hideInfoWindow();
-        } else {
-            marker.showInfoWindow();
+//        if (marker.isInfoWindowShown()) {
+//            marker.hideInfoWindow();
+//        } else {
+//            marker.showInfoWindow();
+//        }
+//
+        if (preMarker != null) {
+            preMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        }
+        if (marker != null) {
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
         }
 
         placePhotosTask(placeId);
@@ -569,56 +643,55 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
+
+
+
+        preMarker = marker;
+
         return false;
     }
 
 
 
-//    private void setUpMap() {
-//
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        mMap.setMyLocationEnabled(true);
-//
-//    }
+   /*private void setUpMap() {
 
-    protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .addApi(LocationServices.API)
-                .addApi(Places.GEO_DATA_API)
-                .build();
-        mGoogleApiClient.connect();
-    }
+       if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+           // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+           // here to request the missing permissions, and then overriding
+             // public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                                    //int[] grantResults)
+             //to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+       }
+       mMap.setMyLocationEnabled(true);
+
+    }*/
+
+
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-//        Log.i(TAG, "Location services connected.");
-//
-//        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
-//        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-//
-//            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-//
-//            handleNewLocation(location);
+       Log.i(TAG, "Location services connected.");
+
+       if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+           // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+          // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+
+        Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+
+           LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+           handleNewLocation(location);
         //.....
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
@@ -674,24 +747,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        //setUpMapIfNeeded();
-//        mGoogleApiClient.connect();
-//
-//        //....
-//    }
-//
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        if (mGoogleApiClient.isConnected()) {
-//
-//            mGoogleApiClient.disconnect();
-//        }
-//    }
+  /*  @Override
+  protected void onResume() {
+        super.onResume();
+       //setUpMapIfNeeded();
+        mGoogleApiClient.connect();
 
+       //....
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+      if (mGoogleApiClient.isConnected()) {
+
+           mGoogleApiClient.disconnect();
+       }
+   }
+*/
 //    public double getDistance(double a,double b) {
 //        float[] results = new float[1];
 //        Location.distanceBetween(a, b, -37.877,145.044, results);
@@ -700,20 +773,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //    }
 
 
-//    private void handleNewLocation(Location location) {
-//        double currentLatitude = location.getLatitude();
-//        double currentLongitude = location.getLongitude();
-//        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
-//        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-//        if (getDistance(location.getLatitude(),location.getLongitude()) < 2000) {
-//
-//
-//            mMap.addMarker((new MarkerOptions().position(new LatLng(-37.877,145.044)).title("Dyslexica")));
-//
-//            Log.i(TAG, "Location services suspended. Please reconnect.");
-//        }
-//
-//    }
+    private void handleNewLocation(Location location) {
+        double currentLatitude = location.getLatitude();
+        double currentLongitude = location.getLongitude();
+
+        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
+        /*MarkerOptions options = new MarkerOptions()
+                .position(latLng)
+                .title("I am here!");
+        mMap.addMarker(options);*/
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,8));
+
+   }
 
 
     @Override
@@ -740,7 +814,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //move map camera
         mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng), 2000, null);
         mMap.animateCamera(CameraUpdateFactory.zoomTo(16), 2000, null);
-        Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
+        //Toast.makeText(MapsActivity.this,"Your Current Location", Toast.LENGTH_LONG).show();
 
         Log.d("onLocationChanged", String.format("latitude:%.3f longitude:%.3f",latitude,longitude));
 
@@ -751,7 +825,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Log.d("onLocationChanged", "Exit");
 
-
+         buttonTag = 0;
 
     }
 
@@ -833,7 +907,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             protected void onPreExecute() {
                 // Display a temporary image to show while bitmap is loading.
-                mImageView.setImageResource(R.drawable.background);
+                mImageView.setImageResource(R.drawable.finalbackground);
             }
 
             @Override
@@ -931,6 +1005,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         } else if (reason == GoogleMap.OnCameraMoveStartedListener
                 .REASON_DEVELOPER_ANIMATION) {
             progressbar.setVisibility(View.VISIBLE);
+        }
+    }
+    @Override
+    public void onBackPressed() {
+        if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        }
+        else {
+            Intent setIntent = new Intent(this, MenuActivity.class);
+            startActivity(setIntent);
         }
     }
 }

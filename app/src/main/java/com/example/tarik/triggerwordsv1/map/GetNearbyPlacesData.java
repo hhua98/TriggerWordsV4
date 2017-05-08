@@ -75,7 +75,7 @@ public class GetNearbyPlacesData extends AsyncTask<Object, String, String> {
             String placeId = googlePlace.get("place_id");
             LatLng latLng = new LatLng(lat, lng);
             markerOptions.position(latLng);
-            markerOptions.title(placeName + " : " + vicinity);
+            //markerOptions.title(placeName + " : " + vicinity);
             markerOptions.snippet(placeId);
             markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
             mMap.addMarker(markerOptions);

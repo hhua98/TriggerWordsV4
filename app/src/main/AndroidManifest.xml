@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tarik.triggerwordsv1">
 
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
@@ -41,7 +42,10 @@
         android:roundIcon="@mipmap/launcher2"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        >
+        android:hardwareAccelerated="false"
+        android:largeHeap="true"
+        tools:replace="android:label">
+
         <uses-feature android:name="android.hardware.camera" />
         <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -66,58 +70,103 @@
 
         <activity
             android:name=".MenuActivity"
-            android:label="Dyslexican"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="Dyslexicon"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".diary.SendCalendar"
-            android:label="Add Reminder"/>
-        <activity android:name=".Newtriggerwords.InteractiveSession" />
-        <activity android:name=".interactMenu" />
+            android:label="Add Reminder"
+            android:windowSoftInputMode="stateHidden|adjustNothing"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Newtriggerwords.InteractiveSession"
+            android:label="Show Trigger Words"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".interactMenu"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Eyetracking_ReadingStories.EyeTracker"
-            android:label="Eye Tracking Training"/>
-        <activity android:name=".triggerWords.WordActivity" />
-        <activity android:name=".RecyclerMain" />
+            android:label="Eye Tracking Training"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".triggerWords.WordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".RecyclerMain"
+            android:screenOrientation="portrait"/>
         <activity android:name=".diary.ActivityDiaryEdit"
-            android:label="Add Diary"/>
+            android:label="Add Diary"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".diary.ActivityMain"
-            android:label="ListWords" />
+            android:label="ListWords"
+            android:screenOrientation="portrait"/>
         <activity android:name=".Eyetracking_ReadingStories.DemoActivity"
-            android:label="Reading Stories">
+            android:label="Reading Stories"
+            android:screenOrientation="portrait"
+            >
 
         </activity>
         <activity
             android:name=".map.MapsActivity"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Information.information"
             android:label="@string/title_activity_information"
+            android:screenOrientation="portrait"
+
+
 
             android:theme="@style/AppTheme"></activity>
 
         <activity android:name=".Information.AQDisorientation"
-            android:label="Disorientation"></activity>
+            android:label="Disorientation"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".Information.AQReadSpell"
-            android:label="Vision, Reading and Spelling"></activity>
+            android:label="Vision, Reading and Spelling"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".Information.AQAttentionFocus"
-            android:label="Hearing, speech and motor skills">
+            android:label="Hearing, speech and motor skills"
+            android:screenOrientation="portrait">
 
         </activity>
         <activity android:name=".Information.AQMath"
-            android:label="Math and time management"></activity>
+            android:label="Math and time management"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".Information.AQHandwriting"
-            android:label="Co-ordination and handwriting"></activity>
+            android:label="Co-ordination and handwriting"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".Information.AQPersonality"
-            android:label="Personality and self-esteem"></activity>
-        <activity android:name=".Information.AQResult"></activity>
+            android:label="Personality and self-esteem"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".Information.AQResult"
+            android:screenOrientation="portrait"></activity>
 
         <activity android:name=".Newtriggerwords.AddWordUi"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden|adjustNothing"
+            android:label="Add Trigger Words"
+
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".wordgame.gameActivity"
+            android:label="word game"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".wordgame.startScreen"
+            android:label="Game"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".Newtriggerwords.ZoomPic"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".triggerletters.CoverFlowActivity"
+            android:label="Trigger Letters"
+            android:screenOrientation="landscape"
+            >
 
         </activity>
 
