@@ -69,7 +69,7 @@
         </provider>
 
         <activity
-            android:name=".MenuActivity"
+            android:name=".ActionMenu.MenuActivity"
             android:label="Dyslexicon"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
@@ -88,14 +88,10 @@
         <activity android:name=".Newtriggerwords.InteractiveSession"
             android:label="Show Trigger Words"
             android:screenOrientation="portrait"/>
-        <activity android:name=".interactMenu"
+        <activity android:name=".ActionMenu.interactMenu"
             android:screenOrientation="portrait"/>
         <activity android:name=".Eyetracking_ReadingStories.EyeTracker"
             android:label="Eye Tracking Training"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".triggerWords.WordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".RecyclerMain"
             android:screenOrientation="portrait"/>
         <activity android:name=".diary.ActivityDiaryEdit"
             android:label="Add Diary"

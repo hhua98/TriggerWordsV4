@@ -11,36 +11,10 @@ import android.speech.tts.UtteranceProgressListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.TextSwitcher;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ViewSwitcher;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.speech.tts.TextToSpeech;
-import android.speech.tts.UtteranceProgressListener;
-import android.support.v7.app.ActionBarActivity;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,9 +27,8 @@ import java.util.Locale;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
-import com.example.tarik.triggerwordsv1.MenuActivity;
 import com.example.tarik.triggerwordsv1.R;
-import com.example.tarik.triggerwordsv1.interactMenu;
+import com.example.tarik.triggerwordsv1.ActionMenu.interactMenu;
 
 
 public class CoverFlowActivity extends ActionBarActivity implements TextToSpeech.OnInitListener{

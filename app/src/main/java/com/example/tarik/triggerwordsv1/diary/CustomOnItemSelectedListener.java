@@ -1,4 +1,4 @@
-package com.example.tarik.triggerwordsv1;
+package com.example.tarik.triggerwordsv1.diary;
 
 /**
  * Created by huanghe on 5/04/2017.

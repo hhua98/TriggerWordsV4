@@ -1,4 +1,4 @@
-package com.example.tarik.triggerwordsv1;
+package com.example.tarik.triggerwordsv1.ActionMenu;
 
 /**
  * Created by huanghe on 1/04/2017.
@@ -14,10 +14,9 @@ import android.widget.ImageButton;
 import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.DemoActivity;
 import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.EyeTracker;
 import com.example.tarik.triggerwordsv1.Newtriggerwords.AddWordUi;
+import com.example.tarik.triggerwordsv1.R;
 import com.example.tarik.triggerwordsv1.triggerletters.CoverFlowActivity;
-import com.example.tarik.triggerwordsv1.wordgame.gameActivity;
 import com.example.tarik.triggerwordsv1.wordgame.startScreen;
-import com.example.tarik.triggerwordsv1.wordgame.gamebuild;
 
 public class interactMenu extends AppCompatActivity {
     ImageButton imageButton6;

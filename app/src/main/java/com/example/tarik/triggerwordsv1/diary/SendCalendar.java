@@ -3,15 +3,10 @@ package com.example.tarik.triggerwordsv1.diary;
 /**
  * Created by huanghe on 5/04/2017.
  */
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -30,12 +25,8 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 
 
-import com.example.tarik.triggerwordsv1.CustomOnItemSelectedListener;
 import com.example.tarik.triggerwordsv1.DateTime2.SublimePickerFragment;
-import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.EyeTracker;
 import com.example.tarik.triggerwordsv1.R;
-import com.example.tarik.triggerwordsv1.interactMenu;
-import com.example.tarik.triggerwordsv1.wordgame.gameActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +34,6 @@ import java.util.Calendar;
 
 import android.util.Log;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 

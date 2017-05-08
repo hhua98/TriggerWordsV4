@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.example.tarik.triggerwordsv1.R;
-import com.example.tarik.triggerwordsv1.interactMenu;
+import com.example.tarik.triggerwordsv1.ActionMenu.interactMenu;
 
 
 public class startScreen extends AppCompatActivity {
