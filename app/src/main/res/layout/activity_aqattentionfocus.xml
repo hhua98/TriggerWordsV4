@@ -411,7 +411,7 @@
                 android:textColor="#ffffff"
                 android:layout_marginRight="7dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"/>
+                android:background="@drawable/button"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -421,7 +421,7 @@
                 android:textColor="#ffffff"
                 android:layout_marginRight="7dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"/>
+                android:background="@drawable/button"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -431,7 +431,7 @@
                 android:textColor="#ffffff"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"/>
+                android:background="@drawable/button"/>
 
         </LinearLayout>
 

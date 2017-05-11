@@ -1,11 +1,15 @@
 package com.example.tarik.triggerwordsv1.Information;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -156,10 +160,7 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, information.class);
-                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent2);
-                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                quitDialog();
                 break;
 
         }
@@ -285,4 +286,31 @@ public class AQAttentionFocus extends AppCompatActivity implements View.OnClickL
         }
         return result;
     }
+
+    public void quitDialog() {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Confirm quitting?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent2 = new Intent(AQAttentionFocus.this, information.class);
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent2);
+                        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
 }

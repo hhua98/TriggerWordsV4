@@ -100,7 +100,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="5"
-                                    android:text="Disorientation"
+                                    android:text="Disorientation(DIS)"
                                     android:textColor="@color/dis"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -133,8 +133,7 @@
                             <TextView
                                 android:id="@+id/disorientationExpView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_height="match_parent"
                                 android:background="@color/colorPrimary"
                                 android:text="@string/aq_disorientation"
                                 android:textColor="#ffffff"
@@ -185,8 +184,8 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="5"
-                                    android:text="Reading and Spelling"
-                                    android:textColor="@android:color/holo_red_dark"
+                                    android:text="Reading and Spelling(RS)"
+                                    android:textColor="@color/rs"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
 
@@ -217,8 +216,7 @@
                             <TextView
                                 android:id="@+id/readSpellExpView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_height="match_parent"
                                 android:background="@color/colorPrimary"
                                 android:text="@string/aq_readspell"
                                 android:textColor="#ffffff"
@@ -269,7 +267,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="5"
-                                    android:text="Attention Focus"
+                                    android:text="Attention Focus(AF)"
                                     android:textColor="@color/af"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -301,8 +299,7 @@
                             <TextView
                                 android:id="@+id/attentionFocusExpView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_height="match_parent"
                                 android:background="@color/colorPrimary"
                                 android:text="@string/aq_attention"
                                 android:textColor="#ffffff"
@@ -353,9 +350,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="5"
-                                    android:text="Math and Time Management"
+                                    android:text="Math and Time Management(MAT)"
                                     android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:textColor="@color/mat"/>
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -384,8 +382,7 @@
                             <TextView
                                 android:id="@+id/mathExpView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_height="match_parent"
                                 android:background="@color/colorPrimary"
                                 android:text="@string/aq_math"
                                 android:textColor="#ffffff"
@@ -436,9 +433,10 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="5"
-                                    android:text="Co-ordination and handwriting"
+                                    android:text="Co-ordination and handwriting(CHW)"
                                     android:textSize="16sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    android:textColor="@color/hw"/>
 
                                 <TextView
                                     android:layout_width="0dp"
@@ -467,8 +465,7 @@
                             <TextView
                                 android:id="@+id/handwritingExpView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_height="match_parent"
                                 android:background="@color/colorPrimary"
                                 android:text="@string/aq_handwriting"
                                 android:textColor="#ffffff"
@@ -519,7 +516,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="4dp"
                                     android:layout_weight="5"
-                                    android:text="Personality and Self-esteem"
+                                    android:text="Personality and Self-esteem(PS)"
                                     android:textColor="@color/ps"
                                     android:textSize="16sp"
                                     android:textStyle="bold" />
@@ -551,8 +548,7 @@
                             <TextView
                                 android:id="@+id/personalityExpView"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_margin="10dp"
+                                android:layout_height="match_parent"
                                 android:background="@color/colorPrimary"
                                 android:text="@string/aq_personality"
                                 android:textColor="#ffffff"
@@ -581,7 +577,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="7dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/button"
                 android:text="QUIT"
                 android:textColor="#ffffff" />
 
@@ -591,7 +587,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="7dp"
                 android:layout_marginTop="5dp"
-                android:background="@color/colorPrimary"
+                android:background="@drawable/button"
                 android:text="BACK"
                 android:textColor="#ffffff" />
 

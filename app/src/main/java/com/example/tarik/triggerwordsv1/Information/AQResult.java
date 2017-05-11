@@ -4,13 +4,16 @@ package com.example.tarik.triggerwordsv1.Information;
  * Created by huanghe on 11/04/2017.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -204,6 +207,31 @@ public class AQResult extends AppCompatActivity implements View.OnClickListener{
 
     }
 
+    public void quitDialog() {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Confirm quitting?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent2 = new Intent(AQResult.this, information.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
@@ -212,9 +240,7 @@ public class AQResult extends AppCompatActivity implements View.OnClickListener{
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(AQResult.this, information.class);
-                startActivity(intent2);
-                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                quitDialog();
 
             case R.id.disorientationTitleView:
                 toggle_contents(disorientationExp, downArrowImageDis, upArrowImageDis);

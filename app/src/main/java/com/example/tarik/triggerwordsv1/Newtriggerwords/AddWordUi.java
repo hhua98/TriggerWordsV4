@@ -741,6 +741,8 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                 break;
 
             case R.id.wtfButton:
+                orderToggleBtn.performClick();
+                hideKeyboard();
                 if (wordList.size() >= 2) {
                     startActivity(new Intent(this, InteractiveSession.class));
                 }

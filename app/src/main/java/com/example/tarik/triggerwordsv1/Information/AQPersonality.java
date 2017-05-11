@@ -4,11 +4,14 @@ package com.example.tarik.triggerwordsv1.Information;
  * Created by huanghe on 11/04/2017.
  */
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -33,7 +36,7 @@ import java.util.ArrayList;
  * Created by Tarik on 08-Apr-17.
  */
 
-public class AQPersonality extends AppCompatActivity implements View.OnClickListener{
+public class AQPersonality extends AppCompatActivity implements View.OnClickListener {
 
     private ArrayList<Float> score;
 
@@ -94,37 +97,37 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         //Group1
         mQuestion1 = (TextView) findViewById(R.id.questionTextView1);
         mRadioG1 = (RadioGroup) findViewById(R.id.radioGroup1);
-        mRadioB1A  = (RadioButton) findViewById(R.id.radioButton1A);
-        mRadioB1S  = (RadioButton) findViewById(R.id.radioButton1S);
-        mRadioB1N  = (RadioButton) findViewById(R.id.radioButton1N);
+        mRadioB1A = (RadioButton) findViewById(R.id.radioButton1A);
+        mRadioB1S = (RadioButton) findViewById(R.id.radioButton1S);
+        mRadioB1N = (RadioButton) findViewById(R.id.radioButton1N);
 
         //Group2
         mQuestion2 = (TextView) findViewById(R.id.questionTextView2);
         mRadioG2 = (RadioGroup) findViewById(R.id.radioGroup2);
-        mRadioB2A  = (RadioButton) findViewById(R.id.radioButton2A);
-        mRadioB2S  = (RadioButton) findViewById(R.id.radioButton2S);
-        mRadioB2N  = (RadioButton) findViewById(R.id.radioButton2N);
+        mRadioB2A = (RadioButton) findViewById(R.id.radioButton2A);
+        mRadioB2S = (RadioButton) findViewById(R.id.radioButton2S);
+        mRadioB2N = (RadioButton) findViewById(R.id.radioButton2N);
 
         //Group3
         mQuestion3 = (TextView) findViewById(R.id.questionTextView3);
         mRadioG3 = (RadioGroup) findViewById(R.id.radioGroup3);
-        mRadioB3A  = (RadioButton) findViewById(R.id.radioButton3A);
-        mRadioB3S  = (RadioButton) findViewById(R.id.radioButton3S);
-        mRadioB3N  = (RadioButton) findViewById(R.id.radioButton3N);
+        mRadioB3A = (RadioButton) findViewById(R.id.radioButton3A);
+        mRadioB3S = (RadioButton) findViewById(R.id.radioButton3S);
+        mRadioB3N = (RadioButton) findViewById(R.id.radioButton3N);
 
         //Group4
         mQuestion4 = (TextView) findViewById(R.id.questionTextView4);
         mRadioG4 = (RadioGroup) findViewById(R.id.radioGroup4);
-        mRadioB4A  = (RadioButton) findViewById(R.id.radioButton4A);
-        mRadioB4S  = (RadioButton) findViewById(R.id.radioButton4S);
-        mRadioB4N  = (RadioButton) findViewById(R.id.radioButton4N);
+        mRadioB4A = (RadioButton) findViewById(R.id.radioButton4A);
+        mRadioB4S = (RadioButton) findViewById(R.id.radioButton4S);
+        mRadioB4N = (RadioButton) findViewById(R.id.radioButton4N);
 
         //Group5
         mQuestion5 = (TextView) findViewById(R.id.questionTextView5);
         mRadioG5 = (RadioGroup) findViewById(R.id.radioGroup5);
-        mRadioB5A  = (RadioButton) findViewById(R.id.radioButton5A);
-        mRadioB5S  = (RadioButton) findViewById(R.id.radioButton5S);
-        mRadioB5N  = (RadioButton) findViewById(R.id.radioButton5N);
+        mRadioB5A = (RadioButton) findViewById(R.id.radioButton5A);
+        mRadioB5S = (RadioButton) findViewById(R.id.radioButton5S);
+        mRadioB5N = (RadioButton) findViewById(R.id.radioButton5N);
 
         //mTitle.setText("Personality and self-esteem");
         mQuit.setOnClickListener(this);
@@ -143,6 +146,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
     }
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -159,7 +163,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()) {
+        switch (v.getId()) {
             case R.id.nextButton:
                 setUp();
                 score.add(calculateScore());
@@ -174,10 +178,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.quitButton:
-                Intent intent2 = new Intent(this, information.class);
-                intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent2);
-                overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                quitDialog();
                 break;
 
         }
@@ -190,7 +191,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         float result4 = RadioFunction4();
         float result5 = RadioFunction5();
 
-        float avg = ((result1 + result2 + result3 + result4 + result5)*100f)/5.0f;
+        float avg = ((result1 + result2 + result3 + result4 + result5) * 100f) / 5.0f;
         return avg;
     }
 
@@ -201,7 +202,7 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
             int screenNumber = 6;
             for (int count = score.size(); count >= screenNumber; count--) {
                 if (score.size() != 0)
-                    score.remove(count-1);
+                    score.remove(count - 1);
                 else
                     break;
             }
@@ -302,4 +303,31 @@ public class AQPersonality extends AppCompatActivity implements View.OnClickList
         }
         return result;
     }
+
+    public void quitDialog() {
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        LayoutInflater inflater = this.getLayoutInflater();
+        final View v = inflater.inflate(R.layout.init_list_dialog, null);
+        TextView messageText = (TextView) v.findViewById(R.id.messageTextView);
+        messageText.setText("Confirm quitting?");
+        myAlert.setView(v)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent2 = new Intent(AQPersonality.this, information.class);
+                        intent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent2);
+                        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+                    }
+                })
+                .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
+    }
+
 }

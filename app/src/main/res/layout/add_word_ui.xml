@@ -58,7 +58,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/wordNameEditView"
-                        android:textSize="16sp"
+                        android:textSize="16dp"
                         android:inputType="textNoSuggestions|textPersonName"
                         android:maxLength="20"
                         android:maxLines="1"
@@ -124,107 +124,158 @@
                     android:layout_marginTop="6dp"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Order by"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginBottom="15dp"/>
-
-                    <RadioGroup
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/mainRadioGroupView"
-                        android:layout_marginBottom="4dp"
-                        android:orientation="horizontal">
+                        android:layout_weight="0.05">
 
-                        <RadioButton
-                            android:layout_width="0dp"
+                        <TextView
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/latestRadioButton"
-                            android:text="Latest"
-                            android:checked="true"
-                            android:textSize="18sp"
-                            android:buttonTint="@color/colorPrimary"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginLeft="6dp"
+                            android:text="Order by"
                             android:textColor="@color/colorPrimary"
-                            android:layout_weight="3.33"/>
+                            android:textSize="16sp" />
+                        <!--android:layout_marginBottom="15dp"-->
 
-                        <RadioButton
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/difficultyRadioButton"
-                            android:text="Difficulty"
-                            android:textSize="18sp"
-                            android:buttonTint="@color/colorPrimary"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_weight="3.33"/>
-
-                        <RadioButton
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/alphabeticalRadioButton"
-                            android:text="Alphabet"
-                            android:textSize="18sp"
-                            android:buttonTint="@color/colorPrimary"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_weight="3.33"/>
-
-                    </RadioGroup>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1">
+
+                        <RadioGroup
+                            android:id="@+id/mainRadioGroupView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <RadioButton
+                                android:id="@+id/latestRadioButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.33"
+                                android:buttonTint="@color/colorPrimary"
+                                android:checked="true"
+                                android:text="Latest"
+                                android:textColor="@color/colorPrimary" />
+
+                            <RadioButton
+                                android:id="@+id/difficultyRadioButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.33"
+                                android:buttonTint="@color/colorPrimary"
+                                android:text="Difficulty"
+                                android:textColor="@color/colorPrimary" />
+
+                            <RadioButton
+                                android:id="@+id/alphabeticalRadioButton"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3.33"
+                                android:buttonTint="@color/colorPrimary"
+                                android:text="Alphabet"
+                                android:textColor="@color/colorPrimary" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="6dp"
+                        android:layout_marginLeft="6dp"
                         android:layout_marginTop="6dp"
-                        android:layout_marginBottom="6dp">
 
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:textSize="18sp"
-                            android:textColor="@color/colorPrimary"
-                            android:text="Results:"
-                            android:layout_weight="2.2"
-                            android:layout_marginTop="10dp"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:text="0"
-                            android:textSize="18sp"
-                            android:textColor="@color/colorPrimary"
-                            android:id="@+id/resultCountView"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1.8"/>
+                        android:layout_weight="5">
 
                         <LinearLayout
-                            android:layout_width="0dp"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_weight="6">
+                            android:layout_gravity="center"
+                            android:layout_weight="1">
 
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:id="@+id/deleteAllButton"
-                                android:padding="6dp"
-                                android:text="Delete All"
-                                android:background="@drawable/button"
-                                android:textColor="#ffffff"
-                                android:layout_marginLeft="4dp"/>
 
-                            <ToggleButton
-                                android:layout_width="wrap_content"
+                            <TextView
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/orderToggleButton"
-                                android:padding="6dp"
-                                android:textOff="Ascending"
-                                android:textOn="Descending"
-                                android:background="@drawable/button"
-                                android:textColor="#ffffff"
-                                android:layout_marginLeft="20dp"/>
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="2"
+                                android:text="Results:"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="17sp" />
+                            <!--android:layout_marginTop="10dp"-->
+
+                            <TextView
+                                android:id="@+id/resultCountView"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1.5"
+                                android:text="0"
+                                android:textColor="@color/colorPrimary"
+                                android:textSize="17sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.7"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:layout_weight="1">
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1.3">
+
+                                <Button
+                                    android:id="@+id/deleteAllButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_weight="2"
+                                    android:background="@drawable/button"
+                                    android:padding="4dp"
+
+                                    android:text="Delete All"
+                                    android:textColor="#ffffff"
+                                    android:textSize="12sp" />
+
+                                <ToggleButton
+                                    android:id="@+id/orderToggleButton"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginLeft="6dp"
+                                    android:layout_weight="2"
+                                    android:background="@drawable/button"
+                                    android:padding="4dp"
+                                    android:textColor="#ffffff"
+                                    android:textOff="Ascending"
+                                    android:textOn="Descending"
+                                    android:textSize="12sp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="8dp"
+                                android:layout_weight="1">
+
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -243,16 +294,15 @@
             android:layout_weight="7">
 
             <android.support.v7.widget.RecyclerView
+                android:id="@+id/wordRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/wordRecyclerView"
-                android:scrollbars="vertical"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp">
-            </android.support.v7.widget.RecyclerView>
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:scrollbars="vertical"></android.support.v7.widget.RecyclerView>
 
         </FrameLayout>
 

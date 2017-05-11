@@ -1,7 +1,6 @@
 package com.example.tarik.triggerwordsv1.map;
 
 import android.Manifest;
-
 import com.example.tarik.triggerwordsv1.ActionMenu.MenuActivity;
 import com.example.tarik.triggerwordsv1.R;
 import android.content.IntentSender;
@@ -23,12 +22,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -42,9 +41,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import android.content.Intent;
-
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
@@ -100,6 +97,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     // set the progress bar time
 
     public ProgressBar progressbar;
+
+    private SupportMapFragment mapFragment;
 //
 //    private int progressStatus = 0;
 //
@@ -115,7 +114,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     //private static final LatLngBounds BOUNDS_GREATER_SYDNEY = new LatLngBounds(
-           // new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
+    // new LatLng(-34.041458, 150.790100), new LatLng(-33.682247, 151.383362));
 
 
     @Override
@@ -138,7 +137,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 //        mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -176,6 +175,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 switch (newState) {
                     case BottomSheetBehavior.STATE_DRAGGING:
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_DRAGGING");
+
+                        ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
+                        int x;
+                        x = dpToPx(579);
+                        params.height = x;
+                        mapFragment.getView().setLayoutParams(params);
+
                         break;
                     case BottomSheetBehavior.STATE_SETTLING:
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_SETTLING");
@@ -187,6 +193,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         }
 
+                        params = mapFragment.getView().getLayoutParams();
+                        x = dpToPx(170);
+                        params.height = x;
+                        mapFragment.getView().setLayoutParams(params);
+
 
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_EXPANDED");
                         break;
@@ -195,6 +206,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                             mMap.animateCamera(CameraUpdateFactory.zoomTo(11), 500, null);
 
                         }
+
+                        params = mapFragment.getView().getLayoutParams();
+                        x = dpToPx(579);
+                        params.height = x;
+                        mapFragment.getView().setLayoutParams(params);
 
                         Log.i("BottomSheetCallback", "BottomSheetBehavior.STATE_COLLAPSED");
                         break;
@@ -211,8 +227,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         });
 
         //.....set adapter
-       //mAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, BOUNDS_GREATER_SYDNEY,
-               //null);
+        //mAdapter = new PlaceAutocompleteAdapter(this, mGoogleApiClient, BOUNDS_GREATER_SYDNEY,
+        //null);
 //        mAutocompleteView.setAdapter(mAdapter);
 
         mImageView = (ImageView) findViewById(R.id.mImageView);
@@ -232,7 +248,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-//    private AdapterView.OnItemClickListener mAutocompleteClickListener
+    //    private AdapterView.OnItemClickListener mAutocompleteClickListener
 //            = new AdapterView.OnItemClickListener() {
 //        @Override
 //        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -260,15 +276,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Log.i(TAG, "Called getPlaceById to get Place details for " + placeId);
 //        }
 //    };
-protected synchronized void buildGoogleApiClient() {
-    mGoogleApiClient = new GoogleApiClient.Builder(this)
-            .addConnectionCallbacks(this)
-            .addOnConnectionFailedListener(this)
-            .addApi(LocationServices.API)
-            .addApi(Places.GEO_DATA_API)
-            .build();
-    mGoogleApiClient.connect();
-}
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .addApi(Places.GEO_DATA_API)
+                .build();
+        mGoogleApiClient.connect();
+    }
 
     private ResultCallback<PlaceBuffer> mUpdatePlaceDetailsCallback
             = new ResultCallback<PlaceBuffer>() {
@@ -584,14 +600,27 @@ protected synchronized void buildGoogleApiClient() {
 
         behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
 
-
-
-
         preMarker = marker;
+
+        //change the map animation
+
+
+
+
 
         return false;
     }
 
+
+    /**
+     * convert dp to px
+     * @param dp
+     * @return
+     */
+    public static int dpToPx(int dp)
+    {
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
 
 
    /*private void setUpMap() {
@@ -614,12 +643,12 @@ protected synchronized void buildGoogleApiClient() {
 
     @Override
     public void onConnected(@Nullable Bundle bundle) {
-       Log.i(TAG, "Location services connected.");
+        Log.i(TAG, "Location services connected.");
 
-       if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-           // TODO: Consider calling
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
             //    ActivityCompat#requestPermissions
-          // here to request the missing permissions, and then overriding
+            // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
@@ -630,9 +659,9 @@ protected synchronized void buildGoogleApiClient() {
 
         Location location = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-           LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
 
-           handleNewLocation(location);
+        handleNewLocation(location);
         //.....
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(1000);
@@ -728,7 +757,7 @@ protected synchronized void buildGoogleApiClient() {
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,8));
 
-   }
+    }
 
 
     @Override
@@ -766,7 +795,7 @@ protected synchronized void buildGoogleApiClient() {
         }
         Log.d("onLocationChanged", "Exit");
 
-         buttonTag = 0;
+        buttonTag = 0;
 
     }
 
@@ -780,7 +809,7 @@ protected synchronized void buildGoogleApiClient() {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
 
-                // Show an explanation to the user *asynchronously* -- don't block
+                // Show an explanation to the user asynchronously -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
 
@@ -952,6 +981,11 @@ protected synchronized void buildGoogleApiClient() {
     public void onBackPressed() {
         if (behavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+            ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
+            int x;
+            x = dpToPx(579);
+            params.height = x;
+            mapFragment.getView().setLayoutParams(params);
         }
         else {
             Intent setIntent = new Intent(this, MenuActivity.class);
@@ -959,8 +993,3 @@ protected synchronized void buildGoogleApiClient() {
         }
     }
 }
-
-
-
-
-

@@ -29,6 +29,7 @@ import com.example.tarik.triggerwordsv1.DateTime2.SublimePickerFragment;
 import com.example.tarik.triggerwordsv1.R;
 
 import java.text.ParseException;
+import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -349,6 +350,8 @@ public class SendCalendar extends AppCompatActivity {
 
                 if (CalendarHelper.haveCalendarReadWritePermissions(SendCalendar.this))
                 {
+
+
                     if (checkBox.isChecked()) {
                         list.add(checkBox.getText().toString());
                         checkBox.setChecked(false);
@@ -365,12 +368,11 @@ public class SendCalendar extends AppCompatActivity {
                         list.add(checkBox4.getText().toString());
                         checkBox4.setChecked(false);
                     }
-
-
                     for (String str : list) {
 
                         description += str + ",";
                     }
+
                     try {
                         addNewEvent();
                     } catch (ParseException e) {
@@ -380,6 +382,7 @@ public class SendCalendar extends AppCompatActivity {
                     list.clear();
 
                     description = "";
+
 
                 }
                 else
@@ -446,6 +449,17 @@ public class SendCalendar extends AppCompatActivity {
 
 
     private void addNewEvent() throws ParseException {
+        if (calendarIdTable==null)
+        {
+            Toast.makeText(this, (String)"No calendars found. Please ensure at least one google account has been added.",
+                    Toast.LENGTH_LONG).show();
+            //Load calendars
+            calendarIdTable = CalendarHelper.listCalendarId(this);
+
+
+
+            return;
+        }
 
         int startYear = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.YEAR) : INVALID_VAL;
         int startMonth = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.MONTH) : INVALID_VAL;
@@ -461,19 +475,20 @@ public class SendCalendar extends AppCompatActivity {
         long xxx = myDate.getTime();
         Log.d("jhg", "hjg" + now);
         Log.d("qwe", "hjg" + xxx);
+
+
+
+
+
         String calendarString = calendarIdSpinner.getSelectedItem().toString();
+
+
+
+
         String title = editText.getText().toString();
-        if (calendarIdTable==null)
-        {
-            Toast.makeText(this, (String)"No calendars found. Please ensure at least one google account has been added.",
-                    Toast.LENGTH_LONG).show();
-            //Load calendars
-            calendarIdTable = CalendarHelper.listCalendarId(this);
 
-            updateCalendarIdSpinner();
 
-            return;
-        }else if(description == "")
+        if(description == "")
         {Toast.makeText(this, (String)"please choose at least one activity",
                 Toast.LENGTH_LONG).show();
             return;
@@ -484,17 +499,17 @@ public class SendCalendar extends AppCompatActivity {
         }else if(editText.getText().toString() == ""){
             Toast.makeText(this, (String)"please enter a title",
                     Toast.LENGTH_LONG).show();
+            return;
         }
-
-
-
         int calendar_id = Integer.parseInt(calendarIdTable.get(calendarString));
 
         CalendarHelper.MakeNewCalendarEntry(this, title, description, "Somewhere",xxx,yyy,false,true,calendar_id,3);
         Toast.makeText(this, (String)"Your reminder has been sent to your calendar.",
                 Toast.LENGTH_LONG).show();
 
+
         }
+
     public void buttonShow2(View view) {
         if (CalendarHelper.haveCalendarReadWritePermissions(this)) {
             //Load calendars

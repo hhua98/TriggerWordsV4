@@ -1,18 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.7"/>
+    android:layout_height="match_parent"
+    android:id="@+id/container">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.2">
+        android:layout_height="213dp"
+        android:layout_gravity="bottom"
+        >
 
         <RadioGroup
             android:id="@+id/radiogrp2"
@@ -21,18 +18,19 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="left"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:clickable="true">
 
 
 
 
-                <RadioButton
+            <RadioButton
                     android:id="@+id/rb1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
                     android:text="Compare Four "
-                    android:clickable="true"
+
 
                     />
 
@@ -42,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="23dp"
                 android:layout_weight="0.5"
-                android:text="Dylexia" />
+                android:text="Dylexia"
+                android:checked="true"/>
 
 
             <RadioButton
@@ -89,10 +88,17 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1.6">
-    </LinearLayout>
+        android:layout_height="309dp"
+        android:clickable="true" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/expanded_image"
+        android:layout_width="match_parent"
+        android:layout_height="492dp"
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/screen_background_light" />
+
+</FrameLayout>
