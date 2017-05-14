@@ -8,6 +8,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Path;
@@ -28,7 +29,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.tarik.triggerwordsv1.ActionMenu.MenuActivity;
+import com.example.tarik.triggerwordsv1.ActionMenu.interactMenu;
 import com.example.tarik.triggerwordsv1.R;
 
 
@@ -50,6 +54,7 @@ public class EyeTracker extends AppCompatActivity {
     int y = 0;
     //Using for model control
     private Boolean startFlag = true;
+    int backButtonCount = 0;
 
     /**
      * Create method.
@@ -86,7 +91,25 @@ public class EyeTracker extends AppCompatActivity {
         onBackPressed();
         return true;
     }
-
+    @Override
+    public void onBackPressed() {
+        if(backButtonCount >= 1)
+        {
+            Intent intentLoadNewActivity = new Intent(EyeTracker.this, interactMenu.class);
+            startActivity(intentLoadNewActivity);
+        }
+        else
+        {
+            Toast.makeText(this, "Press the back button once again to exit.", Toast.LENGTH_SHORT).show();
+            backButtonCount++;
+        }
+        /*DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }*/
+    }
     /**
      * convert dp to px
      * @param dp

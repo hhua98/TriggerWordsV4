@@ -3,15 +3,16 @@
     android:id="@+id/initListDialog"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
     android:orientation="vertical">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/messageTextView"
         android:text="replace"
-        android:textSize="18sp"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:layout_gravity="center"
         android:textColor="@color/colorPrimary"
         android:layout_marginTop="20dp"/>
 

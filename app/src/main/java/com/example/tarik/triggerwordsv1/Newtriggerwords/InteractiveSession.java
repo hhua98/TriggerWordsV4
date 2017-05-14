@@ -13,6 +13,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.Animation;
@@ -43,9 +45,12 @@ import android.widget.Toast;
 
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 import com.example.tarik.triggerwordsv1.Newtriggerwords.AddWordUi.*;
+import com.squareup.picasso.Picasso;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * Created by Tarik on 30-Apr-17.
@@ -69,11 +74,12 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
     private ImageView swipeWordImage;
     private ImageView rightArw;
     private ImageView leftArw;
-    TextView mPoints;
-    TextView mProgEasy;
-    TextView mProgNormal;
-    TextView mProgTough;
-    TextView mProg;
+    private TextView mPoints;
+    private TextView mProgEasy;
+    private TextView mProgNormal;
+    private TextView mProgTough;
+    private TextView mProg;
+    private View blackBoard;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,6 +124,15 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
         mProgNormal = (TextView) findViewById(R.id.progressNormalView);
         mProgTough = (TextView) findViewById(R.id.progressToughView);
         mProg = (TextView) findViewById(R.id.progTextView);
+        blackBoard = findViewById(R.id.swipe_view);
+    }
+
+    public void delayer() {
+        try {
+            Thread.sleep(800);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
     }
 
     public void init() {
@@ -126,8 +141,10 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
         wordList1 = new ArrayList<Word>();
         wordList2 = new ArrayList<Word>();
         sqliteAdapter = new SqliteAdapter(this);
+        delayer();
         if (sqliteAdapter.getRowCount() != 0) {
             wordList1.addAll(sqliteAdapter.getAllWords());
+            delayer();
             Log.d("LIST", ": " + wordList1.toString());
         }
 
@@ -139,6 +156,7 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
     }
 
     public void initAdapter() {
+        displayToastUnderView(blackBoard, "Swipe the blackboard to interact!");
         final SwipeWordAdapter swipeWordAdapter = new SwipeWordAdapter(wordList1, inflater, this);
         swipeView.setAdapter(swipeWordAdapter);
         swipeView.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
@@ -178,16 +196,23 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
 
     public void imageSetter() {
         Word word = sqliteAdapter.searchWord(word2.getWordName());
-        String imageUrl = word.getImageUrl();
-        if (!imageUrl.equals("a")) {
-            File imgFile = new File(imageUrl);
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                swipeWordImage.setImageBitmap(myBitmap);
+        String imageUrl = null;
+        if (word != null) {
+            imageUrl = word.getImageUrl();
+            if (!imageUrl.equals("a")) {
+                /*File imgFile = new File(imageUrl);
+                if (imgFile.exists()) {*/
+                Picasso.with(this)
+                        .load("file://" + imageUrl)
+                        .fit().centerCrop()
+                        .into(swipeWordImage);
+
+            } else {
+                Picasso.with(this)
+                        .load(R.drawable.ic_default_image)
+                        .fit().centerCrop()
+                        .into(swipeWordImage);
             }
-        }
-        else {
-            swipeWordImage.setImageResource(R.drawable.ic_action_default);
         }
     }
 
@@ -245,7 +270,7 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
         if (newImageUrl != null) {
             long exitId = sqliteAdapter.updateWordImage(word2, newImageUrl);
             if (exitId < 0) {
-                alertDialog("Error: Could not increase that word's points");
+                alertDialog("Error: Could not change that word's image");
             } else {
                 imageSetter();
             }
@@ -254,26 +279,27 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
 
     public void ratingBarSetter() {
         Word word = sqliteAdapter.searchWord(word2.getWordName());
-        int points = word.getPoints();
-        mPoints.setText(Integer.toString(points) + ")");
-        if (points <= 10) {
-            if (points >= 7) {
-                mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
-                mProgNormal.setBackgroundColor(Color.parseColor("#ffffff"));
-                mProgTough.setBackgroundColor(Color.parseColor("#ffffff"));
-                mProg.setText("Easy!");
-            }
-            else if (points >= 5) {
-                mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
-                mProgNormal.setBackgroundColor(Color.parseColor("#ffd600"));
-                mProgTough.setBackgroundColor(Color.parseColor("#ffffff"));
-                mProg.setText("Normal!");
-            }
-            else if (points >= 0) {
-                mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
-                mProgNormal.setBackgroundColor(Color.parseColor("#ffd600"));
-                mProgTough.setBackgroundColor(Color.parseColor("#f4511e"));
-                mProg.setText("Tough!");
+        int points = 0;
+        if (word != null) {
+            points = word.getPoints();
+            mPoints.setText(Integer.toString(points) + ")");
+            if (points <= 10) {
+                if (points >= 7) {
+                    mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
+                    mProgNormal.setBackgroundColor(Color.parseColor("#ffffff"));
+                    mProgTough.setBackgroundColor(Color.parseColor("#ffffff"));
+                    mProg.setText("Easy!");
+                } else if (points >= 5) {
+                    mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
+                    mProgNormal.setBackgroundColor(Color.parseColor("#ffd600"));
+                    mProgTough.setBackgroundColor(Color.parseColor("#ffffff"));
+                    mProg.setText("Normal");
+                } else if (points >= 0) {
+                    mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
+                    mProgNormal.setBackgroundColor(Color.parseColor("#ffd600"));
+                    mProgTough.setBackgroundColor(Color.parseColor("#f4511e"));
+                    mProg.setText("Tough!");
+                }
             }
         }
     }
@@ -281,37 +307,41 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
     public void increaseWordPoints() {
         //Toast.makeText(this, "Like clicked for " + currentWordName, Toast.LENGTH_SHORT).show();
         Word word = sqliteAdapter.searchWord(word2.getWordName());
-        int oldPoints = word.getPoints();
-        if (oldPoints < 10) {
-            //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
-            long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints + 1));
-            ratingBarSetter();
-            if (exitId < 0)
-                alertDialog("Error: Could not increase that word's points");
-        }
-        else {
-            alertDialog("Cannot increase points to more than 10");
+        int oldPoints = 0;
+        if (word != null) {
+            oldPoints = word.getPoints();
+            if (oldPoints < 10) {
+                //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
+                long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints + 1));
+                ratingBarSetter();
+                if (exitId < 0)
+                    alertDialog("Error: Could not increase that word's points");
+            } else {
+                alertDialog("Cannot increase points to more than 10");
+            }
         }
     }
 
     public void decreaseWordPoints() {
         //sToast.makeText(this, "Like clicked for " + currentWordName, Toast.LENGTH_SHORT).show();
         Word word = sqliteAdapter.searchWord(word2.getWordName());
-        int oldPoints = word.getPoints();
-        if (oldPoints > 0) {
-            //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
-            long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints - 1));
-            ratingBarSetter();
-            if (exitId < 0)
-                alertDialog("Error: Could not decrease that word's points");
-        }
-        else {
-            alertDialog("Cannot decrease points to less than 0");
+        int oldPoints = 0;
+        if (word != null) {
+            oldPoints = word.getPoints();
+            if (oldPoints > 0) {
+                //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
+                long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints - 1));
+                ratingBarSetter();
+                if (exitId < 0)
+                    alertDialog("Error: Could not decrease that word's points");
+            } else {
+                alertDialog("Cannot decrease points to less than 0");
+            }
         }
     }
 
     public void zoomPic(String imageUrl) {
-        Intent intent = new Intent(this, ZoomPic.class);
+        Intent intent = new Intent(InteractiveSession.this, ZoomPic.class);
         intent.putExtra("ImageUrl", imageUrl);
         startActivity(intent);
     }
@@ -356,8 +386,57 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
 
             case R.id.swipeWordImageView:
                 //Toast.makeText(this, "CLICKED!S", Toast.LENGTH_SHORT).show();
-                zoomPic(word2.getImageUrl());
+                Word word = sqliteAdapter.searchWord(word2.getWordName());
+                String imageUrl = null;
+                if (word != null) {
+                    zoomPic(word.getImageUrl());
+                }
                 break;
         }
+    }
+
+    private void displayToastUnderView(View v, String messageText)
+    {
+        int xOffset = 0;
+        int yOffset = 0;
+        Rect gvr = new Rect();
+
+        View parent = (View) v.getParent();
+        int parentHeight = parent.getHeight();
+
+        if (v.getGlobalVisibleRect(gvr))
+        {
+            View root = v.getRootView();
+
+            int halfWidth = root.getRight() / 2;
+            int halfHeight = root.getBottom() / 2;
+
+            int parentCenterX = ((gvr.right - gvr.left) / 2) + gvr.left;
+
+            int parentCenterY = ((gvr.bottom - gvr.top) / 2) + gvr.top;
+
+            if (parentCenterY <= halfHeight)
+            {
+                yOffset = -(halfHeight - parentCenterY) - parentHeight;
+            }
+            else
+            {
+                yOffset = (parentCenterY - halfHeight) - parentHeight;
+            }
+
+            if (parentCenterX < halfWidth)
+            {
+                xOffset = -(halfWidth - parentCenterX);
+            }
+
+            if (parentCenterX >= halfWidth)
+            {
+                xOffset = parentCenterX - halfWidth;
+            }
+        }
+
+        Toast toast = Toast.makeText(this, messageText, Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, xOffset, yOffset);
+        toast.show();
     }
 }

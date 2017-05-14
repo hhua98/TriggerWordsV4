@@ -27,36 +27,34 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="6">
-
+            android:layout_weight="5.7">
 
             <com.lorentzos.flingswipe.SwipeFlingAdapterView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/swipe_view"
-                android:layout_weight="8"
                 android:layout_gravity="center"
                 android:gravity="center"
                 app:max_visible="1"
-                app:min_adapter_stack="6"
+                app:min_adapter_stack="2"
                 app:rotation_degrees="16"
                 android:background="@drawable/ic_blackboard" />
-
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="4.3"
             android:gravity="center"
+            android:layout_gravity="center"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="250dp"
+                android:layout_width="160dp"
                 android:layout_height="0dp"
                 android:id="@+id/swipeWordImageView"
-                android:layout_weight="8"/>
+                android:layout_weight="8.5" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -67,8 +65,7 @@
                 android:textColor="#ffffff"
                 android:layout_marginTop="10dp"
                 android:padding="4dp"
-                android:elevation="@dimen/fab_elevation_lollipop"
-                android:layout_weight="2"/>
+                android:layout_weight="1.5"/>
 
         </LinearLayout>
 

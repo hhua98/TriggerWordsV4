@@ -36,6 +36,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.tarik.triggerwordsv1.R;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 
@@ -65,14 +66,19 @@ public class ZoomPic extends AppCompatActivity {
 
     private void imageSetter(String imageUrl) {
         if (!imageUrl.equals("a")) {
-            File imgFile = new File(imageUrl);
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                expandImage.setImageBitmap(myBitmap);
-            }
+            /*File imgFile = new File(imageUrl);
+            if (imgFile.exists()) {*/
+            Picasso.with(this)
+                    .load("file://" + imageUrl)
+                    .fit().centerCrop()
+                    .into(expandImage);
+
         }
         else {
-            expandImage.setImageResource(R.drawable.ic_action_default);
+            Picasso.with(this)
+                    .load(R.drawable.ic_default_image)
+                    .fit().centerCrop()
+                    .into(expandImage);
         }
     }
 }

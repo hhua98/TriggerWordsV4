@@ -20,8 +20,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import com.example.tarik.triggerwordsv1.R;
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Tarik on 24-Apr-17.
@@ -34,6 +38,7 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
     private static ArrayList<Word> wordList;
     private WordViewHolder wordViewHolder;
     private onClickItemListener clickListener;
+    //private static int IMAGE_MAX_SIZE = 70;
 
 
     protected WordRecyclerAdapter(Context context, ArrayList<Word> wordList) {
@@ -58,9 +63,8 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         int points = currentWord.getPoints();
         holder.mPoints.setText(Integer.toString(points) + ")");
         ratingBarSetter(holder, points);
-        if (currentWord.getImageUrl() != null) {
-            imageSetter(holder, currentWord);
-        }
+        imageSetter(holder, currentWord);
+
         Log.d("bind", "onBind called");
     }
 
@@ -111,11 +115,20 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         for (Word currentWord : wordList) {
             if ((currentWord.getWordName()).equalsIgnoreCase(word.getWordName())) {
                 wordList.get(wordList.indexOf(currentWord)).setImageUrl(newImageUrl);
-                //Toast.makeText(context, "Image updated for word: " + word.getWordName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Image updated for word: " + word.getWordName(), Toast.LENGTH_SHORT).show();
                 break;
             }
         }
         notifyItemChanged(position);
+    }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
     }
 
     public void increasePoints(Word word, int position){
@@ -150,7 +163,7 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
                 holder.mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
                 holder.mProgNormal.setBackgroundColor(Color.parseColor("#ffd600"));
                 holder.mProgTough.setBackgroundColor(Color.parseColor("#ffffff"));
-                holder.mProg.setText("Normal!");
+                holder.mProg.setText("Normal");
             }
             else if (points >= 0) {
                 holder.mProgEasy.setBackgroundColor(Color.parseColor("#76ff03"));
@@ -163,17 +176,52 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
 
     public void imageSetter(WordViewHolder holder, Word word) {
         String imageUrl = word.getImageUrl();
-        if (word.getImageUrl() != "a") {
-            File imgFile = new File(imageUrl);
-            if (imgFile.exists()) {
-                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                holder.mWordImage.setImageBitmap(myBitmap);
-            }
+        if (imageUrl != "a") {
+            /*File imgFile = new File(imageUrl);
+            if (imgFile.exists()) {*/
+                Picasso.with(context)
+                        .load("file://" + imageUrl)
+                        .fit().centerCrop()
+                        .error(R.drawable.ic_default_image)
+                        .placeholder(R.drawable.ic_default_image)
+                        .into(holder.mWordImage);
+                /*Bitmap myBitmap = decodeFile(imgFile);
+                holder.mWordImage.setImageBitmap(myBitmap);*/
         }
         else {
-            holder.mWordImage.setImageResource(R.drawable.ic_action_default);
+            //holder.mWordImage.setImageResource(R.drawable.ic_default_image);
+            Picasso.with(context)
+                    .load(R.drawable.ic_default_image)
+                    .fit().centerCrop()
+                    .into(holder.mWordImage);
         }
     }
+
+    /*private Bitmap decodeFile(File f){
+        try {
+            BitmapFactory.Options o = new BitmapFactory.Options();
+            o.inJustDecodeBounds = true;
+            FileInputStream fis1 = new FileInputStream(f);
+            BitmapFactory.decodeStream(fis1, null, o);
+
+            int scale = 1;
+            if (o.outHeight > IMAGE_MAX_SIZE || o.outWidth > IMAGE_MAX_SIZE) {
+                scale = (int) Math.pow(2, (int) Math.ceil(Math.log(IMAGE_MAX_SIZE /
+                        (double) Math.max(o.outHeight, o.outWidth)) / Math.log(0.5)));
+            }
+            BitmapFactory.Options o2 = new BitmapFactory.Options();
+            o2.inSampleSize = scale;
+            FileInputStream fis2 = new FileInputStream(f);
+            Bitmap b = BitmapFactory.decodeStream(fis2, null, o2);
+            fis1.close();
+            fis2.close();
+            return b;
+
+    } catch (FileNotFoundException e) {} catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }*/
 
     class WordViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
@@ -231,7 +279,7 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
 
                 case R.id.contextMenuView:
                     if (clickListener !=null) {
-                        clickListener.contextMenuHandler(context, mContextMenu, currentWord.getWordName(), getAdapterPosition());
+                        clickListener.contextMenuHandler(context, mContextMenu, currentWord, getAdapterPosition());
                     }
                     break;
 
@@ -249,7 +297,7 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
     public interface onClickItemListener {
         void increaseWordPoints(String currentWordName, int position);
         void decreaseWordPoints(String currentWordName, int position);
-        void contextMenuHandler(Context context, TextView contextMenuView, String currentWordName, int position);
+        void contextMenuHandler(Context context, TextView contextMenuView, Word currentWord, int position);
         void imageClickHandler(String imageUrl);
     }
 }

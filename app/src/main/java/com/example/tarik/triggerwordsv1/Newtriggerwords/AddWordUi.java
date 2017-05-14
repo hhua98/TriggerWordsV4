@@ -35,6 +35,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -68,6 +69,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     private Button deleteAllWordsBtn;
     private ToggleButton orderToggleBtn;
     private Button gobtn;
+    private ImageView helpBtn;
     private ArrayList<Word> wordList;
     private PopupMenu popupMenu;
     private String wordNameForPic;
@@ -119,13 +121,10 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         initWidgets();
         wordList = new ArrayList<Word>();
         sqliteAdapter = new SqliteAdapter(this);
+        delayer();
         int tableRowCount = sqliteAdapter.getRowCount();
 
-        try {
-            Thread.sleep(1000);
-        } catch(InterruptedException ex) {
-            Thread.currentThread().interrupt();
-        }
+
         if (tableRowCount > 0) {
             wordList.clear();
             initList();
@@ -160,19 +159,27 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         return givenTriggerWordsList;
     }
 
+    public void delayer() {
+        try {
+            Thread.sleep(800);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
     public void initWidgets() {
         recyclerView = (RecyclerView) findViewById(R.id.wordRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         wordNameEdit = (EditText) findViewById(R.id.wordNameEditView);
-        wordNameEdit.setHint(Html.fromHtml("<i>" + "Add word to list.." + "</i>"));
+        wordNameEdit.setHint(Html.fromHtml("<i>" + "Type word here to add to list.." + "</i>"));
         wordNameEdit.setSelectAllOnFocus(true);
 
         addWordButton = (ImageView) findViewById(R.id.addWordButton);
         addWordButton.setOnClickListener(this);
 
         searchNameEdit = (EditText) findViewById(R.id.searchNameEditView);
-        searchNameEdit.setHint(Html.fromHtml("<i>" + "Search word from list.." + "</i>"));
+        searchNameEdit.setHint(Html.fromHtml("<i>" + "Type word here to search from list.." + "</i>"));
         searchNameEdit.setSelectAllOnFocus(true);
 
         searchWordBtn = (ImageView) findViewById(R.id.searchWordButton);
@@ -200,6 +207,9 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         gobtn = (Button) findViewById(R.id.wtfButton);
         gobtn.setOnClickListener(this);
 
+        helpBtn = (ImageView) findViewById(R.id.helpButton);
+        helpBtn.setOnClickListener(this);
+
         findViewById(R.id.mainLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -211,6 +221,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
 
     protected void initList() {
         wordList.addAll(sqliteAdapter.getAllWords());
+        delayer();
         wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
         recyclerView.setAdapter(wordRecyclerAdapter);
         wordRecyclerAdapter.setOnClickItemListener(this);
@@ -222,6 +233,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         if (!wordList.isEmpty()) {
             wordList.clear();
             wordList.addAll(sqliteAdapter.rankBy(rankingOption));
+            delayer();
             wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
             wordRecyclerAdapter.setOnClickItemListener(this);
             recyclerView.setAdapter(wordRecyclerAdapter);
@@ -233,6 +245,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         if (!wordList.isEmpty()) {
             wordList.clear();
             wordList.addAll(sqliteAdapter.orderBy(rankingOption, orderingOption));
+            delayer();
             wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
             wordRecyclerAdapter.setOnClickItemListener(this);
             recyclerView.setAdapter(wordRecyclerAdapter);
@@ -243,6 +256,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     private void initSearchList(String searchWordName) {
         wordList.clear();
         wordList.add(sqliteAdapter.searchWord(searchWordName));
+        delayer();
         wordRecyclerAdapter = new WordRecyclerAdapter(this, wordList);
         wordRecyclerAdapter.setOnClickItemListener(this);
         recyclerView.setAdapter(wordRecyclerAdapter);
@@ -259,6 +273,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         String newWordName = wordNameEdit.getText().toString().trim();
         int tableRowCount = sqliteAdapter.getRowCount();
         if (newWordName.length() != 0) {
+            newWordName = newWordName.toLowerCase();
             if (tableRowCount > 0) {
                 if (sqliteAdapter.compareName(newWordName))
                     alertDialog("That word is already in the list.");
@@ -569,13 +584,15 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     public void replacePictureUrl(String newImageUrl) {
         String inputWordName = getWordNameForPic();
         Word word = sqliteAdapter.searchWord(inputWordName);
-        int position = getWordPositionForPic();
-        if (newImageUrl != null) {
-            long exitId = sqliteAdapter.updateWordImage(word, newImageUrl);
-            if (exitId < 0) {
-                alertDialog("Error: Could not change/delete that word's image");
-            } else {
-                wordRecyclerAdapter.settingImage(word, newImageUrl, position);
+        if (word != null) {
+            int position = getWordPositionForPic();
+            if (newImageUrl != null) {
+                long exitId = sqliteAdapter.updateWordImage(word, newImageUrl);
+                if (exitId < 0) {
+                    alertDialog("Error: Could not change/delete that word's image");
+                } else {
+                    wordRecyclerAdapter.settingImage(word, newImageUrl, position);
+                }
             }
         }
     }
@@ -584,17 +601,19 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     public void increaseWordPoints(String currentWordName, int position) {
         //Toast.makeText(this, "Like clicked for " + currentWordName, Toast.LENGTH_SHORT).show();
         Word word = sqliteAdapter.searchWord(currentWordName);
-        int oldPoints = word.getPoints();
-        if (oldPoints < 10) {
-            //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
-            long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints + 1));
-            if (exitId < 0)
-                alertDialog("Error: Could not increase that word's points");
-            else
-                wordRecyclerAdapter.increasePoints(word, position);
-        }
-        else {
-            alertDialog("Cannot increase points to more than 10");
+        int oldPoints = 0;
+        if (word != null) {
+            oldPoints = word.getPoints();
+            if (oldPoints < 10) {
+                //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
+                long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints + 1));
+                if (exitId < 0)
+                    alertDialog("Error: Could not increase that word's points");
+                else
+                    wordRecyclerAdapter.increasePoints(word, position);
+            } else {
+                alertDialog("Cannot increase points to more than 10");
+            }
         }
     }
 
@@ -602,65 +621,75 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     public void decreaseWordPoints(String currentWordName, int position) {
         //sToast.makeText(this, "Like clicked for " + currentWordName, Toast.LENGTH_SHORT).show();
         Word word = sqliteAdapter.searchWord(currentWordName);
-        int oldPoints = word.getPoints();
-        if (oldPoints > 0) {
-            //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
-            long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints - 1));
-            if (exitId < 0)
-                alertDialog("Error: Could not decrease that word's points");
-            else
-                wordRecyclerAdapter.decreasePoints(word, position);
-        }
-        else {
-            alertDialog("Cannot decrease points to less than 0");
+        int oldPoints = 0;
+        if (word != null) {
+            oldPoints = word.getPoints();
+            if (oldPoints > 0) {
+                //Toast.makeText(this, "points for " + currentWordName + " = " + oldPoints, Toast.LENGTH_SHORT).show();
+                long exitId = sqliteAdapter.updateWordPoints(word, (oldPoints - 1));
+                if (exitId < 0)
+                    alertDialog("Error: Could not decrease that word's points");
+                else
+                    wordRecyclerAdapter.decreasePoints(word, position);
+            } else {
+                alertDialog("Cannot decrease points to less than 0");
+            }
         }
     }
 
     @Override
-    public void contextMenuHandler(Context context, TextView contextMenuView, final String currentWordName, final int position) {
-        popupMenu = new PopupMenu(context, contextMenuView);
-        popupMenu.inflate(R.menu.word_context_menu);
-        popupMenu.show();
-        MenuItem deletePicButton = popupMenu.getMenu().findItem(R.id.deletePicture);
-        if (wordList.size() > 0) {
-            for (Word word : wordList) {
-                if (currentWordName.equals(word.getWordName())) {
-                    if (word.getImageUrl().equals("a")) {
-                        deletePicButton.setEnabled(false);
-                        break;
+    public void contextMenuHandler(Context context, TextView contextMenuView, Word currentWord, final int position) {
+        if (currentWord != null) {
+            final String currentWordName = currentWord.getWordName();
+            final String wordImageUrl = currentWord.getImageUrl();
+            popupMenu = new PopupMenu(context, contextMenuView);
+            popupMenu.inflate(R.menu.word_context_menu);
+            popupMenu.show();
+            MenuItem deletePicButton = popupMenu.getMenu().findItem(R.id.deletePicture);
+            if (wordList.size() > 0) {
+                for (Word word : wordList) {
+                    if (currentWordName.equals(word.getWordName())) {
+                        if (word.getImageUrl().equals("a")) {
+                            deletePicButton.setEnabled(false);
+                            break;
+                        }
                     }
                 }
             }
-        }
-        popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.editItem:
-                        editDialog(currentWordName, position);
-                        hideKeyboard();
-                        break;
+            popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.editItem:
+                            editDialog(currentWordName, position);
+                            hideKeyboard();
+                            break;
 
-                    case R.id.deleteItem:
-                        deleteOneWordDialog(currentWordName, position);
-                        break;
+                        case R.id.deleteItem:
+                            deleteOneWordDialog(currentWordName, position);
+                            break;
 
-                    case R.id.changePicture:
-                        setWordNameForPic(currentWordName);
-                        setWordPositionForPic(position);
-                        hideKeyboard();
-                        askSDAccessPermission();
-                        break;
+                        case R.id.changePicture:
+                            setWordNameForPic(currentWordName);
+                            setWordPositionForPic(position);
+                            hideKeyboard();
+                            askSDAccessPermission();
+                            break;
 
-                    case R.id.deletePicture:
-                        setWordNameForPic(currentWordName);
-                        setWordPositionForPic(position);
-                        deletePictureDialog("a");
-                        break;
+                        case R.id.deletePicture:
+                            if (!wordImageUrl.equals("a")) {
+                                setWordNameForPic(currentWordName);
+                                setWordPositionForPic(position);
+                                deletePictureDialog("a");
+                            } else {
+                                Toast.makeText(AddWordUi.this, "No image there to delete", Toast.LENGTH_SHORT).show();
+                            }
+                            break;
+                    }
+                    return true;
                 }
-                return true;
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -750,6 +779,10 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                     Toast.makeText(this, "Please add at least 2 words to the list first.", Toast.LENGTH_SHORT).show();
                 }
                 break;
+
+            case R.id.helpButton:
+                hideKeyboard();
+                helpDialog();
         }
     }
 
@@ -779,6 +812,27 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
             hideKeyboard();
             rankOrdering("ASC");
         }
+    }
+
+    public void helpDialog() {
+        String message = "1. Start Blackboard --> Accesses the blackboard activity\n" +
+                         "2. (+) button --> Adds the typed word to the list\n" +
+                         "3. Search button --> Searches for the typed word from the list\n" +
+                         "4. Words in the list can be ordered by latest entry, difficulty or alphabetical order\n" +
+                         "5. Edit button --> opens menu to change/delete a word, or to change/delete the picture of a word\n" +
+                         "6. Like/Dislike --> increases/decreases points of a word. More Likes mean word is easier\n" +
+                         "7. The rating bar indicates whether a word is Easy(green), Normal(Yellow) or Tough(Red)\n" +
+                         "8. Click on a picture to fully view it.";
+        AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
+        myAlert.setMessage(message)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        myAlert.show();
     }
 
     public void alertDialog(String errorMessage) {

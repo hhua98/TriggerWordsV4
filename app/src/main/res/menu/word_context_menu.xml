@@ -3,11 +3,11 @@
 
     <item
         android:id="@+id/editItem"
-        android:title="Edit"/>
+        android:title="Edit word" />
 
     <item
         android:id="@+id/deleteItem"
-        android:title="Delete"/>
+        android:title="Delete word"/>
 
     <item
         android:id="@+id/changePicture"

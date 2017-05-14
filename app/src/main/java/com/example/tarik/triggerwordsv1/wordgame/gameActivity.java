@@ -310,9 +310,9 @@ public class gameActivity extends AppCompatActivity {
                     gameActivity.this);
 
             // set title
-            alertDialogBuilder.setTitle("You are awesome!");
+            alertDialogBuilder.setTitle("You Win!");
             alertDialogBuilder.setMessage("Do you want to continue or leave?");
-            alertDialogBuilder.setPositiveButton(R.string.leave, new DialogInterface.OnClickListener() {
+            alertDialogBuilder.setPositiveButton(R.string.leave2, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {
                     Intent intentLoadNewActivity = new Intent(gameActivity.this, startScreen.class);
                     startActivity(intentLoadNewActivity);
