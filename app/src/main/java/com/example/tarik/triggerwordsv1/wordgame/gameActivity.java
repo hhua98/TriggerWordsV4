@@ -24,6 +24,8 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.GridLayout;
@@ -37,6 +39,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
+
 
 import com.example.tarik.triggerwordsv1.R;
 
@@ -129,7 +132,47 @@ public class gameActivity extends AppCompatActivity {
         onBackPressed();
         return true;
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_game, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.instruction) {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    gameActivity.this);
+
+            // set title
+            alertDialogBuilder.setTitle("Instructions");
+
+            // set dialog message
+            alertDialogBuilder.setMessage(R.string.instructions);
+            alertDialogBuilder.setNegativeButton(R.string.leave, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+            // show it
+            alertDialog.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
     private void fillBoard(){
         findViewById(R.id.marker_progress).setVisibility(View.GONE); // hide loader
         tableLayout = (TableLayout) findViewById(R.id.grid);
@@ -351,7 +394,7 @@ public class gameActivity extends AppCompatActivity {
 
                 }
 
-                    // User cancelled the dialog
+                // User cancelled the dialog
             });
             AlertDialog alertDialog = alertDialogBuilder.create();
 
@@ -359,15 +402,15 @@ public class gameActivity extends AppCompatActivity {
             alertDialog.show();
 
 
-    }
+        }
 
-}
+    }
     @Override
     public void onBackPressed() {
 
 
-            Intent setIntent = new Intent(this, startScreen.class);
-            startActivity(setIntent);
+        Intent setIntent = new Intent(this, startScreen.class);
+        startActivity(setIntent);
 
     }
     private void showCurrentWord(int status){

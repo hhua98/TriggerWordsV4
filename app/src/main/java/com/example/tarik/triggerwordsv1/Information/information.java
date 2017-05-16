@@ -136,7 +136,7 @@ public class information extends AppCompatActivity {
                 case 2:
                     return "Stats";
                 case 3:
-                    return "Assessment question";
+                    return "Quiz";
             }
             return null;
         }

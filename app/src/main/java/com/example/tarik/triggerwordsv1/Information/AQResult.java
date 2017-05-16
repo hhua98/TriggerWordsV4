@@ -301,8 +301,8 @@ public class AQResult extends AppCompatActivity implements View.OnClickListener{
 
     public void init() {
         mDesc = (TextView) findViewById(R.id.descriptionTextView);
-        mDesc.setText("If two or more of the key areas of learning above are in the" +
-                "High range of severity, chances are it is dyslexia.");
+        mDesc.setText("If two or more of the key areas of learning above are in the " +
+                "\"High\" range of severity, chances are it is dyslexia.");
 
 
         mQuit = (Button) findViewById(R.id.quitButton);

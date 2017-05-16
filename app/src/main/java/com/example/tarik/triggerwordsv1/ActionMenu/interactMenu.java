@@ -13,7 +13,7 @@ import android.widget.ImageButton;
 
 import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.DemoActivity;
 import com.example.tarik.triggerwordsv1.Eyetracking_ReadingStories.EyeTracker;
-import com.example.tarik.triggerwordsv1.Newtriggerwords.AddWordUi;
+import com.example.tarik.triggerwordsv1.Newtriggerwords.StartTriggerWords;
 import com.example.tarik.triggerwordsv1.R;
 import com.example.tarik.triggerwordsv1.triggerletters.CoverFlowActivity;
 import com.example.tarik.triggerwordsv1.wordgame.startScreen;
@@ -41,7 +41,7 @@ public class interactMenu extends AppCompatActivity {
         imageButton7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentLoadNewActivity = new Intent(interactMenu.this, AddWordUi.class);
+                Intent intentLoadNewActivity = new Intent(interactMenu.this, StartTriggerWords.class);
                 startActivity(intentLoadNewActivity);
             }
         });

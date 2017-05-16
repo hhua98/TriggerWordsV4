@@ -13,9 +13,7 @@ import com.google.android.gms.location.places.PlacePhotoMetadataBuffer;
 import com.google.android.gms.location.places.PlacePhotoMetadataResult;
 import com.google.android.gms.location.places.Places;
 
-/**
- * Created by floko_000 on 8/29/2016.
- */
+
 public abstract class PhotoTask extends AsyncTask<String, Void, PhotoTask.AttributedPhoto> {
 
     private int mHeight;

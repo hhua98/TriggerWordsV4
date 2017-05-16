@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    >
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar50"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@id/toolbar50">
+
+        <ImageView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_alignParentTop="true"
+            android:background="@null"
+            android:src="@drawable/list_start"
+            android:layout_weight="6"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/startBlackBoardButton"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="7dp"
+                    android:background="@drawable/button"
+                    android:elevation="20dp"
+                    android:text="Start Blackboard"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="6dp"/>
+
+                <Button
+                    android:id="@+id/wordListButton"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/startBlackBoardButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button"
+                    android:elevation="20dp"
+                    android:text="To Word List"
+                    android:textColor="#FFFFFF"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:padding="6dp"/>
+
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

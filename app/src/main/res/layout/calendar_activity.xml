@@ -6,6 +6,15 @@
     android:background="#f6f6f6"
     >
 
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar13"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,13 +46,12 @@
                         android:id="@+id/connectCalendar"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
+                        android:clickable="true"
+                        android:onClick="buttonShow2"
                         android:paddingLeft="20dp"
                         android:text="Connect Calendars"
                         android:textSize="@dimen/sampler_text_size"
-                        android:clickable="true"
-                        android:textStyle="bold"
-                        android:onClick="buttonShow2"/>
-
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -51,8 +59,7 @@
                 <Spinner
                     android:id="@+id/calendarid_spinner"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
 
                 <LinearLayout
@@ -68,28 +75,27 @@
                         android:layout_height="wrap_content"
                         android:ems="10"
                         android:inputType="textNoSuggestions|textPersonName"
-                        android:paddingTop="20dp"
-                        />
+                        android:paddingTop="20dp" />
 
                     <TextView
                         android:id="@+id/textView12"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:paddingTop="10dp"
                         android:text="Choose  Activities:"
                         android:textSize="@dimen/sampler_text_size"
-                        android:textStyle="bold"
-                        android:paddingLeft="20dp"
-                        android:paddingTop="10dp"/>
+                        android:textStyle="bold" />
 
                     <CheckBox
                         android:id="@+id/checkBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked"
-                        android:text="Eye Tracking"
                         android:layout_marginLeft="80dp"
+                        android:onClick="onCheckboxClicked"
                         android:scaleX="1.2"
                         android:scaleY="1.2"
+                        android:text="Eye Tracking"
 
                         />
 
@@ -97,11 +103,11 @@
                         android:id="@+id/checkBox2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="80dp"
                         android:onClick="onCheckboxClicked"
-                        android:text="Letters Training"
                         android:scaleX="1.2"
                         android:scaleY="1.2"
-                        android:layout_marginLeft="80dp"
+                        android:text="Letters Training"
 
                         />
 
@@ -109,11 +115,11 @@
                         android:id="@+id/checkBox3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:onClick="onCheckboxClicked"
-                        android:text="Trigger Words"
                         android:layout_marginLeft="80dp"
+                        android:onClick="onCheckboxClicked"
                         android:scaleX="1.2"
-                        android:scaleY="1.2"/>
+                        android:scaleY="1.2"
+                        android:text="Trigger Words" />
 
                     <CheckBox
                         android:id="@+id/checkBox4"
@@ -121,9 +127,9 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="80dp"
                         android:onClick="onCheckboxClicked"
-                        android:text="Reading Stories"
                         android:scaleX="1.2"
-                        android:scaleY="1.2"/>
+                        android:scaleY="1.2"
+                        android:text="Reading Stories" />
 
                 </LinearLayout>
 
@@ -146,7 +152,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:orientation="vertical"
-                    android:visibility="invisible">
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvDateLabel"
@@ -182,7 +188,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
                                 android:layout_weight="1"
-                                android:textColor="@android:color/white" />
+                                android:text="YEAR:"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tvMonth"
@@ -190,7 +198,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
                                 android:layout_weight="1"
-                                android:textColor="@android:color/white" />
+                                android:text="MONTH:"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/tvDay"
@@ -198,14 +208,16 @@
                                 android:layout_height="wrap_content"
                                 android:layout_margin="10dp"
                                 android:layout_weight="1"
-                                android:textColor="@android:color/white" />
+                                android:text="DAY:"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold" />
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/llDateRangeHolder"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -242,7 +254,7 @@
                         android:textAllCaps="true"
                         android:textColor="?attr/colorAccent"
                         android:textSize="15sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
 
                     <LinearLayout
                         android:id="@+id/llTimeHolder"
@@ -260,7 +272,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
-                            android:textColor="@android:color/white" />
+                            android:text="HOUR:"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvMinute"
@@ -268,7 +282,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:layout_weight="1"
-                            android:textColor="@android:color/white" />
+                            android:text="MINUTE:"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold" />
 
                         <Space
                             android:layout_width="0dp"
@@ -282,22 +298,16 @@
                 </RelativeLayout>
 
 
-
-
-
-
             </LinearLayout>
 
         </ScrollView>
 
 
-
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
             android:layout_below="@+id/svMainContainer"
+            android:layout_gravity="bottom"
             android:layout_weight="0.3">
 
 
@@ -318,34 +328,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="45dp"
                 android:text="Choose Date" />
+
             <ImageView
                 android:id="@+id/ivLaunchPicker"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
-                android:layout_marginRight="5dp"
+                android:layout_marginRight="10dp"
+
                 android:background="@drawable/floating_button_shape"
-                android:padding="8dp"
+
                 app:srcCompat="@drawable/ic_action_timepicker" />
-
-
 
 
         </FrameLayout>
 
     </LinearLayout>
-
-
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar13"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        android:theme="?attr/actionBarTheme" />
 
 
 </FrameLayout>

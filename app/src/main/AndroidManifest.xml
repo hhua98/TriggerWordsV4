@@ -145,7 +145,6 @@
         <activity android:name=".Newtriggerwords.AddWordUi"
             android:windowSoftInputMode="stateHidden|adjustNothing"
             android:label="Add Trigger Words"
-
             android:screenOrientation="portrait">
 
         </activity>
@@ -157,6 +156,9 @@
             android:screenOrientation="portrait"></activity>
 
         <activity android:name=".Newtriggerwords.ZoomPic"
+            android:screenOrientation="portrait"></activity>
+
+        <activity android:name=".Newtriggerwords.StartTriggerWords"
             android:screenOrientation="portrait"></activity>
 
         <activity android:name=".triggerletters.CoverFlowActivity"

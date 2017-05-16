@@ -100,30 +100,33 @@
                             android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Absolutely"
+                                android:text="yes"
                                 android:id="@+id/radioButton1A"
+                                android:layout_gravity="left"
                                 android:checked="true"
-                                android:layout_weight="1"
+                                android:layout_weight="3.73"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Somewhat"
                                 android:id="@+id/radioButton1S"
+                                android:layout_gravity="center"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="4.83"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Rarely or never"
+                                android:text="no"
                                 android:id="@+id/radioButton1N"
+                                android:layout_gravity="right"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="2.23"
                                 android:buttonTint="@color/colorPrimary"/>
 
                         </RadioGroup>
@@ -165,30 +168,30 @@
                             android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Absolutely"
+                                android:text="yes"
                                 android:id="@+id/radioButton2A"
                                 android:checked="true"
-                                android:layout_weight="1"
+                                android:layout_weight="3.73"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Somewhat"
                                 android:id="@+id/radioButton2S"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="4.83"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Rarely or never"
+                                android:text="no"
                                 android:id="@+id/radioButton2N"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="2.23"
                                 android:buttonTint="@color/colorPrimary"/>
 
                         </RadioGroup>
@@ -230,30 +233,30 @@
                             android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Absolutely"
+                                android:text="yes"
                                 android:id="@+id/radioButton3A"
                                 android:checked="true"
-                                android:layout_weight="1"
+                                android:layout_weight="3.73"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Somewhat"
                                 android:id="@+id/radioButton3S"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="4.83"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Rarely or never"
+                                android:text="no"
                                 android:id="@+id/radioButton3N"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="2.23"
                                 android:buttonTint="@color/colorPrimary"/>
 
                         </RadioGroup>
@@ -295,30 +298,30 @@
                             android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Absolutely"
+                                android:text="yes"
                                 android:id="@+id/radioButton4A"
                                 android:checked="true"
-                                android:layout_weight="1"
+                                android:layout_weight="3.73"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Somewhat"
                                 android:id="@+id/radioButton4S"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="4.83"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Rarely or never"
+                                android:text="no"
                                 android:id="@+id/radioButton4N"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="2.23"
                                 android:buttonTint="@color/colorPrimary"/>
 
                         </RadioGroup>
@@ -360,30 +363,30 @@
                             android:layout_marginBottom="10dp">
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Absolutely"
+                                android:text="yes"
                                 android:id="@+id/radioButton5A"
                                 android:checked="true"
-                                android:layout_weight="1"
+                                android:layout_weight="3.73"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:text="Somewhat"
                                 android:id="@+id/radioButton5S"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="4.83"
                                 android:buttonTint="@color/colorPrimary"/>
 
                             <RadioButton
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="Rarely or never"
+                                android:text="no"
                                 android:id="@+id/radioButton5N"
                                 android:checked="false"
-                                android:layout_weight="1"
+                                android:layout_weight="2.23"
                                 android:buttonTint="@color/colorPrimary"/>
 
                         </RadioGroup>

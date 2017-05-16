@@ -31,6 +31,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.tarik.triggerwordsv1.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 
@@ -163,18 +164,30 @@ public class statistical extends Fragment implements View.OnTouchListener {
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                if(checkedId==rb1.getId())
-                    image.setImageResource(R.drawable.compare_this_three);
-                else if(checkedId==rb6.getId())
-                    image.setImageResource(R.drawable.compare_with_others);
-                else if(checkedId==rb3.getId())
-                    image.setImageResource(R.drawable.dyscalculia);
-                else if(checkedId==rb4.getId())
-                    image.setImageResource(R.drawable.multiple_learning_difficulties);
-                else if(checkedId==rb5.getId())
-                    image.setImageResource(R.drawable.moderate_learning_difficulty);
-                else
-                    image.setImageResource(R.drawable.dyslexialine);
+                if(checkedId==rb1.getId()){
+                    delayer();
+                    Picasso.with(getActivity()).load(R.drawable.compare_this_three).into(image);}
+                    //image.setImageResource(R.drawable.compare_this_three);}
+                else if(checkedId==rb6.getId()){
+                    delayer();
+                    Picasso.with(getActivity()).load(R.drawable.compare_with_others).into(image);}
+
+                    //image.setImageResource(R.drawable.compare_with_others);}
+                else if(checkedId==rb3.getId()){
+                    delayer();
+                    Picasso.with(getActivity()).load(R.drawable.dyscalculia).into(image);}
+                    //image.setImageResource(R.drawable.dyscalculia);}
+                else if(checkedId==rb4.getId()){
+                    delayer();
+                    Picasso.with(getActivity()).load(R.drawable.multiple_learning_difficulties).into(image);}
+                    //image.setImageResource(R.drawable.multiple_learning_difficulties);}
+                else if(checkedId==rb5.getId()){
+                    delayer();
+                    Picasso.with(getActivity()).load(R.drawable.moderate_learning_difficulty).into(image);}
+                    //image.setImageResource(R.drawable.moderate_learning_difficulty);}
+                else{
+                    //image.setImageResource(R.drawable.dyslexialine);
+                Picasso.with(getActivity()).load(R.drawable.dyslexialine).into(image);}
 
                 /*Toast.makeText(getBaseContext(), selectedId+"", Toast.LENGTH_SHORT).show();*/
             }
@@ -326,6 +339,14 @@ public class statistical extends Fragment implements View.OnTouchListener {
      * checks the spacing between the two fingers on touch
      * ----------------------------------------------------
      */
+
+    public void delayer() {
+        try {
+            Thread.sleep(800);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
+        }
+    }
     private void translate(View expandedImageView  , View thumb1View) {
         expandedImageView.animate()
                 .x(thumb1View.getX())

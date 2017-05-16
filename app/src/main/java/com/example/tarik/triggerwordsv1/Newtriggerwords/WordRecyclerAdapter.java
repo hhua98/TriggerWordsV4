@@ -197,6 +197,17 @@ public class WordRecyclerAdapter extends RecyclerView.Adapter<WordRecyclerAdapte
         }
     }
 
+    public void disableButton(String buttonToDisable, int position) {
+        switch (buttonToDisable) {
+            case "likeButton":
+                getWordViewHolder().mLikeButton.setVisibility(View.INVISIBLE);
+                break;
+            case "dislikeButton":
+                getWordViewHolder().mDislikeButton.setVisibility(View.INVISIBLE);
+                break;
+        }
+    }
+
     /*private Bitmap decodeFile(File f){
         try {
             BitmapFactory.Options o = new BitmapFactory.Options();

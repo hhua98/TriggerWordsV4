@@ -68,7 +68,6 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     private TextView resultCount;
     private Button deleteAllWordsBtn;
     private ToggleButton orderToggleBtn;
-    private Button gobtn;
     private ImageView helpBtn;
     private ArrayList<Word> wordList;
     private PopupMenu popupMenu;
@@ -204,9 +203,6 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         orderToggleBtn = (ToggleButton) findViewById(R.id.orderToggleButton);
         orderToggleBtn.setOnCheckedChangeListener(this);
 
-        gobtn = (Button) findViewById(R.id.wtfButton);
-        gobtn.setOnClickListener(this);
-
         helpBtn = (ImageView) findViewById(R.id.helpButton);
         helpBtn.setOnClickListener(this);
 
@@ -287,6 +283,9 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                         wordRecyclerAdapter.addingWord(newWord, 0);
                         recyclerView.smoothScrollToPosition(0);
                         setResultsFoundCounter(tableRowCount + 1);
+                        if (!orderToggleBtn.isChecked()) {
+                            orderToggleBtn.performClick();
+                        }
 
                     }
                 }
@@ -612,7 +611,8 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                 else
                     wordRecyclerAdapter.increasePoints(word, position);
             } else {
-                alertDialog("Cannot increase points to more than 10");
+                alertDialog("Max point is 10");
+
             }
         }
     }
@@ -632,7 +632,7 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                 else
                     wordRecyclerAdapter.decreasePoints(word, position);
             } else {
-                alertDialog("Cannot decrease points to less than 0");
+                alertDialog("Minimum point is 0");
             }
         }
     }
@@ -769,16 +769,6 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                 initRankingList("alphabet");
                 break;
 
-            case R.id.wtfButton:
-                orderToggleBtn.performClick();
-                hideKeyboard();
-                if (wordList.size() >= 2) {
-                    startActivity(new Intent(this, InteractiveSession.class));
-                }
-                else {
-                    Toast.makeText(this, "Please add at least 2 words to the list first.", Toast.LENGTH_SHORT).show();
-                }
-                break;
 
             case R.id.helpButton:
                 hideKeyboard();
@@ -815,14 +805,13 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     }
 
     public void helpDialog() {
-        String message = "1. Start Blackboard --> Accesses the blackboard activity\n" +
-                         "2. (+) button --> Adds the typed word to the list\n" +
-                         "3. Search button --> Searches for the typed word from the list\n" +
-                         "4. Words in the list can be ordered by latest entry, difficulty or alphabetical order\n" +
-                         "5. Edit button --> opens menu to change/delete a word, or to change/delete the picture of a word\n" +
-                         "6. Like/Dislike --> increases/decreases points of a word. More Likes mean word is easier\n" +
-                         "7. The rating bar indicates whether a word is Easy(green), Normal(Yellow) or Tough(Red)\n" +
-                         "8. Click on a picture to fully view it.";
+        String message = "1. (+) button --> Adds the typed word to the list\n" +
+                         "2. Search button --> Searches for the typed word from the list\n" +
+                         "3. Words in the list can be ordered by latest entry, difficulty or alphabetical order\n" +
+                         "4. Edit button --> opens menu to change/delete a word, or to change/delete the picture of a word\n" +
+                         "5. Like/Dislike --> increases/decreases points of a word. More Likes mean word is easier\n" +
+                         "6. The rating bar indicates whether a word is Easy(green), Normal(Yellow) or Tough(Red)\n" +
+                         "7. Click on a picture to fully view it.";
         AlertDialog.Builder myAlert = new AlertDialog.Builder(this);
         myAlert.setMessage(message)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {

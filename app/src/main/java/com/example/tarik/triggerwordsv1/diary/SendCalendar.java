@@ -13,6 +13,7 @@ import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.util.Pair;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -22,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
+import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 
 
@@ -80,7 +82,7 @@ public class SendCalendar extends AppCompatActivity {
     SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
         @Override
         public void onCancelled() {
-            rlDateTimeRecurrenceInfo.setVisibility(View.GONE);
+            //rlDateTimeRecurrenceInfo.setVisibility(View.GONE);
         }
 
         @Override
@@ -112,8 +114,8 @@ public class SendCalendar extends AppCompatActivity {
         tvMonth = ((TextView) findViewById(R.id.tvMonth));
         tvDay = ((TextView) findViewById(R.id.tvDay));
 
-        tvStartDate = ((TextView) findViewById(R.id.tvStartDate));
-        tvEndDate = ((TextView) findViewById(R.id.tvEndDate));
+        //tvStartDate = ((TextView) findViewById(R.id.tvStartDate));
+        //tvEndDate = ((TextView) findViewById(R.id.tvEndDate));
 
         tvHour = ((TextView) findViewById(R.id.tvHour));
         tvMinute = ((TextView) findViewById(R.id.tvMinute));
@@ -128,18 +130,20 @@ public class SendCalendar extends AppCompatActivity {
                 pickerFrag.setCallback(mFragmentCallback);
 
                 // Options
-
+                Pair<Boolean, SublimeOptions> optionsPair = getOptions();
 
                 // Valid options
                 Bundle bundle = new Bundle();
-
+                bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
                 pickerFrag.setArguments(bundle);
 
                 pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
                 pickerFrag.show(getSupportFragmentManager(), "SUBLIME_PICKER");
 
+
             }
         });
+
         dealWithSavedInstanceState(savedInstanceState);
 
 
@@ -229,7 +233,7 @@ public class SendCalendar extends AppCompatActivity {
             if (savedInstanceState.getBoolean(SS_INFO_VIEW_VISIBILITY)) {
                 int startYear = savedInstanceState.getInt(SS_START_YEAR);
 
-               if (startYear != INVALID_VAL) {
+                if (startYear != INVALID_VAL) {
                     Calendar startCal = Calendar.getInstance();
                     startCal.set(startYear, savedInstanceState.getInt(SS_START_MONTH),
                             savedInstanceState.getInt(SS_START_DAY));
@@ -255,6 +259,27 @@ public class SendCalendar extends AppCompatActivity {
                 restoredFragment.setCallback(mFragmentCallback);
             }
         }
+    }
+    Pair<Boolean, SublimeOptions> getOptions() {
+        SublimeOptions options = new SublimeOptions();
+        int displayOptions = 0;
+
+
+        displayOptions |= SublimeOptions.ACTIVATE_DATE_PICKER;
+
+
+
+        displayOptions |= SublimeOptions.ACTIVATE_TIME_PICKER;
+
+
+
+
+
+
+        options.setDisplayOptions(displayOptions);
+
+
+        return new Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
     }
 
     private void updateInfoView() {
@@ -302,7 +327,7 @@ public class SendCalendar extends AppCompatActivity {
     final String SS_START_MONTH = "saved.state.start.month";
     final String SS_START_DAY = "saved.state.start.day";
     final String SS_END_YEAR = "saved.state.end.year";
-   final String SS_END_MONTH = "saved.state.end.month";
+    final String SS_END_MONTH = "saved.state.end.month";
     final String SS_END_DAY = "saved.state.end.day";
     final String SS_HOUR = "saved.state.hour";
     final String SS_MINUTE = "saved.state.minute";
@@ -317,9 +342,9 @@ public class SendCalendar extends AppCompatActivity {
         int startMonth = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.MONTH) : INVALID_VAL;
         int startDayOfMonth = mSelectedDate != null ? mSelectedDate.getStartDate().get(Calendar.DAY_OF_MONTH) : INVALID_VAL;
 
-       int endYear = mSelectedDate != null ? mSelectedDate.getEndDate().get(Calendar.YEAR) : INVALID_VAL;
+        int endYear = mSelectedDate != null ? mSelectedDate.getEndDate().get(Calendar.YEAR) : INVALID_VAL;
         int endMonth = mSelectedDate != null ? mSelectedDate.getEndDate().get(Calendar.MONTH) : INVALID_VAL;
-       int endDayOfMonth = mSelectedDate != null ? mSelectedDate.getEndDate().get(Calendar.DAY_OF_MONTH) : INVALID_VAL;
+        int endDayOfMonth = mSelectedDate != null ? mSelectedDate.getEndDate().get(Calendar.DAY_OF_MONTH) : INVALID_VAL;
 
         // Save data
         outState.putInt(SS_START_YEAR, startYear);
@@ -331,8 +356,8 @@ public class SendCalendar extends AppCompatActivity {
         outState.putInt(SS_HOUR, mHour);
         outState.putInt(SS_MINUTE, mMinute);
 
-        outState.putBoolean(SS_INFO_VIEW_VISIBILITY,
-                rlDateTimeRecurrenceInfo.getVisibility() == View.VISIBLE);
+        //outState.putBoolean(SS_INFO_VIEW_VISIBILITY,
+        //rlDateTimeRecurrenceInfo.getVisibility() == View.VISIBLE);
 
 
 
@@ -404,12 +429,12 @@ public class SendCalendar extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.checkBox:
 
-               //list.add(checkBox.getText().toString());
+                //list.add(checkBox.getText().toString());
 
 
                 break;
             case R.id.checkBox2:
-               //list.add(checkBox2.getText().toString());
+                //list.add(checkBox2.getText().toString());
 
                 break;
 
@@ -508,7 +533,7 @@ public class SendCalendar extends AppCompatActivity {
                 Toast.LENGTH_LONG).show();
 
 
-        }
+    }
 
     public void buttonShow2(View view) {
         if (CalendarHelper.haveCalendarReadWritePermissions(this)) {
