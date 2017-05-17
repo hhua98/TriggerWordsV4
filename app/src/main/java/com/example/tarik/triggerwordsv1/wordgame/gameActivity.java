@@ -283,7 +283,7 @@ public class gameActivity extends AppCompatActivity {
                 showCurrentWord(0);
                 int wordStatus = checkWord();
                 if (wordStatus == 2){
-                    (Toast.makeText(this, "Congrats! " + currentWord + " is a valid word", Toast.LENGTH_SHORT)).show();
+                    (Toast.makeText(this, "You find it! " + currentWord + "cheer up !", Toast.LENGTH_SHORT)).show();
                     processCorrectWord();
                 } else {
                     showCurrentWord(wordStatus);
@@ -312,7 +312,7 @@ public class gameActivity extends AppCompatActivity {
             showCurrentWord(0);
             int wordStatus = checkWord();
             if (wordStatus == 2){
-                (Toast.makeText(this, "Congrats! " + currentWord + " is a valid word", Toast.LENGTH_SHORT)).show();
+                (Toast.makeText(this, "You are so clever! " + currentWord + " is found by you!", Toast.LENGTH_SHORT)).show();
                 processCorrectWord();
             } else {
                 showCurrentWord(wordStatus);

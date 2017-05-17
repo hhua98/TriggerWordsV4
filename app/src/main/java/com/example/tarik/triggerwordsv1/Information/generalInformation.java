@@ -117,11 +117,11 @@ public class generalInformation extends Fragment implements View.OnClickListener
 
         contentText2 = (TextView) myView.findViewById(R.id.contentTextView2);
         contentText2.setText("Even if you aren’t sure what’s causing your child’s reading issues, there are still ways to help him—and get support for yourself, too. Here are a few options to consider:\n" +
-                "Learn as much as you can. Understanding your child’s trouble with reading is the first step to getting him the help he needs. The more you know, the better able you’ll be to find ways to build his reading skills and make reading more fun.\n" +
-                "Observe and take notes. By closely watching your child’s behavior, you may be able to spot patterns and triggers. Acknowledge even the smallest bit of progress. Your encouragement will help him stay motivated.\n" +
-                "Use audiobooks. Listening to a book while looking at the words can help your child learn to connect the sounds he’s hearing to the words he’s seeing.\n" +
-                "Look for apps and other high-tech help. It’s hard to know what your child is experiencing with his reading difficulties. Get a sense of what it might feel like to have those issues. Having that insight can make it easier to be supportive.\n" +
-                "Connect with other parents. Knowing you’re not alone can make you feel supported.");
+                "\nLearn as much as you can: \nUnderstanding your child’s trouble with reading is the first step to getting him the help he needs. The more you know, the better able you’ll be to find ways to build his reading skills and make reading more fun.\n" +
+                "\n\nObserve and take notes: \nBy closely watching your child’s behavior, you may be able to spot patterns and triggers. Acknowledge even the smallest bit of progress. Your encouragement will help him stay motivated.\n" +
+                "\n\nUse audiobooks: \nListening to a book while looking at the words can help your child learn to connect the sounds he’s hearing to the words he’s seeing.\n" +
+                "\n\nLook for apps and other high-tech help: \nIt’s hard to know what your child is experiencing with his reading difficulties. Get a sense of what it might feel like to have those issues. Having that insight can make it easier to be supportive.\n" +
+                "\n\nConnect with other parents: \nKnowing you’re not alone can make you feel supported.");
         downArrowImage2 = (ImageView) myView.findViewById(R.id.downArrowImageView2);
         upArrowImage2 = (ImageView) myView.findViewById(R.id.upArrowImageView2);
         upArrowImage2.setVisibility(View.INVISIBLE);
@@ -139,10 +139,10 @@ public class generalInformation extends Fragment implements View.OnClickListener
 
         contentText3 = (TextView) myView.findViewById(R.id.contentTextView3);
         contentText3.setText("Talk with your child’s teacher. Knowing what’s happening in school is a good first step to understanding your child’s issues.\n" +
-                "The teacher may also try out some informal supports in class to see if they help with his reading, writing and self-esteem.\n" +
-                "Rule out some medical causes, including ADHD. Or she may refer you to a specialist.\n" +
-                "Consult with specialists. There are a number of professionals who can help figure out why your child is struggling with reading.A neurologist can also diagnose ADHD.\n" +
-                "Talk to a learning specialist. This professional can evaluate your child for learning and attention issues using the same tests the school would use. \n");
+                "\nThe teacher may also try out some informal supports in class to see if they help with his reading, writing and self-esteem.\n" +
+                "\n\nRule out some medical causes, including ADHD. Or she may refer you to a specialist.\n" +
+                "\n\nConsult with specialists. There are a number of professionals who can help figure out why your child is struggling with reading.A neurologist can also diagnose ADHD.\n" +
+                "\n\nTalk to a learning specialist. This professional can evaluate your child for learning and attention issues using the same tests the school would use. \n");
 
         downArrowImage3 = (ImageView) myView.findViewById(R.id.downArrowImageView3);
         upArrowImage3 = (ImageView) myView.findViewById(R.id.upArrowImageView3);
@@ -163,7 +163,7 @@ public class generalInformation extends Fragment implements View.OnClickListener
         contentText4 = (TextView) myView.findViewById(R.id.contentTextView4);
         contentText4.setMovementMethod(LinkMovementMethod.getInstance());
         Linkify.addLinks(contentText4, Linkify.ALL);
-        contentText4.setText("http://dyslexiaassociation.org.au/\n" +
+        contentText4.setText("More info at:\n\nhttp://dyslexiaassociation.org.au/\n" +
                 "\n https://www.davisdyslexia.com/staff.html\n" +
                 "\n https://dyslexiaida.org/\n" +
                 "\n http://dyslexiamelbourne.com/\n" +

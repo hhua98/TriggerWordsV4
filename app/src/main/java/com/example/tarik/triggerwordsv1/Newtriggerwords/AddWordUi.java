@@ -27,6 +27,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -44,6 +45,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.tarik.triggerwordsv1.R;
+import com.example.tarik.triggerwordsv1.wordgame.gameActivity;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -101,6 +103,29 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_addtriggerwords, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.addtriggerwords) {
+
+            helpDialog();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -203,8 +228,8 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
         orderToggleBtn = (ToggleButton) findViewById(R.id.orderToggleButton);
         orderToggleBtn.setOnCheckedChangeListener(this);
 
-        helpBtn = (ImageView) findViewById(R.id.helpButton);
-        helpBtn.setOnClickListener(this);
+        //helpBtn = (ImageView) findViewById(R.id.helpButton);
+        //helpBtn.setOnClickListener(this);
 
         findViewById(R.id.mainLayout).setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -770,9 +795,9 @@ public class AddWordUi extends AppCompatActivity implements WordRecyclerAdapter.
                 break;
 
 
-            case R.id.helpButton:
+            /*case R.id.helpButton:
                 hideKeyboard();
-                helpDialog();
+                helpDialog();*/
         }
     }
 

@@ -25,12 +25,15 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.tarik.triggerwordsv1.wordgame.gameActivity;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import com.example.tarik.triggerwordsv1.R;
@@ -104,6 +107,47 @@ public class InteractiveSession extends AppCompatActivity implements View.OnClic
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_blackboard, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.blackboradmenu) {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    InteractiveSession.this);
+
+            // set title
+            alertDialogBuilder.setTitle("Instructions");
+
+            // set dialog message
+            alertDialogBuilder.setMessage(R.string.blackboardins);
+            alertDialogBuilder.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+            // show it
+            alertDialog.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
     public void initWidgets() {
         swipeView = (SwipeFlingAdapterView) findViewById(R.id.swipe_view);

@@ -8,6 +8,7 @@ import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
@@ -16,12 +17,15 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -33,6 +37,7 @@ import android.widget.Toast;
 
 import com.example.tarik.triggerwordsv1.ActionMenu.MenuActivity;
 import com.example.tarik.triggerwordsv1.ActionMenu.interactMenu;
+import com.example.tarik.triggerwordsv1.Newtriggerwords.InteractiveSession;
 import com.example.tarik.triggerwordsv1.R;
 
 
@@ -109,6 +114,47 @@ public class EyeTracker extends AppCompatActivity {
         } else {
             super.onBackPressed();
         }*/
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_eyetracker, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.eyetracker) {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    EyeTracker.this);
+
+            // set title
+            alertDialogBuilder.setTitle("Instructions");
+
+            // set dialog message
+            alertDialogBuilder.setMessage(R.string.eyetracker);
+            alertDialogBuilder.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+            // show it
+            alertDialog.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
     /**
      * convert dp to px

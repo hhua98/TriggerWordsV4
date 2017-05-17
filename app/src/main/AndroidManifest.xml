@@ -86,10 +86,11 @@
             android:windowSoftInputMode="stateHidden|adjustNothing"
             android:screenOrientation="portrait"/>
         <activity android:name=".Newtriggerwords.InteractiveSession"
-            android:label="Show Trigger Words"
+            android:label="Trigger Words Blackboard"
             android:screenOrientation="portrait"/>
         <activity android:name=".ActionMenu.interactMenu"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait"
+            android:label="Interaction"/>
         <activity android:name=".Eyetracking_ReadingStories.EyeTracker"
             android:label="Eye Tracking Training"
             android:screenOrientation="portrait"/>
@@ -152,14 +153,15 @@
             android:label="word game"
             android:screenOrientation="portrait"></activity>
         <activity android:name=".wordgame.startScreen"
-            android:label="Game"
+            android:label="Words Game"
             android:screenOrientation="portrait"></activity>
 
         <activity android:name=".Newtriggerwords.ZoomPic"
             android:screenOrientation="portrait"></activity>
 
         <activity android:name=".Newtriggerwords.StartTriggerWords"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:label="Trigger Words"></activity>
 
         <activity android:name=".triggerletters.CoverFlowActivity"
             android:label="Trigger Letters"

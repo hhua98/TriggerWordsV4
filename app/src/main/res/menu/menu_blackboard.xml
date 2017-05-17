@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/instruction"
-        android:title="Game Instruction"
+        android:id="@+id/blackboradmenu"
+        android:title="How to use it"
         android:icon="@drawable/ic_action_help"
         app:showAsAction="ifRoom"
         />

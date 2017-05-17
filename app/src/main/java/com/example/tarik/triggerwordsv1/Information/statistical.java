@@ -29,6 +29,7 @@ import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.tarik.triggerwordsv1.R;
 import com.squareup.picasso.Picasso;
@@ -115,51 +116,7 @@ public class statistical extends Fragment implements View.OnTouchListener {
         expand=(ImageView)myView.findViewById(R.id.expanded_image);
         expand.setOnTouchListener(this);
 
-        /*zoomin = AnimationUtils.loadAnimation(this.getContext(), R.anim.zoomin);
-        zoomout = AnimationUtils.loadAnimation(this.getContext(), R.anim.zoomout);
-        image.setAnimation(zoomin);
-        image.setAnimation(zoomout);
-        zoomin.setAnimationListener(new Animation.AnimationListener() {
 
-            @Override
-            public void onAnimationStart(Animation arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation arg0) {
-                image.startAnimation(zoomout);
-
-            }
-        });
-        zoomout.setAnimationListener(new Animation.AnimationListener() {
-
-            @Override
-            public void onAnimationStart(Animation arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation arg0) {
-                // TODO Auto-generated method stub
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animation arg0) {
-                image.startAnimation(zoomin);
-
-            }
-        });
-*/
         rb.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -201,6 +158,8 @@ public class statistical extends Fragment implements View.OnTouchListener {
         thumb1View.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getActivity(), (String)"Long press to go back otherwise you can not choose other graph",
+                        Toast.LENGTH_LONG).show();
 
                 if(rb1.isChecked()==true)
 

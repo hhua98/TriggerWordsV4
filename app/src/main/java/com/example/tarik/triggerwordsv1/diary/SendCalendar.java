@@ -3,10 +3,12 @@ package com.example.tarik.triggerwordsv1.diary;
 /**
  * Created by huanghe on 5/04/2017.
  */
+import android.content.DialogInterface;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.Html;
@@ -14,6 +16,8 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.util.Pair;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
@@ -28,6 +32,7 @@ import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicke
 
 
 import com.example.tarik.triggerwordsv1.DateTime2.SublimePickerFragment;
+import com.example.tarik.triggerwordsv1.Newtriggerwords.InteractiveSession;
 import com.example.tarik.triggerwordsv1.R;
 
 import java.text.ParseException;
@@ -196,7 +201,47 @@ public class SendCalendar extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_sendcalender, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.sendcalender) {
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                    SendCalendar.this);
+
+            // set title
+            alertDialogBuilder.setTitle("Instructions");
+
+            // set dialog message
+            alertDialogBuilder.setMessage(R.string.sendcalendar);
+            alertDialogBuilder.setNegativeButton(R.string.ok, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    // User cancelled the dialog
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+            // show it
+            alertDialog.show();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {

@@ -4,9 +4,26 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="instructions">
         1. You are supposed to make as many words as you can from the given set of letters in the grid.
-        \n2. If the submitted word is a valid one then it is added to the list and the score would be updated.
-        \n3. A letter can be a word!.
-    </string>
+        \n2. If the submitted word is a valid one in the word list then it is added to the list and the score would be updated.
+        \n3.Sometimes the word is correct, but is not in the word list, you can not get score.
+        \n4. If you can not remember, do not click the words in the right top of screen to check!
+        \n5. When you finish the game, you can leave and continue. If you continue, the game will refresh.
+        \n6. If you choose wrong letter, do not afraid, just click it again it will cancel.
+        \n7. A letter can be a word!
+
+</string>
+        <string name="blackboardins">1. Swipe the blackboard to change the word.
+        \n2.Click the respective picture of the word to zoom in.
+        \n3.Change button --> Changes image of the word
+        </string>
+
+<string name="sendcalendar">1.Click connect calendar first to synchronous your calendar and then fill the title first.
+\n2.Choose at least one activity.
+\n3.Choose a date(datepicker is at the right bottom of screen and it will appear on the screen.
+\n4.Send the reminder to the calender.</string>
+    <string name="eyetracker">1.Click start button to track the aim.
+    \n2.Choose the change button to change the image and track route.
+    \n3.Click stop button to stop this activity.</string>
     <string name="play_caps">PLAY</string>
     <string name="about_caps">ABOUT</string>
     <string name="instructions_caps">INSTRUCTIONS</string>
@@ -53,7 +70,7 @@
     <string name="saturday">Saturday</string>
     <string name="place_details">&lt;b&gt;%1$s&lt;/b&gt;&lt;br/&gt;&lt;/i&gt;&lt;br/&gt;Address: %2$s&lt;br/&gt;Phone: %3$s&lt;br/&gt;Website: %4$s</string>
 
-
+<string name="ok">OK</string>
     <string-array name="days_array">
         <item>@string/sunday</item>
         <item>@string/monday</item>
