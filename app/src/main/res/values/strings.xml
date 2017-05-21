@@ -17,13 +17,13 @@
         \n3.Change button --> Changes image of the word
         </string>
 
-<string name="sendcalendar">1.Click connect calendar first to synchronous your calendar and then fill the title first.
+<string name="sendcalendar">1.Click connect calendar first to and then fill the title first.
 \n2.Choose at least one activity.
-\n3.Choose a date(datepicker is at the right bottom of screen and it will appear on the screen.
+\n3.Choose a date(datepicker is at the right bottom of screen and it will appear on the screen).
 \n4.Send the reminder to the calender.</string>
-    <string name="eyetracker">1.Click start button to track the aim.
+    <string name="eyetracker">1.Click start button to start the exercise.
     \n2.Choose the change button to change the image and track route.
-    \n3.Click stop button to stop this activity.</string>
+    \n3.Click stop button to stop this exercise.</string>
     <string name="play_caps">PLAY</string>
     <string name="about_caps">ABOUT</string>
     <string name="instructions_caps">INSTRUCTIONS</string>

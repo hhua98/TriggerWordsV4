@@ -164,7 +164,7 @@
             android:label="Trigger Words"></activity>
 
         <activity android:name=".triggerletters.CoverFlowActivity"
-            android:label="Trigger Letters"
+            android:label="Letters Training"
             android:screenOrientation="landscape"
             >
 

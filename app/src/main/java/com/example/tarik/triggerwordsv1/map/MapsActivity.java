@@ -124,13 +124,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         //Check if Google Play Services Available or not
-        if (!CheckGooglePlayServices()) {
+        /*if (!CheckGooglePlayServices()) {
             Log.d("onCreate", "Finishing test case since Google Play Services are not available");
             finish();
         }
         else {
             Log.d("onCreate","Google Play Services available.");
-        }
+        }*/
 
 
         requestPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1678);
@@ -178,7 +178,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
                         int x;
-                        x = dpToPx(579);
+                        x = dpToPx(580);
+                        //x = dpToPx(1128);
                         params.height = x;
                         mapFragment.getView().setLayoutParams(params);
 
@@ -195,6 +196,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                         params = mapFragment.getView().getLayoutParams();
                         x = dpToPx(170);
+                        //x = dpToPx(710);
                         params.height = x;
                         mapFragment.getView().setLayoutParams(params);
 
@@ -208,7 +210,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         }
 
                         params = mapFragment.getView().getLayoutParams();
-                        x = dpToPx(579);
+                        x = dpToPx(580);
+                       // x = dpToPx(1128);
                         params.height = x;
                         mapFragment.getView().setLayoutParams(params);
 
@@ -747,6 +750,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double currentLatitude = location.getLatitude();
         double currentLongitude = location.getLongitude();
 
+       // double currentLatitude = -37.884;
+       // double currentLongitude = 145.027;
+
         LatLng latLng = new LatLng(currentLatitude, currentLongitude);
 
         //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
@@ -983,7 +989,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             ViewGroup.LayoutParams params = mapFragment.getView().getLayoutParams();
             int x;
-            x = dpToPx(579);
+            x = dpToPx(580);
+           // x = dpToPx(1128);
             params.height = x;
             mapFragment.getView().setLayoutParams(params);
         }
